@@ -21,6 +21,8 @@ class vector
         typedef Iterator<const value_type> const_iterator;
 
         //reverse iterator
+        typedef reverse_iterator<iterator> reverse_iterator;
+        typedef reverse_iterator<const_iterator> const_reverse_iterator;
 };
 #endif
 
