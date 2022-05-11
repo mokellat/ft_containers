@@ -2,6 +2,7 @@
 #define ITERATOR_HPP
 
 #include "library.hpp"
+#include "vector.hpp"
 
 template <class T>
 class MyIterator
