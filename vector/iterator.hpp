@@ -39,11 +39,32 @@ class MyIterator
             std::cout << "Desctructor Called" << std::endl;
         }
 
+        //--------------------------------------------------------------------
+
         // operators begin
         bool &operator==(MyIterator &rhs)
         {
-            this->_ptr = rhs._ptr;
-            return (*this); //forget what this do
+            if this->_ptr = rhs._ptr;
+                return true;
+            else
+                return false;
         }
+        bool &operator!=(MyIterator &rhs)
+        {
+            if this->_ptr != rhs._ptr;
+                return true;
+            else
+                return false;
+        }
+        pointer &operator*()
+        {
+            return *_ptr;
+        }
+        pointer &operator->()
+        {
+            return ptr;
+        }
+        
+
 };
 #endif
