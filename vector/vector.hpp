@@ -21,8 +21,27 @@ class vector
         typedef MyIterator<const value_type>  const_iterator;
 
         //reverse iterator
-        typedef reverse_iterator<iterator> reverse_iterator;
-        typedef reverse_iterator<const_iterator> const_reverse_iterator;
+        // typedef reverse_iterator<iterator> reverse_iterator;
+        // typedef reverse_iterator<const_iterator> const_reverse_iterator;
+    private:
+
+    
+    public:
+    //member fuctions
+    vector()
+    {
+
+    }
+    ~vector()
+    {
+
+    }
+    vector &operator=(vector &it)
+    {
+        return (*this);
+    }
+
+    //iterators
 };
 #endif
 
