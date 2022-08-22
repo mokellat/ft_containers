@@ -3,5 +3,6 @@
 
 #include <iostrem>
 #include <iterator.hpp>
+#include "vector.hpp"
 
 #endif
