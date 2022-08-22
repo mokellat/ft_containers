@@ -21,7 +21,7 @@ class MyIterator
         // default constructor
         MyIterator(pointer cp)
         {
-            _ptr = abc;
+            _ptr = cp;
         }
         // copy constructor
         MyIterator(MyIterator &cp)
