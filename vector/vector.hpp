@@ -26,7 +26,9 @@ class vector
         typedef size_t                                      size_type;
 
     private:
-        pointer _ptr;
+        pointer         _ptr;
+        allocator_type  _alloc_copy;
+        size_type       _n;
        
     public:
 
@@ -35,31 +37,46 @@ class vector
         //Constructors
         explicit vector (const allocator_type& alloc = allocator_type())
         {
-            
+            //initialize the variables
+            _n = 0;
+            this->_alloc_copy = alloc;
         }
 
         explicit vector (size_type n, const value_type& val = value_type(),
-                    const allocator_type& alloc = allocator_type())
+                const allocator_type& alloc = allocator_type())
         {
-
+            _n = n;
+            _ptr = _alloc_copy.allocate(n);
+            for(int i = 0; i < n; i++)
+                _alloc_copy.construct(&_ptr[i], val);
         }
 
         template <class InputIterator>
         vector (InputIterator first, InputIterator last,
                 const allocator_type& alloc = allocator_type())
         {
-
+            difference_type diff = std::distance(first, last);
+            _n = diff;
+            //what if the difference is < 0
+            _ptr = _alloc_copy.allocate(diff);
+            for(int i = 0; i < diff; i++)
+                _alloc_copy.construct(&_ptr[i], first++);
         }
 
         vector (const vector& x)
         {
-
+            this->_alloc_copy = x._alloc_copy;
+            *this = x;
         }
 
         //Destructor
         ~vector()
         {
+            MyIterator it;
 
+            for(int i = 0; i < _n; i++)
+                _alloc_copy.destroy(&_ptr[i]);
+            _pointer.deallocate(_ptr, this->_n);
         }
 
         //assignement overload
