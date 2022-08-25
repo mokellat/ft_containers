@@ -65,6 +65,7 @@ class vector
 
         vector (const vector& x)
         {
+            this->_n = x._n;
             this->_alloc_copy = x._alloc_copy;
             *this = x;
         }
@@ -72,17 +73,33 @@ class vector
         //Destructor
         ~vector()
         {
-            MyIterator it;
+            if(_ptr)
+            {
+                MyIterator it;
 
-            for(int i = 0; i < _n; i++)
-                _alloc_copy.destroy(&_ptr[i]);
-            _pointer.deallocate(_ptr, this->_n);
+                for(int i = 0; i < _n; i++)
+                    _alloc_copy.destroy(&_ptr[i]);
+                _alloc_copy.deallocate(_ptr, this->_n);
+            }
         }
 
         //assignement overload
-        vector& operator= (const vector& x)
+        vector& operator=(const vector& x)
         {
-
+            // deallocate and destroy whats in the container then copy
+            if(_ptr)
+            {
+                for(int i = 0; i < this->_n; i++)
+                    _alloc_copy.destroy(&ptr[i]);
+                _alloc_copy.deallocate(_ptr, this->_n);
+            }
+            this->_alloc_copy = x._alloc_copy;
+            _ptr = alloc_copy.allocate(x._n);
+            for(int i = 0; i < x._n; i++)
+                alloc_copy.construct(&_ptr[i], &x[i]);
+            this->_n = x._n;
+            *this = x;
+            return *this;
         }
 
         //iterators------------------------------------
