@@ -200,7 +200,7 @@ class vector
                 pointer     temp;
 
                 this->_capacity = n;
-                temp = _alloc_copy.allocate(n)
+                temp = _alloc_copy.allocate(n);
                 for(i = 0; i < this->_size; i++)
                 {
                     _alloc_copy.construct(&_temp[i], &_ptr[i]);
@@ -293,7 +293,7 @@ class vector
             if(n > this->_capacity)
             {
                 _ptr = _alloc.deallocate(_ptr, this->_size)
-                this->_capacity = this->_size;
+                this->_capacity = n;
                 _ptr = _alloc.copy.allocate(this->_capacity);
             }
             this->_size = n;
@@ -303,17 +303,33 @@ class vector
 
         void push_back (const value_type& val)
         {
-            
+            pointer temp;
+
+            if(this->_size + 1 > this->_capacity)
+            {
+                this->_capacity = this->_capacity + this->_capacity / 2;
+                temp = _alloc_copy.allocate(this->_capacity);
+                for(i = 0; i < this->_size; i++)
+                {
+                    _alloc_copy.construct(&_temp[i], &_ptr[i]);
+                    _alloc_copy.destroy(&_ptr[i]);
+                }
+                _ptr = _alloc_copy.deallocate(_ptr, this->_capacity);
+                _ptr = temp;
+            } 
+            _alloc_copy.construct(&_ptr[this->_size], val);
+            this->_size++;
         }
 
         void pop_back()
         {
-
+            _allocator_copy.destroy(&_ptr[this->_size - 1]);
+            this->_size--;
         }
 
         iterator insert (iterator position, const value_type& val)
         {
-
+            
         }
 
         void   insert (iterator position, size_type n, const value_type& val)
