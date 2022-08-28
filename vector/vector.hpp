@@ -1,7 +1,7 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include "library.hpp"
+#include "../library.hpp"
 
 template < class T, class Alloc = std::allocator<T>>
 class vector
@@ -87,7 +87,7 @@ class vector
                 _alloc_copy.deallocate(_ptr, this->_size);
             }
         }
-
+        
         //assignement overload
         vector& operator=(const vector& x)
         {
@@ -355,9 +355,24 @@ class vector
 
         void swap (vector& x)
         {
+            pointer temp;
 
+        
+            if(this->_size == x._size)
+            {
+                for(size_type i = 0; i < this->_size; i++)
+                {
+                    temp = x._ptr[i];
+                    x_ptr[i] = this->_ptr[i];
+                    this->_ptr[i] = temp;
+                }
+            }
+            else
+            {
+                if(this->_size > x._size)
+            }
         }
-
+        
         void clear()
         {
             for(size_type i = 0; i < _size; i++)

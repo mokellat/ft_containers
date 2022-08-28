@@ -1,8 +1,8 @@
 #ifndef LIBRARY_HPP
 #define LIBRARY_HPP
 
-#include <iostrem>
-#include <iterator.hpp>
-#include "vector.hpp"
+#include <iostream>
+// #include "vector/iterator.hpp"
+#include "vector/vector.hpp"
 
 #endif
