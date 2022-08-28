@@ -334,7 +334,7 @@ class vector
 
         void   insert (iterator position, size_type n, const value_type& val)
         {
-
+            
         }
         
         template <class InputIterator>
@@ -360,56 +360,62 @@ class vector
 
         void clear()
         {
-
+            for(size_type i = 0; i < _size; i++)
+                _alloc_copy.destroy(&_ptr[i]);
+            _size = 0;
         }
 
         //Allocator-------------------------------------------------------------
         allocator_type get_allocator() const
         {
-            
+            return _alloc_copy;
         }
 
         //Non-member function overloads------------------------------------------
         template <class T, class Alloc>
         bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
         {
-
+            if(rhs._size == lhs._size)
+                return std::equal(rhs.begin(), rhs.end(), lhs.begin());
+            return false;
         }
     
         template <class T, class Alloc>
         bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
         {
-
+             if(rhs._size != lhs._size)
+                return !std::equal(rhs.begin(), rhs.end(), lhs.begin());
+            return false;
         }
     
         template <class T, class Alloc>
         bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
         {
-
+            return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
         }
     
         template <class T, class Alloc>
         bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
         {
-
+            return !std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
         }
     
         template <class T, class Alloc>
         bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
         {
-
+            return std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
         }
     
         template <class T, class Alloc>
         bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
         {
-
+            return !std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
         }
 
         template <class T, class Alloc>
         void swap (vector<T,Alloc>& x, vector<T,Alloc>& y)
         {
-            
+            x.swap(y);
         }
 };
 #endif
