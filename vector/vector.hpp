@@ -345,7 +345,7 @@ class vector
 
         iterator erase (iterator position)
         {
-
+            
         }
 
         iterator erase (iterator first, iterator last)
@@ -366,7 +366,7 @@ class vector
         //Allocator-------------------------------------------------------------
         allocator_type get_allocator() const
         {
-
+            
         }
 
         //Non-member function overloads------------------------------------------
