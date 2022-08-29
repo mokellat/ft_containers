@@ -9,7 +9,7 @@ class reverse_iterator
     public:
 
         //Member functions
-        
+
         //constructors
         reverse_iterator()
         {
@@ -140,7 +140,7 @@ class reverse_iterator
             const reverse_iterator<Iterator>& lhs,
             const reverse_iterator<Iterator>& rhs)
         {
-
+            
         }
 };
 
