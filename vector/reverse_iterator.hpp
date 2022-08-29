@@ -123,37 +123,55 @@ class reverse_iterator
         bool operator== (const reverse_iterator<Iterator>& lhs,
                         const reverse_iterator<Iterator>& rhs)
         {
-
+            if(lhs._it == rhs._it)
+                return true;
+            else
+                return false;
         }	
         template <class Iterator>
         bool operator!= (const reverse_iterator<Iterator>& lhs,
                         const reverse_iterator<Iterator>& rhs)
         {
-
+             if(lhs._it != rhs._it)
+                return true;
+            else
+                return false;
         }	
         template <class Iterator>
         bool operator<  (const reverse_iterator<Iterator>& lhs,
                         const reverse_iterator<Iterator>& rhs)
         {
-
+             if(lhs._it > rhs._it)
+                return true;
+            else
+                return false;
         }	
         template <class Iterator>
         bool operator<= (const reverse_iterator<Iterator>& lhs,
                         const reverse_iterator<Iterator>& rhs)
         {
-
+             if(lhs._it >= rhs._it)
+                return true;
+            else
+                return false;
         }	
         template <class Iterator>
         bool operator>  (const reverse_iterator<Iterator>& lhs,
                         const reverse_iterator<Iterator>& rhs)
         {
-
+             if(lhs._it < rhs._it)
+                return true;
+            else
+                return false;
         }	
         template <class Iterator>
         bool operator>= (const reverse_iterator<Iterator>& lhs,
                         const reverse_iterator<Iterator>& rhs)
         {
-
+             if(lhs._it <= rhs._it)
+                return true;
+            else
+                return false;
         }
 
         template <class Iterator>
@@ -161,7 +179,7 @@ class reverse_iterator
                     typename reverse_iterator<Iterator>::difference_type n,
                     const reverse_iterator<Iterator>& rev_it)
         {
-
+            return rev_it + n;
         }
 
         template <class Iterator>
@@ -169,7 +187,7 @@ class reverse_iterator
             const reverse_iterator<Iterator>& lhs,
             const reverse_iterator<Iterator>& rhs)
         {
-
+            return lhs._it - rhs._it;
         }
 };
 

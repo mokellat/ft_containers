@@ -1,6 +1,12 @@
-#include "library.hpp"
+#include <iostream>
+
+
+bool istrue()
+{
+    
+}
 
 int main()
 {
-    vector<int> ve;
+    
 }
