@@ -2,6 +2,6 @@
 
 int main()
 {
-    vector _ve;
+    ft::vector<int> _ve;
     return 0;
 }

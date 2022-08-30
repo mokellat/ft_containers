@@ -43,16 +43,16 @@ class MyIterator
         //--------------------------------------------------------------------
 
         // operators begin
-        bool &operator==(MyIterator &rhs)
+        bool operator==(MyIterator &rhs)
         {
-            if this->_ptr = rhs._ptr;
+            if (this->_ptr == rhs._ptr)
                 return true;
             else
                 return false;
         }
-        bool &operator!=(MyIterator &rhs)
+        bool operator!=(MyIterator &rhs)
         {
-            if this->_ptr != rhs._ptr;
+            if (this->_ptr != rhs._ptr)
                 return true;
             else
                 return false;
@@ -63,7 +63,7 @@ class MyIterator
         }
         pointer &operator->()
         {
-            return ptr;
+            return _ptr;
         }
         // started here
         MyIterator &operator++()
