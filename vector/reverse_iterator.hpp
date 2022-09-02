@@ -1,7 +1,7 @@
 #ifndef REVERSEITERATOR_HPP
 #define REVERSEITERATOR_HPP
 
-#include "../library.hpp"
+#include "../utilities.hpp"
 
 namespace ft
 {
@@ -19,7 +19,7 @@ namespace ft
             typedef typename iterator_traits<iterator>::reference               reference;
 
         private:
-        iterator_type    _it;
+            iterator_type    _it;
 
         public:
             //Member functions

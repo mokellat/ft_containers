@@ -1,12 +1,15 @@
 #ifndef VECTOR_HPP
 #define VECTOR_HPP
 
-#include "../library.hpp"
+#include "iterator.hpp"
+#include "reverse_iterator.hpp"
+#include <iostream>
+#include <stdexcept>
 
 namespace ft
 {
 
-    #include "iterator.hpp"
+    // #include "iterator.hpp"
     template < class T, class Alloc = std::allocator<T> >
     class vector
     {
@@ -22,9 +25,9 @@ namespace ft
             typedef MyIterator<value_type>                      iterator;
             typedef MyIterator<const value_type>                const_iterator;
 
-            //reverse iterator
-            // typedef reverse_iterator<iterator>                  reverse_iterator;
-            // typedef reverse_iterator<const_iterator>            const_reverse_iterator;
+            // reverse iterator
+            typedef ft::reverse_iterator<iterator>                  reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
             typedef ptrdiff_t                                   difference_type;
             typedef size_t                                      size_type;
@@ -114,7 +117,7 @@ namespace ft
             //iterators------------------------------------
             iterator begin()
             {
-            return iterator(&_ptr[0]);
+                return iterator(&_ptr[0]);
             }
 
             const_iterator begin() const
@@ -131,21 +134,21 @@ namespace ft
                 return const_iterator(&_ptr[_size]);
             }
 
-            iterator rbegin()
+            reverse_iterator rbegin()
             {
-            return reverse_iterator(&_ptr[0]);
+                return reverse_iterator(&_ptr[0]);
             }
 
-            const_iterator rbegin() const
+            const_reverse_iterator rbegin() const
             {
                 return const_reverse_iterator(&_ptr[0]);
             }
 
-            iterator rend()
+            reverse_iterator rend()
             {
                 return reverse_iterator(&_ptr[_size]);
             }
-            const_iterator rend() const
+            const_reverse_iterator rend() const
             {
                 return const_reverse_iterator(&_ptr[_size]);
             }
@@ -197,7 +200,7 @@ namespace ft
             void reserve (size_type n)
             {
                 if(n > max_size())
-                    throw std::lenght_error("Lenght Error : Max size execeded");
+                    throw std::length_error("Lenght Error : Max size execeded");
                 if(n > this->_capacity)
                 {
                     size_type   i;

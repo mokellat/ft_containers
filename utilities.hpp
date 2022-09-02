@@ -1,6 +1,8 @@
 #ifndef UTILITIES_HPP
 #define UTILITIES_HPP
 
+#include <iterator>
+
 namespace ft
 {
     template <class Iterator>
