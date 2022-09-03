@@ -5,6 +5,7 @@
 #include "reverse_iterator.hpp"
 #include <iostream>
 #include <stdexcept>
+#include <iterator>
 
 namespace ft
 {
@@ -22,15 +23,15 @@ namespace ft
             typedef typename allocator_type::const_pointer      const_pointer;
 
             // iterators
-            typedef MyIterator<value_type>                      iterator;
-            typedef MyIterator<const value_type>                const_iterator;
+            typedef ft::MyIterator<value_type>                      iterator;
+            typedef ft::MyIterator<const value_type>                const_iterator;
 
             // reverse iterator
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
             typedef ft::reverse_iterator<const_iterator>            const_reverse_iterator;
 
-            typedef ptrdiff_t                                   difference_type;
-            typedef size_t                                      size_type;
+            typedef ptrdiff_t                                       difference_type;
+            typedef size_t                                          size_type;
 
         private:
             pointer         _ptr;
@@ -50,23 +51,25 @@ namespace ft
                 _capacity = 0;
                 this->_alloc_copy = alloc;
             }
-
+            //(1)
             explicit vector (size_type n, const value_type& val = value_type(),
                     const allocator_type& alloc = allocator_type())
             {
-                (void)alloc;
+                std::cout << "im heeeeeeeeeeeere" << std::endl;
+                this->_alloc_copy = alloc;
                 _size = n;
                 _capacity = n;
                 _ptr = _alloc_copy.allocate(n);
                 for(size_type i = 0; i < n; i++)
                     _alloc_copy.construct(&_ptr[i], val);
             }
-
+            //(2)
             template <class InputIterator>
             vector (InputIterator first, InputIterator last,
                     const allocator_type& alloc = allocator_type())
             {
-                (void)alloc;
+                // std::cout << "im heeeeeeeeeeeere" << std::endl;
+                this->_alloc_copy = alloc;
                 difference_type diff = std::distance(first, last);
                 _size = diff;
                 _capacity = diff;
@@ -75,7 +78,7 @@ namespace ft
                 for(int i = 0; i < diff; i++)
                     _alloc_copy.construct(&_ptr[i], first++);
             }
-
+            //(3)
             vector (const vector& x)
             {
                 this->_size = x._size;
@@ -87,12 +90,14 @@ namespace ft
             //Destructor
             ~vector()
             {
-                if(_ptr)
+                if(_size > 0)
                 {
-                    for(size_type i = 0; i < _size; i++)
+                    // std::cout << "my job done inside" << std::endl;
+                    for(size_type i = 0; i < this->_size; i++)
                         _alloc_copy.destroy(&_ptr[i]);
-                    _alloc_copy.deallocate(_ptr, this->_size);
+                    _alloc_copy.deallocate(_ptr, this->_capacity);
                 }
+                // std::cout << "my job done outside" << std::endl;
             }
             
             //assignement overload
