@@ -15,16 +15,16 @@ namespace ft
     class vector
     {
         public:
-            typedef T                                           value_type;
-            typedef Alloc                                       allocator_type;
-            typedef typename allocator_type::reference          reference;
-            typedef typename allocator_type::const_reference    const_reference;
-            typedef typename allocator_type::pointer            pointer;
-            typedef typename allocator_type::const_pointer      const_pointer;
+            typedef T                                               value_type;
+            typedef Alloc                                           allocator_type;
+            typedef typename allocator_type::reference              reference;
+            typedef typename allocator_type::const_reference        const_reference;
+            typedef typename allocator_type::pointer                pointer;
+            typedef typename allocator_type::const_pointer          const_pointer;
 
             // iterators
-            typedef ft::MyIterator<value_type>                      iterator;
-            typedef ft::MyIterator<const value_type>                const_iterator;
+            typedef MyIterator<value_type>                          iterator;
+            typedef MyIterator<const value_type>                    const_iterator;
 
             // reverse iterator
             typedef ft::reverse_iterator<iterator>                  reverse_iterator;
@@ -34,10 +34,10 @@ namespace ft
             typedef size_t                                          size_type;
 
         private:
-            pointer         _ptr;
-            allocator_type  _alloc_copy;
-            size_type       _size;
-            size_type       _capacity;
+            pointer                                                 _ptr;
+            allocator_type                                          _alloc_copy;
+            size_type                                               _size;
+            size_type                                               _capacity;
         
         public:
 

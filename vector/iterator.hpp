@@ -19,7 +19,9 @@ namespace ft{
             pointer _ptr;
 
         public:
-            // default constructor
+            // default cnstructor
+            MyIterator() : _ptr() {}
+
             MyIterator(pointer cp)
             {
                 _ptr = cp;
