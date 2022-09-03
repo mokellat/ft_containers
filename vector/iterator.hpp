@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <stdexcept>
+#include <iterator>
 
 namespace ft{
     template <class T>
@@ -10,10 +11,11 @@ namespace ft{
     {
         public:
             //typedefs
-            typedef T           value_type;
-            typedef T*          pointer;
-            typedef T&          reference;
-            typedef ptrdiff_t   difference_type;
+            typedef T                                   value_type;
+            typedef T*                                  pointer;
+            typedef T&                                  reference;
+            typedef ptrdiff_t                           difference_type;
+            typedef  std::random_access_iterator_tag    iterator_category;
         
         private:
             pointer _ptr;
@@ -40,7 +42,7 @@ namespace ft{
             // destructor
             ~MyIterator()
             {
-                std::cout << "Desctructor Called" << std::endl;
+                // std::cout << "Desctructor Called" << std::endl;
             }
 
             //--------------------------------------------------------------------

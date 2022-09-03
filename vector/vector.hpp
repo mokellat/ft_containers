@@ -55,7 +55,7 @@ namespace ft
             explicit vector (size_type n, const value_type& val = value_type(),
                     const allocator_type& alloc = allocator_type())
             {
-                std::cout << "im heeeeeeeeeeeere" << std::endl;
+                // std::cout << "im heeeeeeeeeeeere" << std::endl;
                 this->_alloc_copy = alloc;
                 _size = n;
                 _capacity = n;
@@ -71,18 +71,25 @@ namespace ft
                 // std::cout << "im heeeeeeeeeeeere" << std::endl;
                 this->_alloc_copy = alloc;
                 difference_type diff = std::distance(first, last);
+                if(diff < 0)
+                    throw std::length_error("constructor: range error");
                 _size = diff;
                 _capacity = diff;
                 //what if the difference is < 0
-                _ptr = _alloc_copy.allocate(diff);
-                for(int i = 0; i < diff; i++)
-                    _alloc_copy.construct(&_ptr[i], first++);
+                if(diff > 0)
+                {
+                    _ptr = _alloc_copy.allocate(diff);
+                    for(int i = 0; i < diff; i++)
+                        _alloc_copy.construct(&_ptr[i], *first++);
+                }
             }
             //(3)
             vector (const vector& x)
             {
-                this->_size = x._size;
-                this->_capacity = x._capacity;
+                // std::cout << "im heeeeeeeeeeeere" << std::endl;
+                this->_ptr = NULL;
+                this->_size = 0;
+                this->_capacity = 0;
                 this->_alloc_copy = x._alloc_copy;
                 *this = x;
             }
@@ -90,6 +97,8 @@ namespace ft
             //Destructor
             ~vector()
             {
+                // std::cout << "size " << this->_size << std::endl;
+                // std::cout << "size " << this->_capacity << std::endl;
                 if(_size > 0)
                 {
                     // std::cout << "my job done inside" << std::endl;
@@ -104,17 +113,21 @@ namespace ft
             vector& operator=(const vector& x)
             {
                 // deallocate and destroy whats in the container then copy
+                // std::cout << this->_capacity << std::endl;
                 if(_ptr)
                 {
-                    for(int i = 0; i < this->_size; i++)
+                    for(size_type i = 0; i < this->_size; i++)
                         _alloc_copy.destroy(&_ptr[i]);
-                    _alloc_copy.deallocate(_ptr, this->_size);
+                    if(this->_capacity > 0)
+                        _alloc_copy.deallocate(_ptr, this->_capacity);
                 }
                 this->_alloc_copy = x._alloc_copy;
-                _ptr = _alloc_copy.allocate(x._size);
-                for(int i = 0; i < x._size; i++)
-                    _alloc_copy.construct(&_ptr[i], &x[i]);
+                if(x._size > 0)
+                    _ptr = _alloc_copy.allocate(x._size);
+                for(size_type i = 0; i < x._size; i++)
+                    _alloc_copy.construct(&_ptr[i], x._ptr[i]);
                 this->_size = x._size;
+                this->_capacity = x._capacity;
                 // *this = x;
                 return *this;
             }
