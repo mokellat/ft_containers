@@ -145,11 +145,11 @@ namespace ft
 
             iterator end()
             {
-                return iterator(&_ptr[_size]);
+                return iterator(&_ptr[_size -1]);
             }
             const_iterator end() const
             {
-                return const_iterator(&_ptr[_size]);
+                return const_iterator(&_ptr[_size -1]);
             }
 
             reverse_iterator rbegin()

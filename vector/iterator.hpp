@@ -15,7 +15,7 @@ namespace ft{
             typedef T*                                  pointer;
             typedef T&                                  reference;
             typedef ptrdiff_t                           difference_type;
-            typedef  std::random_access_iterator_tag    iterator_category;
+            typedef std::random_access_iterator_tag     iterator_category;
         
         private:
             pointer _ptr;
@@ -23,19 +23,21 @@ namespace ft{
         public:
             // default cnstructor
             MyIterator() : _ptr() {}
-
+            
             MyIterator(pointer cp)
             {
+                std::cout << "heeeere" << std::endl;
                 _ptr = cp;
             }
             // copy constructor
-            MyIterator(MyIterator &cp)
+            MyIterator(MyIterator const &cp)
             {
                 this->_ptr = cp._ptr;
             }
             // assignment overload
-            MyIterator &operator=(MyIterator &rhs)
+            MyIterator &operator=(MyIterator const &rhs)
             {
+                std::cout << "heeeere----" << std::endl;
                 this->_ptr = rhs._ptr;
                 return (*this); //forget what this do
             }

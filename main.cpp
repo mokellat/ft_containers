@@ -13,26 +13,32 @@ int main()
     //     std::cout << _ve1[i] << std::endl;
 
     // (2)-----------------------------------
-		int a1[5] = {10, 20, 30, 40, 50};
+	int a1[5] = {10, 20, 30, 40, 50};
 
-		ft::vector<int> _ve2(a1, a1);
+	ft::vector<int> _ve2(a1, a1+5);
 
-		//(3)------------------------------------
-		ft::vector<int> _ve3(_ve2);
+	//(3)------------------------------------
+	ft::vector<int> _ve3(_ve2);
 
-		//assign operator--------------------------------------
-		// ft::vector<int> _ve4 = _ve2;
-		// _ve4 = _ve1;
+	//assign operator--------------------------------------
+	// ft::vector<int> _ve4 = _ve2;
+	// _ve4 = _ve1;
 
-		//begin
-		ft::vector<int>::iterator it;
-		// it = _ve4.begin();
+	//begin andd end
+	ft::vector<int>::iterator it;
+	it = _ve2.begin(); // it.operator=(v2.begin())'
+	std::cout << *it << std::endl;
 
-		// for (size_t i = 0; i < _ve2.size(); i++)
-    //     std::cout << _ve2[i] << std::endl;
+	// for (size_t i = 0; i < _ve2.size(); i++)
+	// 	std::cout << _ve2[i] << std::endl;
     return 0;
 }
 
+
+// int main()
+// {
+// 	ft::MyIterator<int> it(NULL);
+// }
 
 // notes to add
 
