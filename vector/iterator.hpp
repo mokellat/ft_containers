@@ -26,7 +26,7 @@ namespace ft{
             
             MyIterator(pointer cp)
             {
-                std::cout << "heeeere" << std::endl;
+                // std::cout << "heeeere" << std::endl;
                 _ptr = cp;
             }
             // copy constructor
@@ -37,7 +37,7 @@ namespace ft{
             // assignment overload
             MyIterator &operator=(MyIterator const &rhs)
             {
-                std::cout << "heeeere----" << std::endl;
+                // std::cout << "heeeere----" << std::endl;
                 this->_ptr = rhs._ptr;
                 return (*this); //forget what this do
             }
@@ -89,7 +89,7 @@ namespace ft{
                 this->_ptr--;
                 return (*this);
             }
-            MyIterator &operator--(int)
+            MyIterator operator--(int)
             {
                 MyIterator cp(*this);
                 --_ptr;
@@ -101,7 +101,7 @@ namespace ft{
                 cp += n;
                 return cp;
             }
-            MyIterator &operator-(int n)
+            MyIterator operator-(int n)
             {
                 MyIterator cp(*this);
                 cp -= n;
@@ -154,7 +154,7 @@ namespace ft{
             MyIterator operator-=(int n)
             {
                 MyIterator cp(*this);
-                cp -= n;
+                cp = cp - n;
                 return cp;
             }
             reference operator[](int n)

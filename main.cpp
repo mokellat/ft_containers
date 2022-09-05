@@ -25,10 +25,9 @@ int main()
 	// _ve4 = _ve1;
 
 	//begin andd end
-	ft::vector<int>::iterator it;
-	it = _ve2.begin(); // it.operator=(v2.begin())'
-	std::cout << *it << std::endl;
-
+	// ft::vector<int>::reverse_iterator it;
+	// it = _ve2.rbegin(); // it.operator=(v2.begin())'
+	std::cout << *(_ve2.end() - 1) << std::endl;
 	// for (size_t i = 0; i < _ve2.size(); i++)
 	// 	std::cout << _ve2[i] << std::endl;
     return 0;

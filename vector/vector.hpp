@@ -135,31 +135,32 @@ namespace ft
             //iterators------------------------------------
             iterator begin()
             {
-                return iterator(&_ptr[0]);
+                return iterator(_ptr);
             }
 
             const_iterator begin() const
             {
-                return const_iterator(&_ptr[0]);
+                return const_iterator(_ptr);
             }
 
             iterator end()
             {
-                return iterator(&_ptr[_size -1]);
+                return iterator(&_ptr[_size]);
             }
             const_iterator end() const
             {
-                return const_iterator(&_ptr[_size -1]);
+                return const_iterator(&_ptr[_size]);
             }
 
             reverse_iterator rbegin()
             {
-                return reverse_iterator(&_ptr[0]);
+                // std::cout << "hhh" << std::endl;
+                return reverse_iterator(_ptr);
             }
 
             const_reverse_iterator rbegin() const
             {
-                return const_reverse_iterator(&_ptr[0]);
+                return const_reverse_iterator(_ptr);
             }
 
             reverse_iterator rend()
