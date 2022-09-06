@@ -95,7 +95,7 @@ namespace ft{
                 --_ptr;
                 return (cp);
             }
-            MyIterator &operator+(int n)
+            MyIterator operator+(int n)
             {
                 MyIterator cp(*this);
                 cp += n;
@@ -148,7 +148,7 @@ namespace ft{
             MyIterator operator+=(int n)
             {
                 MyIterator cp(*this);
-                cp += n;
+                cp._ptr += n;
                 return cp;
             }
             MyIterator operator-=(int n)
