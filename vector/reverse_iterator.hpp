@@ -29,6 +29,7 @@ namespace ft
 
             explicit reverse_iterator (iterator_type it)
             {
+                std::cout << "kkkk" << std::endl;
                 _it = it;
             }
 

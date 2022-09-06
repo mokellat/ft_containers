@@ -155,21 +155,22 @@ namespace ft
             reverse_iterator rbegin()
             {
                 // std::cout << "hhh" << std::endl;
-                return reverse_iterator(_ptr);
+                return reverse_iterator(_ptr + _size);
             }
 
             const_reverse_iterator rbegin() const
             {
-                return const_reverse_iterator(_ptr);
+                return const_reverse_iterator(_ptr + _size);
             }
 
             reverse_iterator rend()
             {
-                return reverse_iterator(&_ptr[_size]);
+                return reverse_iterator(_ptr);
             }
+
             const_reverse_iterator rend() const
             {
-                return const_reverse_iterator(&_ptr[_size]);
+                return const_reverse_iterator(_ptr);
             }
             
             //Capacity--------------------------------------------

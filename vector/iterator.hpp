@@ -104,7 +104,7 @@ namespace ft{
             MyIterator operator-(int n)
             {
                 MyIterator cp(*this);
-                cp -= n;
+                cp._ptr -= n;
                 return cp;
             }
             difference_type operator-(MyIterator &it)
@@ -154,8 +154,8 @@ namespace ft{
             MyIterator operator-=(int n)
             {
                 MyIterator cp(*this);
-                cp = cp - n;
-                return cp;
+                // cp -= n;
+                return cp - n;
             }
             reference operator[](int n)
             {
