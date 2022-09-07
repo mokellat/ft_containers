@@ -27,9 +27,22 @@ int main()
 	//begin andd end
 	// ft::vector<int>::reverse_iterator it;
 	// it = _ve2.rbegin(); // it.operator=(v2.begin())'
-	std::cout << *(_ve2.rend() - 1) << std::endl;
+	// std::cout << *(_ve2.rbegin() + 3) << std::endl;
+	// _ve2.reserve(10);
+	// ft::vector<int>::iterator it;
+	// ft::vector<int>::iterator ite = _ve2.begin() - 1;
+
+	// for(it = _ve2.end(); it != ite; it--)
+	// {
+	// 	std::cout << *it << std::endl;
+	// }
+	// std::cout << _ve2.capacity() << std::endl;
+
+	ft::vector<int> _ve5;
+
+	_ve5.assign(a1, a1+4)
 	// for (size_t i = 0; i < _ve2.size(); i++)
-	// 	std::cout << _ve2[i] << std::endl;
+	// 	std::cout << _ve2.at(i) << std::endl;
     return 0;
 }
 

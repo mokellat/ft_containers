@@ -230,10 +230,10 @@ namespace ft
                     temp = _alloc_copy.allocate(n);
                     for(i = 0; i < this->_size; i++)
                     {
-                        _alloc_copy.construct(&temp[i], &_ptr[i]);
+                        _alloc_copy.construct(&temp[i], _ptr[i]);
                         _alloc_copy.destroy(&_ptr[i]);
-                    }   
-                    _ptr = _alloc_copy.deallocate(_ptr, this->_size);
+                    }
+                    _alloc_copy.deallocate(_ptr, this->_size);
 
                     // reallocate now
                     _ptr = temp;
@@ -308,7 +308,7 @@ namespace ft
 
             void assign (size_type n, const value_type& val)
             {
-            size_type i;
+                size_type i;
 
                 if(_ptr)
                 {
@@ -336,7 +336,7 @@ namespace ft
                     temp = _alloc_copy.allocate(this->_capacity);
                     for(size_type i = 0; i < this->_size; i++)
                     {
-                        _alloc_copy.construct(&temp[i], &_ptr[i]);
+                        _alloc_copy.construct(&temp[i], _ptr[i]);
                         _alloc_copy.destroy(&_ptr[i]);
                     }
                     _ptr = _alloc_copy.deallocate(_ptr, this->_capacity);

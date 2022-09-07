@@ -27,8 +27,12 @@ int main()
     // std::cout << "hh: " << _ve2.size() << std::endl;
     // std::vector<int>::reverse_iterator it;
 	// it = _ve2.begin(); // it.operator=(v2.begin())'
-	std::cout << *(_ve2.rend() - 1) << std::endl;
-    // std::cout << "value " <<*it << std::endl;
-    // for (size_t i = 0; i < _ve2.size(); i++)
-    //     std::cout << _ve2[i] << std::endl;
+    _ve2.reserve(10);
+    std::vector<int>::iterator it;
+	std::vector<int>::iterator ite = _ve2.begin() - 1;
+	std::cout << _ve2.capacity() << std::endl;
+    for(it = _ve2.end(); it != ite; it--)
+	{
+		std::cout << *it << std::endl;
+	}
 }

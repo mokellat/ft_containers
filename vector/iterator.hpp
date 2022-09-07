@@ -57,6 +57,7 @@ namespace ft{
                 else
                     return false;
             }
+
             bool operator!=(MyIterator &rhs)
             {
                 if (this->_ptr != rhs._ptr)
@@ -64,44 +65,50 @@ namespace ft{
                 else
                     return false;
             }
-            reference &operator*()
+            reference operator*()
             {
                 return *_ptr;
             }
+
+            // void operator*(T ptr_val) { *_ptr = ptr_val; }
+
             pointer &operator->()
             {
                 return _ptr;
             }
             // started here
-            MyIterator &operator++()
+            MyIterator operator++()
             {
                 this->_ptr++;
                 return (*this);
             }
-            MyIterator &operator++(int)
+            MyIterator operator++(int)
             {
                 MyIterator cp(*this);
                 ++_ptr;
                 return (cp);
             }
-            MyIterator &operator--()
+            MyIterator operator--()
             {
                 this->_ptr--;
                 return (*this);
             }
+
             MyIterator operator--(int)
             {
                 MyIterator cp(*this);
                 --_ptr;
                 return (cp);
             }
-            MyIterator operator+(int n)
+
+            MyIterator operator+(int n) const
             {
                 MyIterator cp(*this);
-                cp += n;
+                cp._ptr += n;
                 return cp;
             }
-            MyIterator operator-(int n)
+
+            MyIterator operator-(int n) const
             {
                 MyIterator cp(*this);
                 cp._ptr -= n;

@@ -56,9 +56,7 @@ namespace ft
 
             reverse_iterator operator+ (difference_type n) const
             {
-                reverse_iterator rev_it = *this;
-                rev_it._it - n;
-                return rev_it;
+                return reverse_iterator(_it - n);
             }
 
             reverse_iterator& operator++()
@@ -84,10 +82,7 @@ namespace ft
 
             reverse_iterator operator- (difference_type n) const
             {
-                std::cout << "fuuuuuck" << std::endl;
-                reverse_iterator rev_it = *this;
-                rev_it._it + n;
-                return rev_it;
+                return reverse_iterator(_it + n);
             }
 
             reverse_iterator& operator--()
