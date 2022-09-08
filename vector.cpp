@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 
+typedef std::vector<int> VE_INT;
 
 int main()
 {
@@ -27,12 +28,29 @@ int main()
     // std::cout << "hh: " << _ve2.size() << std::endl;
     // std::vector<int>::reverse_iterator it;
 	// it = _ve2.begin(); // it.operator=(v2.begin())'
-    _ve2.reserve(10);
-    std::vector<int>::iterator it;
-	std::vector<int>::iterator ite = _ve2.begin() - 1;
-	std::cout << _ve2.capacity() << std::endl;
-    for(it = _ve2.end(); it != ite; it--)
-	{
-		std::cout << *it << std::endl;
-	}
+    // _ve2.reserve(10);
+    // std::vector<int>::iterator it;
+	// std::vector<int>::iterator ite = _ve2.begin() - 1;
+	// std::cout << _ve2.capacity() << std::endl;
+    // for(it = _ve2.end(); it != ite; it--)
+	// {
+	// 	std::cout << *it << std::endl;
+	// }
+
+    // std::vector<int> _ve7(_ve2);
+
+	// _ve7.push_back(1000000);
+	// std::cout << _ve7.size() << std::endl;
+	// std::cout << _ve7.capacity() << std::endl;
+
+    VE_INT _ve8(_ve2);
+	// _ve8.clear();
+	// std::cout << _ve8[0] << std::endl;
+	// std::cout << _ve8.capacity() << std::endl;
+
+    _ve8.resize(10, 20);
+    for(size_t i = 0; i < _ve8.size(); i++)
+    {
+        std::cout << _ve8[i] << std::endl;
+    }
 }

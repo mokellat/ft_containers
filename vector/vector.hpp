@@ -186,21 +186,38 @@ namespace ft
 
             void resize (size_type n, value_type val = value_type())
             {
+                pointer temp;
                 // for later i didnt get it right
-                if(val == nullptr)
+                if(n < _size)
                 {
-                    if(n < this->_size)
+                    for(size_type i = n; i < this->_size; i++)
+                        _alloc_copy.destroy(&_ptr[i]);
+                    _size = n;
+                }
+                else if(n > _size)
+                {
+                    for(size_type i = _size; i < n; i++)
+                        push_back(val);
+                    if(n > _capacity)
                     {
+                        //deallocation
+                        temp = _alloc_copy.allocate(_size);
+                        for(size_type i = 0; i < this->_size; i++)
+                        {
+                            _alloc_copy.destroy(&_ptr[i]);
+                            _alloc_copy.construct(&temp[i], _ptr[i]);
+                        }
+                        _alloc_copy.deallocate(_ptr, this->_capacity);
 
+                        //reallocating and constructing
+                        _ptr = _alloc_copy.allocate(n);
+                        for(size_type i = 0; i < _size; i++)
+                            _alloc_copy.construct(&_ptr[i], temp[i]);
+                        for(size_type i = _size; i < n; i++)
+                            _alloc_copy.construct(&_ptr[i], val);
+                        _capacity = n;
                     }
-                    else if(n > this->_size)
-                    {
-
-                    }
-                    else if(n > this->_capacity)
-                    {
-
-                    }
+                    _size = n;
                 }
             }
 
@@ -289,35 +306,37 @@ namespace ft
             template <class InputIterator>
             void assign (InputIterator first, InputIterator last)
             {
+                // std::cout << "first" << std::endl;
                 if(_ptr)
                 {
-                    for(int i = 0; i < _size; i++)
+                    for(size_type i = 0; i < _size; i++)
                         _alloc_copy.destroy(&_ptr[i]);
                 }
                 difference_type diff = std::distance(first, last);
-                if(diff > this->_capacity)
+                if((size_type)diff > this->_capacity)
                 {
-                    _ptr = _alloc_copy.deallocate(_ptr, this->_size);
-                    this->_capacity = this->_size;
+                    _alloc_copy.deallocate(_ptr, this->_size);
+                    this->_capacity = diff;
                     _ptr = _alloc_copy.allocate(this->_capacity);
                 }
                 this->_size = diff;
                 for(difference_type i = 0; i < diff; i++)
-                    _alloc_copy.construct(&_ptr[i], first++);
+                    _alloc_copy.construct(&_ptr[i], *first++);
             }
 
             void assign (size_type n, const value_type& val)
             {
+                // std::cout << "second" << std::endl;
                 size_type i;
 
                 if(_ptr)
                 {
-                    for(int i = 0; i < _size; i++)
+                    for(i = 0; i < _size; i++)
                         _alloc_copy.destroy(&_ptr[i]);
                 }
                 if(n > this->_capacity)
                 {
-                    _ptr = _alloc_copy.deallocate(_ptr, this->_size);
+                    _alloc_copy.deallocate(_ptr, this->_size);
                     this->_capacity = n;
                     _ptr = _alloc_copy.allocate(this->_capacity);
                 }
@@ -332,14 +351,14 @@ namespace ft
 
                 if(this->_size + 1 > this->_capacity)
                 {
-                    this->_capacity = this->_capacity + this->_capacity / 2;
+                    this->_capacity *= 2;
                     temp = _alloc_copy.allocate(this->_capacity);
                     for(size_type i = 0; i < this->_size; i++)
                     {
                         _alloc_copy.construct(&temp[i], _ptr[i]);
                         _alloc_copy.destroy(&_ptr[i]);
                     }
-                    _ptr = _alloc_copy.deallocate(_ptr, this->_capacity);
+                    _alloc_copy.deallocate(_ptr, this->_capacity);
                     _ptr = temp;
                 } 
                 _alloc_copy.construct(&_ptr[this->_size], val);
