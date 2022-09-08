@@ -80,22 +80,27 @@ int main()
 	// 	std::cout << _ve8[i] << std::endl;
 
 	//swap---------------------------------------------------------------------
+	// int a1[7] = {10, 20, 30, 40, 50, 60, 70};
+	// VE_INT _ve2(a1, a1+7);
+
+	// int a2[5] = {100, 200, 300, 400, 500};
+	// VE_INT _ve(_ve2);
+	// VE_INT _ve1(a2, a2+5);
+
+	// _ve.swap(_ve1);
+
+	// for (size_t i = 0; i < _ve.size(); i++)
+	// 	std::cout << _ve[i] << std::endl;
+	// std::cout << "-----------------------------" << std::endl;
+	// for (size_t i = 0; i < _ve1.size(); i++)
+	// 	std::cout << _ve1[i] << std::endl;
+
+	//erase----------------------------------------------------------------
 	int a1[7] = {10, 20, 30, 40, 50, 60, 70};
-	VE_INT _ve2(a1, a1+7);
-
-	int a2[5] = {100, 200, 300, 400, 500};
-	VE_INT _ve(_ve2);
-	VE_INT _ve1(a2, a2+5);
-
-	_ve.swap(_ve1);
-
-	for (size_t i = 0; i < _ve.size(); i++)
+    VE_INT _ve(a1, a1+7);
+    _ve.erase(_ve.begin() + 10);
+    for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
-	std::cout << "-----------------------------" << std::endl;
-	for (size_t i = 0; i < _ve1.size(); i++)
-		std::cout << _ve1[i] << std::endl;
-
-
     return 0;
 }
 

@@ -387,10 +387,26 @@ namespace ft
 
             // }
 
-            // iterator erase (iterator position)
-            // {
-                
-            // }
+            iterator erase (iterator position)
+            {
+                pointer     temp;
+                iterator    ret;
+
+                temp = _alloc_copy.allocate(_capacity);
+                ret = iterator(&_ptr[position]);
+                for(size_type i = 0; i < _size; i++)
+                {
+                    if(i != *position)
+                        _alloc_copy.construct(&temp[i], _ptr[i]);
+                    _alloc_copy.destroy(&_ptr[i]);
+                }
+                _alloc_copy.deallocate(_ptr, _capacity);
+
+                _ptr = _alloc_copy.allocate(_capacity);
+                this->_size--;
+                _ptr = temp;
+                return ret;
+            }
 
             // iterator erase (iterator first, iterator last)
             // {
@@ -399,7 +415,6 @@ namespace ft
 
             void swap (vector& x)
             {
-
                 // !!PS: Exception safety to ask for
                 pointer     p1;
                 pointer     p2;
