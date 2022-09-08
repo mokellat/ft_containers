@@ -15,9 +15,9 @@ int main()
     //     std::cout << _ve1[i] << std::endl;
 
     // (2)-----------------------------------
-	int a1[5] = {10, 20, 30, 40, 50};
+	// int a1[7] = {10, 20, 30, 40, 50, 60, 70};
 
-	ft::vector<int> _ve2(a1, a1+5);
+	// ft::vector<int> _ve2(a1, a1+7);
 
 	//(3)------------------------------------
 	// ft::vector<int> _ve3(_ve2);
@@ -65,17 +65,37 @@ int main()
 	// std::cout << "-------------" << std::endl;
 
 	//resize---------------------------------------------------------
-	VE_INT _ve8(_ve2);
+	// VE_INT _ve8(_ve2);
 
-    _ve8.resize(10, 20);
-    for(size_t i = 0; i < _ve8.size(); i++)
-    {
-        std::cout << _ve8[i] << std::endl;
-    }
-
+    // _ve8.resize(0, 20);
+    // for(size_t i = 0; i < _ve8.size(); i++)
+    // {
+    //     std::cout << _ve8[i] << std::endl;
+    // }
+	// std::cout << "-------------" << std::endl;
+	// std::cout << _ve8.size() << std::endl;
+	// std::cout << _ve8.capacity() << std::endl;
 
 	// for (size_t i = 0; i < _ve8.size(); i++)
 	// 	std::cout << _ve8[i] << std::endl;
+
+	//swap---------------------------------------------------------------------
+	int a1[7] = {10, 20, 30, 40, 50, 60, 70};
+	VE_INT _ve2(a1, a1+7);
+
+	int a2[5] = {100, 200, 300, 400, 500};
+	VE_INT _ve(_ve2);
+	VE_INT _ve1(a2, a2+5);
+
+	_ve.swap(_ve1);
+
+	for (size_t i = 0; i < _ve.size(); i++)
+		std::cout << _ve[i] << std::endl;
+	std::cout << "-----------------------------" << std::endl;
+	for (size_t i = 0; i < _ve1.size(); i++)
+		std::cout << _ve1[i] << std::endl;
+
+
     return 0;
 }
 

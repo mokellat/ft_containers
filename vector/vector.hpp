@@ -399,24 +399,40 @@ namespace ft
 
             void swap (vector& x)
             {
-                pointer temp;
 
-            
+                // !!PS: Exception safety to ask for
+                pointer     p1;
+                pointer     p2;
+
                 if(this->_size == x._size)
                 {
                     for(size_type i = 0; i < this->_size; i++)
-                    {
-                        temp = x._ptr[i];
-                        x._ptr[i] = this->_ptr[i];
-                        this->_ptr[i] = temp;
-                    }
+                       std::swap(_ptr[i], x._ptr[i]);
                 }
                 else
                 {
-                    if(this->_size > x._size)
+                    // std::cout << "tabbbbb" << std::endl;
+                    p1 = _alloc_copy.allocate(_size);
+                    p2 = _alloc_copy.allocate(x._size);
+                    for(size_type i = 0; i < x._size; i++)
                     {
-
+                        _alloc_copy.construct(&p1[i], x._ptr[i]);
+                        _alloc_copy.construct(&p2[i], _ptr[i]);
+                        _alloc_copy.destroy(&x._ptr[i]);
+                        _alloc_copy.destroy(&_ptr[i]);
                     }
+                    for(size_type i = x._size; i < _size; i++)
+                    {
+                        _alloc_copy.construct(&p2[i], _ptr[i]);
+                        _alloc_copy.destroy(&_ptr[i]);
+                    }
+                    _alloc_copy.deallocate(_ptr, this->_capacity);
+                    _alloc_copy.deallocate(x._ptr, x._capacity);
+
+                    //swapping after destroying originals and copying to temps
+                    _ptr = p1;
+                    x._ptr = p2;
+                    std::swap(x._size, _size);
                 }
             }
             
