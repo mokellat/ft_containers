@@ -371,15 +371,50 @@ namespace ft
                 this->_size--;
             }
 
-            // iterator insert (iterator position, const value_type& val)
-            // {
-                
-            // }
+            iterator insert (iterator position, const value_type& val)
+            {
+                pointer     temp;
+                size_type   j = 0;
+                size_type   index = 0;
+                // iterator    ret;
 
-            // void   insert (iterator position, size_type n, const value_type& val)
-            // {
-                
-            // }
+                if(*position == *(end()))
+                    push_back(val);
+                else
+                {
+                    if(_size + 1 > _capacity)
+                    {
+                        _capacity *= 2;
+                        temp = _alloc_copy.allocate(this->_capacity);
+                        for(iterator i = begin(); i != end(); i++)
+                        {
+                            if(i == position)
+                                _alloc_copy.construct(&temp[j++], val);
+                            _alloc_copy.construct(&temp[j], _ptr[index]);
+                            _alloc_copy.destroy(&_ptr[index]);
+                            index++;
+                            j++;
+                        }
+                        _alloc_copy.deallocate(_ptr, this->_capacity);
+                        _ptr = temp;
+                    }
+                    _size++;
+                }
+                return position;
+            }
+
+            void   insert (iterator position, size_type n, const value_type& val)
+            {
+                for(iterator i = position; i != position + n; i++)
+                {
+                    for (size_type i = 0; i < _size; i++)
+                    {
+                        std::cout << _ptr[i] << std::endl;
+                    }
+                    std::cout << "----------------------------" << std::endl;
+                    insert(i, val);
+                }
+            }
             
             // template <class InputIterator>
             // void insert (iterator position, InputIterator first, InputIterator last)
@@ -394,7 +429,6 @@ namespace ft
                 int         index1 = 0;
 
                 temp = _alloc_copy.allocate(_capacity);
-                // std::cout << "good: " << *position << std::endl;
                 for(iterator i = begin(); i != end(); i++)
                 {
                     if(*i != *position)
@@ -414,8 +448,8 @@ namespace ft
             {
                 for(iterator i = first; i!= last; i++)
                     erase(i);
-                if(last != end() || last + 1 != end())
-                    return last + 1
+                if(*last != *end())
+                    return last + 1;
                 else    
                     return first + 1;
             }
