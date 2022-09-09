@@ -58,13 +58,15 @@ namespace ft{
                     return false;
             }
 
-            bool operator!=(MyIterator &rhs)
+            template<class TE>
+            bool operator!=(const MyIterator<TE> &rhs)
             {
                 if (this->_ptr != rhs._ptr)
                     return true;
                 else
                     return false;
             }
+
             reference operator*()
             {
                 return *_ptr;

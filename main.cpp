@@ -98,7 +98,8 @@ int main()
 	//erase----------------------------------------------------------------
 	int a1[7] = {10, 20, 30, 40, 50, 60, 70};
     VE_INT _ve(a1, a1+7);
-    _ve.erase(_ve.begin() + 10);
+	// std::cout << "wtf " << *(_ve.begin(), _ve.begin() + 3) << std::endl;
+    std::cout << *(_ve.erase(_ve.begin() + 3, _ve.end() - 3)) << std::endl;
     for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
     return 0;
@@ -106,5 +107,9 @@ int main()
 
 
 // notes to add
-
 //(2): if the range given is bigger than  the array size
+
+//erase: 	-if a the iterator out of range it gives a 0(undefined behavior)
+//			what should i do in this situation
+
+//			-i have a problem in the retun

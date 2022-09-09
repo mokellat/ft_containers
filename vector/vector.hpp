@@ -390,28 +390,35 @@ namespace ft
             iterator erase (iterator position)
             {
                 pointer     temp;
-                iterator    ret;
+                int         index = 0;
+                int         index1 = 0;
 
                 temp = _alloc_copy.allocate(_capacity);
-                ret = iterator(&_ptr[position]);
-                for(size_type i = 0; i < _size; i++)
+                // std::cout << "good: " << *position << std::endl;
+                for(iterator i = begin(); i != end(); i++)
                 {
-                    if(i != *position)
-                        _alloc_copy.construct(&temp[i], _ptr[i]);
-                    _alloc_copy.destroy(&_ptr[i]);
+                    if(*i != *position)
+                        _alloc_copy.construct(&temp[index1++], _ptr[index]);
+                    _alloc_copy.destroy(&_ptr[index]);
+                    index++;
                 }
                 _alloc_copy.deallocate(_ptr, _capacity);
 
                 _ptr = _alloc_copy.allocate(_capacity);
                 this->_size--;
                 _ptr = temp;
-                return ret;
+                return position;
             }
 
-            // iterator erase (iterator first, iterator last)
-            // {
-
-            // }
+            iterator erase (iterator first, iterator last)
+            {
+                for(iterator i = first; i!= last; i++)
+                    erase(i);
+                if(last != end() || last + 1 != end())
+                    return last + 1
+                else    
+                    return first + 1;
+            }
 
             void swap (vector& x)
             {

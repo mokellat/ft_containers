@@ -72,7 +72,8 @@ int main()
 
     int a1[7] = {10, 20, 30, 40, 50, 60, 70};
     VE_INT _ve(a1, a1+7);
-    std::cout << "here " << *_ve.erase(_ve.begin()) << std::endl;
+    // std::cout << "wtf " << *(_ve.begin(), _ve.begin() + 3) << std::endl;
+    std::cout << "here " << *_ve.erase(_ve.begin() + 3, _ve.end()) << std::endl;
     for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
 }
