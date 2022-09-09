@@ -379,25 +379,31 @@ namespace ft
                 // iterator    ret;
 
                 if(*position == *(end()))
+                {
+                    // std::cout << "tababaaaaaaabine" << std::endl;
                     push_back(val);
+                }
                 else
                 {
+                    std::cout << "tababaaaaaaabine" << std::endl;
                     if(_size + 1 > _capacity)
-                    {
                         _capacity *= 2;
-                        temp = _alloc_copy.allocate(this->_capacity);
-                        for(iterator i = begin(); i != end(); i++)
+                    temp = _alloc_copy.allocate(this->_capacity);
+                    for(iterator i = begin(); i != end(); i++)
+                    {
+                        if(i == position)
                         {
-                            if(i == position)
-                                _alloc_copy.construct(&temp[j++], val);
-                            _alloc_copy.construct(&temp[j], _ptr[index]);
-                            _alloc_copy.destroy(&_ptr[index]);
-                            index++;
-                            j++;
+                            std::cout << "constructed" << std::endl;
+                            std::cout << *position << std::endl;
+                            _alloc_copy.construct(&temp[j++], val);
                         }
-                        _alloc_copy.deallocate(_ptr, this->_capacity);
-                        _ptr = temp;
+                        _alloc_copy.construct(&temp[j], _ptr[index]);
+                        _alloc_copy.destroy(&_ptr[index]);
+                        index++;
+                        j++;
                     }
+                    _alloc_copy.deallocate(_ptr, this->_capacity);
+                    _ptr = temp;
                     _size++;
                 }
                 return position;
