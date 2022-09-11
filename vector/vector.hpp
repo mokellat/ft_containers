@@ -384,14 +384,11 @@ namespace ft
                     push_back(val);
                 else
                 {
-                    // std::cout << "hello" << _size << std::endl;
                     resize(diff);
                     _alloc_copy.construct(&_ptr[_size - 1], val);
                 }
                 for(difference_type i = _size - 1; i > diff; i--)
-                {
                     std::swap(_ptr[i], _ptr[i - 1]);
-                }
                 return begin() + diff; // return is not what we want
             }
 
@@ -401,9 +398,7 @@ namespace ft
 
                 diff = std::distance(begin(), position);
                 for(size_type i = 0; i < n; i++)
-                {
                     insert(begin() + diff + i, val);
-                }
             }
             
             // template <class InputIterator>
