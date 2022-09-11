@@ -6,6 +6,7 @@
 #include <iostream>
 #include <stdexcept>
 #include <iterator>
+#include <cmath>
 
 namespace ft
 {
@@ -373,52 +374,35 @@ namespace ft
 
             iterator insert (iterator position, const value_type& val)
             {
-                pointer     temp;
-                size_type   j = 0;
-                size_type   index = 0;
-                // iterator    ret;
-
-                if(*position == *(end()))
-                {
-                    // std::cout << "tababaaaaaaabine" << std::endl;
+                
+                difference_type diff;
+                iterator        ret = end();
+                
+                diff = std::distance(begin(), position);
+                // std::cout << "dis" << diff << std::endl;
+                if(end() > begin() + diff)
                     push_back(val);
-                }
                 else
                 {
-                    std::cout << "tababaaaaaaabine" << std::endl;
-                    if(_size + 1 > _capacity)
-                        _capacity *= 2;
-                    temp = _alloc_copy.allocate(this->_capacity);
-                    for(iterator i = begin(); i != end(); i++)
-                    {
-                        if(i == position)
-                        {
-                            std::cout << "constructed" << std::endl;
-                            std::cout << *position << std::endl;
-                            _alloc_copy.construct(&temp[j++], val);
-                        }
-                        _alloc_copy.construct(&temp[j], _ptr[index]);
-                        _alloc_copy.destroy(&_ptr[index]);
-                        index++;
-                        j++;
-                    }
-                    _alloc_copy.deallocate(_ptr, this->_capacity);
-                    _ptr = temp;
-                    _size++;
+                    // std::cout << "hello" << _size << std::endl;
+                    resize(diff);
+                    _alloc_copy.construct(&_ptr[_size - 1], val);
                 }
-                return position;
+                for(difference_type i = _size - 1; i > diff; i--)
+                {
+                    std::swap(_ptr[i], _ptr[i - 1]);
+                }
+                return begin() + diff; // return is not what we want
             }
 
             void   insert (iterator position, size_type n, const value_type& val)
             {
-                for(iterator i = position; i != position + n; i++)
+                difference_type diff;
+
+                diff = std::distance(begin(), position);
+                for(size_type i = 0; i < n; i++)
                 {
-                    for (size_type i = 0; i < _size; i++)
-                    {
-                        std::cout << _ptr[i] << std::endl;
-                    }
-                    std::cout << "----------------------------" << std::endl;
-                    insert(i, val);
+                    insert(begin() + diff + i, val);
                 }
             }
             

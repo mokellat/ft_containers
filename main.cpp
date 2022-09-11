@@ -105,7 +105,7 @@ int main()
 
 	//insert-----------------------------------------------------------------
 	VE_INT _ve((size_t)5, 10);
-	_ve.insert(_ve.begin()+ 3, 4, 70) ;
+	_ve.insert(_ve.begin()+ 5, 70);
     for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
     return 0;

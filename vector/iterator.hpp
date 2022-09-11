@@ -5,7 +5,8 @@
 #include <stdexcept>
 #include <iterator>
 
-namespace ft{
+namespace ft
+{
     template <class T>
     class MyIterator
     {
@@ -58,13 +59,10 @@ namespace ft{
                     return false;
             }
 
-            template<class TE>
-            bool operator!=(const MyIterator<TE> &rhs)
+           
+            bool operator!=(const MyIterator &rhs)
             {
-                if (this->_ptr != rhs._ptr)
-                    return true;
-                else
-                    return false;
+                return (this->_ptr != rhs._ptr);
             }
 
             reference operator*()
@@ -133,7 +131,7 @@ namespace ft{
                 else
                     return false;
             }
-            bool    operator>(MyIterator &it)
+            bool    operator>(MyIterator const &it)
             {
                 if(this->_ptr > it._ptr)
                     return true;

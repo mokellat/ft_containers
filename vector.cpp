@@ -78,7 +78,7 @@ int main()
 	// 	std::cout << _ve[i] << std::endl;
 
     VE_INT _ve(5, 10);
-     std::cout << "i like it : " << *(_ve.insert(_ve.begin()+ 3, 4, 70)) << std::endl;
+    _ve.insert(_ve.begin()+ 10, 1, 70);
     for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
 }
