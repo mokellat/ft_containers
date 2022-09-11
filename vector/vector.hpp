@@ -69,7 +69,6 @@ namespace ft
             vector (InputIterator first, InputIterator last,
                     const allocator_type& alloc = allocator_type())
             {
-                // std::cout << "im heeeeeeeeeeeere" << std::endl;
                 this->_alloc_copy = alloc;
                 difference_type diff = std::distance(first, last);
                 if(diff < 0)
@@ -401,11 +400,17 @@ namespace ft
                     insert(begin() + diff + i, val);
             }
             
-            // template <class InputIterator>
-            // void insert (iterator position, InputIterator first, InputIterator last)
-            // {
+            template <class InputIterator>
+            void insert (iterator position, InputIterator first, InputIterator last)
+            {
+                difference_type diff;
+                difference_type length;
 
-            // }
+                diff = std::distance(begin(), position);
+                length = std::distance(first, last);
+                for(difference_type i = 0; i < length; i++)
+                    insert(begin() + diff + i, *(first + i));
+            }
 
             iterator erase (iterator position)
             {

@@ -78,7 +78,8 @@ int main()
 	// 	std::cout << _ve[i] << std::endl;
 
     VE_INT _ve(5, 10);
-    _ve.insert(_ve.begin()+ 10, 70);
+    VE_INT _v(6, 500);
+    _ve.insert(_ve.begin()+ 10, _v.begin(), _v.end());
     for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
 }
