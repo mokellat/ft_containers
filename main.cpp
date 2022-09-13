@@ -104,9 +104,9 @@ int main()
 	// 	std::cout << _ve[i] << std::endl;
 
 	//insert-----------------------------------------------------------------
-	VE_INT _ve((size_t)5, 10);
-    VE_INT _v((size_t)6, 500);
-    _ve.insert(_ve.begin()+ 10, _v.begin(), _v.end());
+	VE_INT _ve(5, 10);
+    VE_INT _v(6, 500);
+    // _ve.insert(_ve.begin()+ 10, _v.begin(), _v.end());
     for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
     return 0;

@@ -67,7 +67,7 @@ namespace ft
             //(2)
             template <class InputIterator>
             vector (InputIterator first, InputIterator last,
-                    const allocator_type& alloc = allocator_type())
+                    const allocator_type& alloc = allocator_type(), typename enable_if<!(is_integral<InputIterator>::value), int>::type = 0)
             {
                 this->_alloc_copy = alloc;
                 difference_type diff = std::distance(first, last);
@@ -304,7 +304,7 @@ namespace ft
 
             //Modifiers------------------------------------------------------
             template <class InputIterator>
-            void assign (InputIterator first, InputIterator last)
+            void assign (InputIterator first, InputIterator last, typename enable_if<!(is_integral<InputIterator>::value), int>::type = 0)
             {
                 // std::cout << "first" << std::endl;
                 if(_ptr)
@@ -401,7 +401,7 @@ namespace ft
             }
             
             template <class InputIterator>
-            void insert (iterator position, InputIterator first, InputIterator last)
+            void insert (iterator position, InputIterator first, InputIterator last, typename enable_if<!(is_integral<InputIterator>::value), int>::type = 0)
             {
                 difference_type diff;
                 difference_type length;
