@@ -13,6 +13,7 @@ int main()
     while(!s.empty())
     {
         std::cout << s.top() << std::endl;
+        std::cout << "size " << s.size() << std::endl;
         s.pop();
     }
 }
