@@ -2,6 +2,8 @@
 
 #include <iostream>
 #include <map>
+#include "map/map_iterator.hpp"
+#include "map/AVL.hpp"
 
 namespace ft
 {
@@ -23,13 +25,19 @@ namespace ft
 
             //create an iterator bidericotinal and reverse iterator bellow
 
+            typedef mapIterator<value_type>                     iterator;
+            typedef mapIterator<const value_type>               const_iterator;
+
+            typedef ft::map_reverse_iterator<iterator>          reverse_iterator;
+            typedef ft::map_reverse_iterator<const_iterator>    const_reverse_iterator;
+
 			typedef	size_t	size_type;
 
 
         private:
             //attributes(we ll see later)
+            Node    *node;
 
-        
         public:
 
             //constructors-----------------------------------------
