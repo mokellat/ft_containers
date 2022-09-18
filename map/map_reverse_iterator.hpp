@@ -2,8 +2,11 @@
 
 #include <iostream>
 
-template <class Iterator> 
-class map_reverse_iterator
+namespace ft
 {
-    
-};
+    template <class Iterator> 
+    class map_reverse_iterator
+    {
+        
+    };
+}

@@ -17,10 +17,10 @@ namespace ft
 			typedef	Compare	                                    key_compare;
 			typedef                                             value_compare; //Nested function class to compare elements
 			typedef Alloc	                                    allocator_type;
-			typedef	typename    allocator_type::reference       reference;
-			typedef	typename	allocator_type::const_reference const_reference;
-			typedef	typename	allocator_type::pointer	        pointer;
-			typedef	typename	allocator_type::const_pointer	const_pointer;
+			typedef	typename allocator_type::reference          reference;
+			typedef	typename allocator_type::const_reference    const_reference;
+			typedef	typename allocator_type::pointer	        pointer;
+			typedef	typename allocator_type::const_pointer	    const_pointer;
 			typedef ptrdiff_t	                                difference_type;
 
             //create an iterator bidericotinal and reverse iterator bellow
@@ -31,7 +31,7 @@ namespace ft
             typedef ft::map_reverse_iterator<iterator>          reverse_iterator;
             typedef ft::map_reverse_iterator<const_iterator>    const_reverse_iterator;
 
-			typedef	size_t	size_type;
+			typedef	size_t	                                    size_type;
 
 
         private:
@@ -60,7 +60,10 @@ namespace ft
             }
 
             //destructor---------------------------------------------
-            ~map();
+            ~map()
+            {
+
+            }
 
             //equal overload---------------------------------------------
             map& operator= (const map& x)
@@ -142,27 +145,28 @@ namespace ft
 
             }
 
-            pair<iterator,bool> insert (const value_type& val);
+            pair<iterator,bool> insert (const value_type& val)
             {
 
             }
 
-            iterator insert (iterator position, const value_type& val);
+            iterator insert (iterator position, const value_type& val)
             {
 
             }
+
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last)
             {
 
             }
 
-            void erase (iterator position);
+            void erase (iterator position)
             {
 
             }	
 
-            size_type erase (const key_type& k);
+            size_type erase (const key_type& k)
             {
 
             }	
