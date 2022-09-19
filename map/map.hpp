@@ -15,7 +15,6 @@ namespace ft
 			typedef T	                                        mapped_type;
 			typedef pair<const key_type, mapped_type>	        value_type;
 			typedef	Compare	                                    key_compare;
-			typedef                                             value_compare; //Nested function class to compare elements
 			typedef Alloc	                                    allocator_type;
 			typedef	typename allocator_type::reference          reference;
 			typedef	typename allocator_type::const_reference    const_reference;
@@ -33,6 +32,22 @@ namespace ft
 
 			typedef	size_t	                                    size_type;
 
+            //value compare
+            class value_compare 
+            {
+                friend class map;
+                protected:
+                    Compare comp;
+                    value_compare (Compare c) : comp(c) {}  // constructed with map's comparison object
+                public:
+                    typedef bool result_type;
+                    typedef value_type first_argument_type;
+                    typedef value_type second_argument_type;
+                    bool operator() (const value_type& x, const value_type& y) const
+                    {
+                        return comp(x.first, y.first);
+                    }
+            };
 
         private:
             //attributes(we ll see later)
