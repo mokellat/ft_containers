@@ -36,9 +36,11 @@ namespace ft
             class value_compare 
             {
                 friend class map;
+
                 protected:
                     Compare comp;
                     value_compare (Compare c) : comp(c) {}  // constructed with map's comparison object
+                
                 public:
                     typedef bool result_type;
                     typedef value_type first_argument_type;
@@ -51,45 +53,55 @@ namespace ft
 
         private:
             //attributes(we ll see later)
-            Node    *node;
+            // Node<value_type>            *_node;
+            AVL<value_type>             _avl_tree;
+            allocator_type              _alloc_copy;
+            key_compare                 _comp;
 
         public:
 
             //constructors-----------------------------------------
             explicit map (const key_compare& comp = key_compare(),
-                            const allocator_type& alloc = allocator_type())
+                            const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp()
             {
-
+                _alloc_copy = alloc;
             }
             	
             template <class InputIterator>
             map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), 
-                            const allocator_type& alloc = allocator_type())
+                            const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(key_compare)
             {
-
+                _alloc_copy = alloc;
+                insert(first, last);
             }
         	
             map (const map& x)
             {
-
+                _alloc_copy = x._alloc_copy;
+                _comp = x._comp;
+                insert(x.begin(), x.end());
             }
 
             //destructor---------------------------------------------
             ~map()
             {
-
+                clear();
             }
 
             //equal overload---------------------------------------------
             map& operator= (const map& x)
             {
-
+                clear();
+                _alloc_copy = x._alloc_copy;
+                _comp = x._comp;
+                insert(x.begin(), x.end());
+                return *this;
             }
 
             //iterators-------------------------------------
             iterator begin()
             {
-
+                return iterator();
             }
 
             const_iterator begin() const
