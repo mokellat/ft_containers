@@ -6,6 +6,7 @@ template<class T>
 class Node 
 {
 	public:
+		T		value;
 		int		key;
 		Node	*left;
 		Node	*right;
