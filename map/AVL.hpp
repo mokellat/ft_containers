@@ -1,194 +1,114 @@
-#pragma once
-
 #include <iostream>
 
-template<class T>
 class Node 
 {
-	public:
-		int		key;
-		Node	*left;
-		Node	*right;
-		int		height;
-
-	public:
-		Node() : height(1), left(NULL), right(NULL){}
-
-		~Node(){}
-		
+   public:
+      int   key;
+      Node  *left;
+      Node  *right;
+      int   height;
 };
 
-template<class T>
-class AVL
+// Calculate height
+
+int height(Node *node) 
 {
+	if (node == NULL)
+	return 0;
+	return node->height;
+}
 
-	public:
-		AVL(){}
+int max(int a, int b) 
+{
+	return (a > b) ? a : b;
+}
 
-	public:
+Node    *rotatate_left(Node *x)
+{
+	Node  *y;
+	Node  *temp;
 
-		// Calculate height
-		int height(Node *N)
-		{
-			if (N == NULL)
-				return 0;
-			return N->height;
-		}
+	y = x->right;
+	temp = y->left;
+	//rotate here
+	y->left = x;
+	x->right = temp;
+	// we have to calculate the height of the nodes
+	y->height = max(height(y->left),height(y->right)) + 1;
+  	x->height = max(height(x->left),height(x->right)) + 1;
+	return y;
+}
 
-		int max(int a, int b) 
-		{
-			return (a > b) ? a : b;
-		}
+Node    *rotate_right(Node *y)
+{
+	Node  *x;
+	Node  *temp;
 
-		// New node creation
-		Node *newNode(int key) 
-		{
-			Node *node = new Node();
-			node->key = key;
-			node->left = NULL;
-			node->right = NULL;
-			node->height = 1;
-			return (node);
-		}
+	x = y->left;
+	temp = x->right;
+	//rotate here
+	x->right = y;
+	y->left = temp;
+	// we have to calculate the height of the nodes
+	y->height = max(height(y->left), height(y->right)) + 1;
+	x->height = max(height(x->left), height(x->right)) + 1;
+	return x;
+}
 
-		// Rotate right
-		Node *rightRotate(Node *y) 
-		{
-			Node *x = y->left;
-			Node *T2 = x->right;
-			x->right = y;
-			y->left = T2;
-			y->height = max(height(y->left), height(y->right)) + 1;
-			x->height = max(height(x->left), height(x->right)) + 1;
-			return x;
-		}
+Node   *newNode(int key)
+{
+	Node *neww = new Node();
+	neww->right = NULL;
+	neww->left = NULL;
+	neww->height = 1;
+	neww->key = key;
+	return neww;
+}
 
-		// Rotate left
-		Node *leftRotate(Node *x)
-		{
-			Node *y = x->right;
-			Node *T2 = y->left;
-			y->left = x;
-			x->right = T2;
-			x->height = max(height(x->left), height(x->right)) + 1;
-			y->height = max(height(y->left), height(y->right)) + 1;
-			return y;
-		}
 
-		// Get the balance factor of each node
-		int getBalanceFactor(Node *N) 
-		{
-			if (N == NULL)
-				return 0;
-			return height(N->left) - height(N->right);
-		}
+int		BalanceFactor(Node *node)
+{
+	Node *right = node->right;
+	Node *left = node->left;
 
-		// Insert a node
-		Node *insertNode(Node *node, int key) 
-		{
-		// Find the correct postion and insert the node
-			if (node == NULL)
-				return (newNode(key));
-			if (key < node->key)
-				node->left = insertNode(node->left, key);
-			else if (key > node->key)
-				node->right = insertNode(node->right, key);
-			else
-				return node;
+	if(node == NULL)
+		return 0;
+	return right->height - left->height;
+}
 
-			// Update the balance factor of each node and
-			// balance the tree
-			node->height = 1 + max(height(node->left), height(node->right));
-			int balanceFactor = getBalanceFactor(node);
-			if (balanceFactor > 1) 
-			{
-				if (key < node->left->key) 
-				return rightRotate(node);
-				else if (key > node->left->key) 
-				{
-					node->left = leftRotate(node->left);
-					return rightRotate(node);
-				}
-			}
-			if (balanceFactor < -1) {
-				if (key > node->right->key) 
-					return leftRotate(node);
-				else if (key < node->right->key) 
-				{
-					node->right = rightRotate(node->right);
-					return leftRotate(node);
-				}
-			}
-			return node;
-		}
+Node  *insertNode(Node *root, int key)
+{
+	int bf;
+    // explain the recursion happening here
+	// so we all know that recursion stops when the condition is false
+	// here we have two conditions
+	// (1) : so the program gonna check the first to compare keys and see where the right
+	// position to insert the node
+	// (2) : we update the height and start checking the balance factor and start 
+	// the rotations
 
-		// Node with minimum value
-		Node *nodeWithMimumValue(Node *node) 
-		{
-			Node *current = node;
-			while (current->left != NULL)
-				current = current->left;
-			return current;
-		}
+	//(1)
+    if(root == NULL)
+      return newNode(key);
 
-		// Delete a node
-		Node *deleteNode(Node *root, int key) 
-		{
-		// Find the node and delete it
-			if (root == NULL)
-				return root;
-			if (key < root->key)
-				root->left = deleteNode(root->left, key);
-			else if (key > root->key)
-				root->right = deleteNode(root->right, key);
-			else 
-			{
-				if ((root->left == NULL) || (root->right == NULL)) 
-				{
-					Node *temp = root->left ? root->left : root->right;
-					if (temp == NULL) 
-					{
-						temp = root;
-						root = NULL;
-					} 
-					else
-						*root = *temp;
-					free(temp);
-				}
-				else 
-				{
-					Node *temp = nodeWithMimumValue(root->right);
-					root->key = temp->key;
-					root->right = deleteNode(root->right, temp->key);
-				}
-			}
-			if (root == NULL)
-				return root;
+	//(2)
+    if(key > root->key)
+      root->right = insertNode(root->right, key);
+    else if(key < root->key)
+      root->left = insertNode(root->left, key);
+    else
+      return root;
 
-			// Update the balance factor of each node and
-			// balance the tree
-			root->height = 1 + max(height(root->left), height(root->right));
-			int balanceFactor = getBalanceFactor(root);
-			if (balanceFactor > 1) 
-			{
-				if (getBalanceFactor(root->left) >= 0) 
-					return rightRotate(root);
-				else 
-				{
-					root->left = leftRotate(root->left);
-					return rightRotate(root);
-				}
-			}
-			if (balanceFactor < -1) 
-			{
-				if (getBalanceFactor(root->right) <= 0) 
-					return leftRotate(root);
-				else 
-				{
-					root->right = rightRotate(root->right);
-					return leftRotate(root);
-				}
-			}
-			return root;
-		}
-};
+    //get the balance back and update the height
+	root->height = max(height(root->left), height(root->right)) + 1;
+	bf = BalanceFactor(root);
+	if(bf > 1)
+	{
+		//means the height of the right subtree is greater then the left one
+	}
+	else if(bf < -1)
+	{
+		// means the height of the right subtree is greater than that of the left subtree
+
+	}
+}
