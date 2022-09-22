@@ -134,4 +134,27 @@ class Node
 		}
 		return root;
 	}
+
+	Node	*deleteOneNode(Node *root, int key)
+	{
+		// locate the node to be deleted
+		if(root == NULL)
+			return root;
+		if(key > root->key)
+			root->right = deleteOneNode(root->right, key);
+		else if(key < root->key)
+			root->left = deleteOneNode(root->left, key);
+		else
+		{
+			//found the node to be deleted
+			if(root->right == NULL && root->left == NULL)
+			{
+				// delete the node
+			}
+			else if(root->right == NULL || root->left == NULL)
+			{
+				
+			}
+		}
+	}
 // };
