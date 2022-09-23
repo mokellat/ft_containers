@@ -77,7 +77,8 @@ class Node
 	Node  *insertNode(Node *root, int key)
 	{
 		int bf;
-		// explain the recursion happening here
+
+		// explaining the recursion happening here
 		// so we all know that recursion stops when the condition is false
 		// here we have two conditions
 		// (1) : so the program gonna check the first to compare keys and see where the right
@@ -135,8 +136,21 @@ class Node
 		return root;
 	}
 
+	Node	*inorderSuccessor(Node *node)
+	{
+		Node *temp;
+
+		temp = node;
+		while(temp->left != NULL)
+			temp = temp->left;
+		return temp;
+	}
+
 	Node	*deleteOneNode(Node *root, int key)
 	{
+		Node	*temp;
+		int		bf;
+
 		// locate the node to be deleted
 		if(root == NULL)
 			return root;
@@ -147,14 +161,66 @@ class Node
 		else
 		{
 			//found the node to be deleted
-			if(root->right == NULL && root->left == NULL)
+			// if(root->right == NULL && root->left == NULL)
+			// {
+			// 	// no childs, delete the node immeadiately
+			// 	std::cout << "im fucking here" << std::endl;
+			// }
+			if(root->right == NULL || root->left == NULL)
 			{
-				// delete the node
+				// has one child, replace the parent with the child
+				if(root->right == NULL)
+					temp = root->left;
+				else
+					temp = root->right;
+				if(temp == NULL)
+				{
+					temp = root;
+					root = NULL;
+				}
+				*root = *temp;
+				free(temp);
+				// !! here we should delete the temp, they used free, we shouldnt
 			}
-			else if(root->right == NULL || root->left == NULL)
+			else
 			{
-				
+				//the parent has two children, we have to find the inorder successor
+				// it means the nide with minimum value in the right subtree
+
+				Node *temp = inorderSuccessor(root->right);
+
+				root->key = temp->key;
+				root->right = deleteOneNode(root->right, temp->key);
 			}
 		}
+
+		if(root == NULL)
+			return NULL;
+		//update the height and get the tree balanced 
+		//rotations here
+
+		root->height = 1 + max(height(root->left), height(root->right));
+		bf = BalanceFactor(root);
+		if (bf > 1) 
+		{
+			if (BalanceFactor(root->left) >= 0) 
+				return rotate_right(root);
+			else 
+			{
+				root->left = rotate_left(root->left);
+				return rotate_right(root);
+			}
+		}
+		if (bf < -1) 
+		{
+			if (BalanceFactor(root->right) <= 0) 
+				return rotate_left(root);
+			else 
+			{
+				root->right = rotate_right(root->right);
+				return rotate_left(root);
+			}
+		}
+		return root;
 	}
 // };
