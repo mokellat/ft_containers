@@ -141,8 +141,8 @@ class Node
 		Node *temp;
 
 		temp = node;
-		while(temp->left != NULL)
-			temp = temp->left;
+		while(temp->right != NULL)
+			temp = temp->right;
 		return temp;
 	}
 
@@ -178,8 +178,11 @@ class Node
 					temp = root;
 					root = NULL;
 				}
-				*root = *temp;
-				free(temp);
+				else
+				{
+					*root = *temp;
+					free(temp);
+				}
 				// !! here we should delete the temp, they used free, we shouldnt
 			}
 			else
