@@ -1,5 +1,6 @@
 #include <iostream>
 #include "map/AVL.hpp"
+#include <map>
 using namespace std;
 
 // class Node {
@@ -170,38 +171,54 @@ using namespace std;
 // }
 
 // // Print the tree
-void printTree(Node *root, string indent, bool last) {
-  if (root != nullptr) {
-    cout << indent;
-    if (last) {
-      cout << "R----";
-      indent += "   ";
-    } else {
-      cout << "L----";
-      indent += "|  ";  
-    }
-    cout << root->key << endl;
-    printTree(root->left, indent, false);
-    printTree(root->right, indent, true);
-  }
-}
+// void printTree(Node *root, string indent, bool last) {
+//   if (root != nullptr) {
+//     cout << indent;
+//     if (last) {
+//       cout << "R----";
+//       indent += "   ";
+//     } else {
+//       cout << "L----";
+//       indent += "|  ";  
+//     }
+//     cout << root->key << endl;
+//     printTree(root->left, indent, false);
+//     printTree(root->right, indent, true);
+//   }
+// }
 
-int main() {
-  Node *root = NULL;
-  root = insertNode(root, 33);
-  root = insertNode(root, 13);
-  root = insertNode(root, 53);
-  root = insertNode(root, 21);
-  root = insertNode(root, 61);
-  root = insertNode(root, 11);
-  root = insertNode(root, 8);
-  root = insertNode(root, 9);
-  // root = insertNode(root, 40);
-  root = deleteOneNode(root, 33);
-  printTree(root, "", true);
-//   root = deleteNode(root, 13);
-//   cout << "After deleting " << endl;
+// int main() {
+//   Node *root = NULL;
+//   root = insertNode(root, 33);
+//   root = insertNode(root, 13);
+//   root = insertNode(root, 53);
+//   root = insertNode(root, 21);
+//   root = insertNode(root, 61);
+//   root = insertNode(root, 11);
+//   root = insertNode(root, 8);
+//   root = insertNode(root, 9);
+//   // root = insertNode(root, 40);
+//   root = deleteOneNode(root, 33);
 //   printTree(root, "", true);
+// //   root = deleteNode(root, 13);
+// //   cout << "After deleting " << endl;
+// //   printTree(root, "", true);
 
-// cout << 
+// // cout << 
+// }
+
+int main()
+{
+  std::map<int, int> m;
+ 
+  m.insert(pair<int, int>(1, 40));
+  m.insert(pair<int, int>(2, 400));
+  m.insert(pair<int, int>(3, 4));
+  m.insert(pair<int, int>(4, 48));
+  m.insert(pair<int, int>(5, 26));
+  m.insert(pair<int, int>(6, 22));
+  m.insert(pair<int, int>(7, 021));
+  m.insert(pair<int, int>(8, 555));
+  
+  std::cout << m[7] << std::endl;
 }

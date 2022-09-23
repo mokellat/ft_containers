@@ -54,7 +54,7 @@ namespace ft
         private:
             //attributes(we ll see later)
             // Node<value_type>            *_node;
-            AVL<value_type>             _avl_tree;
+            AVL<mapped_type>            _avl_tree;
             allocator_type              _alloc_copy;
             key_compare                 _comp;
 
