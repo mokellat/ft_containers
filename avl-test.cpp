@@ -1,5 +1,5 @@
 #include <iostream>
-#include "map/AVL.hpp"
+// #include "map/AVL.hpp"
 #include <map>
 using namespace std;
 
@@ -220,5 +220,10 @@ int main()
   m.insert(pair<int, int>(7, 021));
   m.insert(pair<int, int>(8, 555));
   
-  std::cout << m[7] << std::endl;
+  std::map<int, int>::iterator it;
+
+  for(it = m.begin(); it != m.end(); ++it)
+  {
+      std::cout << "it value: " << it << std::endl;
+  }
 }

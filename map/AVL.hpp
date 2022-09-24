@@ -4,8 +4,8 @@ template<class T>
 class Node 
 {
 	public:
-		T		value;
-		int		key;
+		// T		value;
+		T		key;
 		Node	*left;
 		Node	*right;
 		int		height;
@@ -20,9 +20,11 @@ class Node
 template<class T>
 class AVL
 {
+	private:
+		Node	*_node
 
 	public:
-		AVL() {}
+		AVL() : _node() {}
 
 		~AVL() {}
 // Calculate height
