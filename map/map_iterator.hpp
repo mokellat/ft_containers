@@ -11,8 +11,8 @@ namespace ft
     {
         public:
             //typedefs
-            typedef T                   value_type;
-            typedef Node<value_type>    node_type;
+            typedef T                                           value_type;
+            typedef Node<value_type>                            node_type;
             typedef typename std::bidirectional_iterator_tag	iterator_category;
 
         private:
@@ -48,12 +48,12 @@ namespace ft
 
             reference	operator*() 
             {
-                return *(_node->value); 
+                //donno what to do here
             }
 
 		    pointer	operator->()
             {
-                return _node->value; 
+                //donno what to do here
             }
 
             mapIterator &operator++()
@@ -76,7 +76,7 @@ namespace ft
             mapIterator &operator--(int)
             {
                 mapIterator it(*this);
-                operator--();
+                --(*this);
                 return it;
             }
     };
