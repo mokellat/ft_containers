@@ -1,5 +1,3 @@
-#pragma once
-
 #include <iostream>
 
 template<class T>
@@ -24,16 +22,18 @@ class AVL
 {
 
 	public:
-		AVL(){}
+		AVL() {}
+
+		~AVL() {}
+// Calculate height
 
 	public:
 
-		// Calculate height
-		int height(Node *N)
+		int height(Node *node)
 		{
-			if (N == NULL)
+			if (node == NULL)
 				return 0;
-			return N->height;
+			return node->height;
 		}
 
 		int max(int a, int b) 
@@ -41,153 +41,203 @@ class AVL
 			return (a > b) ? a : b;
 		}
 
-		// New node creation
-		Node *newNode(int key) 
+		Node    *rotate_left(Node *x)
 		{
-			Node *node = new Node();
-			node->key = key;
-			node->left = NULL;
-			node->right = NULL;
-			node->height = 1;
-			return (node);
+			Node  *y;
+			Node  *temp;
+
+			y = x->right;
+			temp = y->left;
+			//rotate here
+			y->left = x;
+			x->right = temp;
+			// we have to calculate the height of the nodes
+			y->height = max(height(y->left),height(y->right)) + 1;
+			x->height = max(height(x->left),height(x->right)) + 1;
+			return y;
 		}
 
-		// Rotate right
-		Node *rightRotate(Node *y) 
+		Node    *rotate_right(Node *y)
 		{
-			Node *x = y->left;
-			Node *T2 = x->right;
+			Node  *x;
+			Node  *temp;
+
+			x = y->left;
+			temp = x->right;
+			//rotate here
 			x->right = y;
-			y->left = T2;
+			y->left = temp;
+			// we have to calculate the height of the nodes
 			y->height = max(height(y->left), height(y->right)) + 1;
 			x->height = max(height(x->left), height(x->right)) + 1;
 			return x;
 		}
 
-		// Rotate left
-		Node *leftRotate(Node *x)
+		Node   *newNode(int key)
 		{
-			Node *y = x->right;
-			Node *T2 = y->left;
-			y->left = x;
-			x->right = T2;
-			x->height = max(height(x->left), height(x->right)) + 1;
-			y->height = max(height(y->left), height(y->right)) + 1;
-			return y;
+			Node *neww = new Node();
+			neww->right = NULL;
+			neww->left = NULL;
+			neww->height = 1;
+			neww->key = key;
+			return neww;
 		}
 
-		// Get the balance factor of each node
-		int getBalanceFactor(Node *N) 
+		int		BalanceFactor(Node *node)
 		{
-			if (N == NULL)
+			if(node == NULL)
 				return 0;
-			return height(N->left) - height(N->right);
+			return height(node->left) - height(node->right);
 		}
 
-		// Insert a node
-		Node *insertNode(Node *node, int key) 
+		Node  *insertNode(Node *root, int key)
 		{
-		// Find the correct postion and insert the node
-			if (node == NULL)
-				return (newNode(key));
-			if (key < node->key)
-				node->left = insertNode(node->left, key);
-			else if (key > node->key)
-				node->right = insertNode(node->right, key);
+			int bf;
+
+			// explaining the recursion happening here
+			// so we all know that recursion stops when the condition is false
+			// here we have two conditions
+			// (1) : so the program gonna check the first to compare keys and see where the right
+			// position to insert the node
+			// (2) : we update the height and start checking the balance factor and start 
+			// the rotations
+
+			//(1)
+			if(root == NULL)
+				return newNode(key);
+
+			//(2)
+			if(key > root->key)
+				root->right = insertNode(root->right, key);
+			else if(key < root->key)
+				root->left = insertNode(root->left, key);
 			else
-				return node;
-
-			// Update the balance factor of each node and
-			// balance the tree
-			node->height = 1 + max(height(node->left), height(node->right));
-			int balanceFactor = getBalanceFactor(node);
-			if (balanceFactor > 1) 
-			{
-				if (key < node->left->key) 
-				return rightRotate(node);
-				else if (key > node->left->key) 
-				{
-					node->left = leftRotate(node->left);
-					return rightRotate(node);
-				}
-			}
-			if (balanceFactor < -1) {
-				if (key > node->right->key) 
-					return leftRotate(node);
-				else if (key < node->right->key) 
-				{
-					node->right = rightRotate(node->right);
-					return leftRotate(node);
-				}
-			}
-			return node;
-		}
-
-		// Node with minimum value
-		Node *nodeWithMimumValue(Node *node) 
-		{
-			Node *current = node;
-			while (current->left != NULL)
-				current = current->left;
-			return current;
-		}
-
-		// Delete a node
-		Node *deleteNode(Node *root, int key) 
-		{
-		// Find the node and delete it
-			if (root == NULL)
 				return root;
-			if (key < root->key)
-				root->left = deleteNode(root->left, key);
-			else if (key > root->key)
-				root->right = deleteNode(root->right, key);
-			else 
+
+			//get the balance back and update the height
+			root->height = max(height(root->left), height(root->right)) + 1;
+			bf = BalanceFactor(root);
+			if(bf > 1)
 			{
-				if ((root->left == NULL) || (root->right == NULL)) 
+				//means the height of the right subtree is greater then the left one
+				if(key < root->left->key)
 				{
-					Node *temp = root->left ? root->left : root->right;
-					if (temp == NULL) 
+					//right rotation
+					root->right = rotate_right(root->right);
+					return root;
+				}
+				else
+				{
+					//left-right rotation
+					root->left = rotate_left(root->left);
+					return rotate_right(root);
+				}
+			}
+			else if(bf < -1)
+			{
+				// means the height of the right subtree is greater than that of the left subtree
+				if(key > root->right->key)
+				{
+					//left rotation
+					root->left = rotate_left(root->left);
+					return root;
+				}
+				else
+				{
+					//right-left rotation
+					root->right = rotate_right(root->right);
+					return rotate_left(root);
+				}
+			}
+			return root;
+		}
+
+		Node	*inorderSuccessor(Node *node)
+		{
+			Node *temp;
+
+			temp = node;
+			while(temp->right != NULL)
+				temp = temp->right;
+			return temp;
+		}
+
+		Node	*deleteOneNode(Node *root, int key)
+		{
+			Node	*temp;
+			int		bf;
+
+			// locate the node to be deleted
+			if(root == NULL)
+				return root;
+			if(key > root->key)
+				root->right = deleteOneNode(root->right, key);
+			else if(key < root->key)
+				root->left = deleteOneNode(root->left, key);
+			else
+			{
+				//found the node to be deleted
+				// if(root->right == NULL && root->left == NULL)
+				// {
+				// 	// no childs, delete the node immeadiately
+				// 	std::cout << "im fucking here" << std::endl;
+				// }
+				if(root->right == NULL || root->left == NULL)
+				{
+					// has one child, replace the parent with the child
+					if(root->right == NULL)
+						temp = root->left;
+					else
+						temp = root->right;
+					if(temp == NULL)
 					{
 						temp = root;
 						root = NULL;
-					} 
+					}
 					else
+					{
 						*root = *temp;
-					free(temp);
+						free(temp);
+					}
+					// !! here we should delete the temp, they used free, we shouldnt
 				}
-				else 
+				else
 				{
-					Node *temp = nodeWithMimumValue(root->right);
-					root->key = temp->key;
-					root->right = deleteNode(root->right, temp->key);
-				}
-			}
-			if (root == NULL)
-				return root;
+					//the parent has two children, we have to find the inorder successor
+					// it means the nide with minimum value in the right subtree
 
-			// Update the balance factor of each node and
-			// balance the tree
-			root->height = 1 + max(height(root->left), height(root->right));
-			int balanceFactor = getBalanceFactor(root);
-			if (balanceFactor > 1) 
-			{
-				if (getBalanceFactor(root->left) >= 0) 
-					return rightRotate(root);
-				else 
-				{
-					root->left = leftRotate(root->left);
-					return rightRotate(root);
+					Node *temp = inorderSuccessor(root->right);
+
+					root->key = temp->key;
+					root->right = deleteOneNode(root->right, temp->key);
 				}
 			}
-			if (balanceFactor < -1) 
+
+			if(root == NULL)
+				return NULL;
+			//update the height and get the tree balanced 
+			//rotations here
+
+			root->height = 1 + max(height(root->left), height(root->right));
+			bf = BalanceFactor(root);
+			if (bf > 1) 
 			{
-				if (getBalanceFactor(root->right) <= 0) 
-					return leftRotate(root);
+				if (BalanceFactor(root->left) >= 0) 
+					return rotate_right(root);
 				else 
 				{
-					root->right = rightRotate(root->right);
-					return leftRotate(root);
+					root->left = rotate_left(root->left);
+					return rotate_right(root);
+				}
+			}
+			if (bf < -1) 
+			{
+				if (BalanceFactor(root->right) <= 0) 
+					return rotate_left(root);
+				else 
+				{
+					root->right = rotate_right(root->right);
+					return rotate_left(root);
 				}
 			}
 			return root;
