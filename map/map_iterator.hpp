@@ -64,7 +64,7 @@ namespace ft
             mapIterator &operator++(int)
             {
                 mapIterator it(*this);
-                operator++();
+                (this)++;
                 return it;
             }
 
@@ -76,7 +76,7 @@ namespace ft
             mapIterator &operator--(int)
             {
                 mapIterator it(*this);
-                --(*this);
+                (*this)--;
                 return it;
             }
     };

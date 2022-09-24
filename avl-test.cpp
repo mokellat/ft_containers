@@ -224,6 +224,6 @@ int main()
 
   for(it = m.begin(); it != m.end(); ++it)
   {
-      std::cout << "it value: " << it << std::endl;
+      std::cout << "it value: " << *it << std::endl;
   }
 }

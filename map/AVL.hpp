@@ -21,13 +21,13 @@ template<class T>
 class AVL
 {
 	private:
-		Node	*_node
+		Node	*main_node;
 
 	public:
 		AVL() : _node() {}
 
 		~AVL() {}
-// Calculate height
+	// Calculate height
 
 	public:
 
@@ -77,6 +77,7 @@ class AVL
 
 		Node   *newNode(int key)
 		{
+			// we have to change it with the allocator
 			Node *neww = new Node();
 			neww->right = NULL;
 			neww->left = NULL;
@@ -226,7 +227,7 @@ class AVL
 			{
 				if (BalanceFactor(root->left) >= 0) 
 					return rotate_right(root);
-				else 
+				else
 				{
 					root->left = rotate_left(root->left);
 					return rotate_right(root);
