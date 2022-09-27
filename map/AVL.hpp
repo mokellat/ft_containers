@@ -14,7 +14,8 @@ class Node
 	public:
 		Node() : height(1), left(), right(), parent(){}
 
-		~Node(){}		
+		~Node(){}
+		
 };
 
 
@@ -122,9 +123,9 @@ class AVL
 				return newNode(root, key);
 
 			//(2)
-			if(_compare(key, root->key))
+			if(_compare(root->key, key))
 				root->right = insertNode(root->right, key);
-			else if(key < root->key)
+			else if(_compare(key, root->key))
 				root->left = insertNode(root->left, key);
 			else
 				return root;
@@ -135,7 +136,7 @@ class AVL
 			if(bf > 1)
 			{
 				//means the height of the right subtree is greater then the left one
-				if(key < root->left->key)
+				if(_compare(key, root->left->key))
 				{
 					//right rotation
 					root->right = rotate_right(root->right);
@@ -151,7 +152,7 @@ class AVL
 			else if(bf < -1)
 			{
 				// means the height of the right subtree is greater than that of the left subtree
-				if(key > root->right->key)
+				if(_compare(root->right->key, key))
 				{
 					//left rotation
 					root->left = rotate_left(root->left);
