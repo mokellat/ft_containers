@@ -6,25 +6,36 @@ class Node
 	public:
 		// T		value;
 		T		key;
+		Node	*parent;
 		Node	*left;
 		Node	*right;
 		int		height;
 
 	public:
-		Node() : height(1), left(NULL), right(NULL){}
+		Node() : height(1), left(), right(), parent(){}
 
-		~Node(){}
-		
+		~Node(){}		
 };
 
-template<class T>
+
+
+template<class T, class ALLoc, class Compare>
 class AVL
 {
+	//some typedefs to add
+	public:
+		typedef T			mapped_type;
+		typedef Node<T>		Node;	
+		typedef	Compare		compare;
+		typedef	ALLoc		alloc_node;
+
 	private:
-		Node	*main_node;
+		Node		*root;
+		compare		_compare;
+		alloc_node	_alloc_node;
 
 	public:
-		AVL() : _node() {}
+		AVL() : root() {}
 
 		~AVL() {}
 	// Calculate height
@@ -75,14 +86,15 @@ class AVL
 			return x;
 		}
 
-		Node   *newNode(int key)
+		Node   *newNode(Node *neww, int key)
 		{
 			// we have to change it with the allocator
-			Node *neww = new Node();
-			neww->right = NULL;
-			neww->left = NULL;
 			neww->height = 1;
 			neww->key = key;
+			neww = _alloc_node.allocate(neww->height * sizeof(mapped_type));
+			_alloc_node.construst(node, key);
+			neww->right = NULL;
+			neww->left = NULL;
 			return neww;
 		}
 
@@ -93,7 +105,7 @@ class AVL
 			return height(node->left) - height(node->right);
 		}
 
-		Node  *insertNode(Node *root, int key)
+		Node  *insertNode(Node *root, mapped_type key)
 		{
 			int bf;
 
@@ -107,10 +119,10 @@ class AVL
 
 			//(1)
 			if(root == NULL)
-				return newNode(key);
+				return newNode(root, key);
 
 			//(2)
-			if(key > root->key)
+			if(_compare(key, root->key))
 				root->right = insertNode(root->right, key);
 			else if(key < root->key)
 				root->left = insertNode(root->left, key);
@@ -200,7 +212,9 @@ class AVL
 					else
 					{
 						*root = *temp;
-						free(temp);
+						_alloc_node.destroy(temp);
+						_alloc_node.deallocate(temp, sizeof(temp));
+						// free(temp);
 					}
 					// !! here we should delete the temp, they used free, we shouldnt
 				}

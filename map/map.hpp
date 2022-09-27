@@ -32,6 +32,9 @@ namespace ft
 
 			typedef	size_t	                                    size_type;
 
+            //rebind and some typedefs for avl
+		    typedef typename Alloc::rebind<Node>::other         _alloc_node;  //it may throw error
+
             //value compare
             class value_compare 
             {
@@ -42,9 +45,9 @@ namespace ft
                     value_compare (Compare c) : comp(c) {}  // constructed with map's comparison object
                 
                 public:
-                    typedef bool result_type;
-                    typedef value_type first_argument_type;
-                    typedef value_type second_argument_type;
+                    typedef bool        result_type;
+                    typedef value_type  first_argument_type;
+                    typedef value_type  second_argument_type;
                     bool operator() (const value_type& x, const value_type& y) const
                     {
                         return comp(x.first, y.first);
@@ -53,6 +56,7 @@ namespace ft
 
         private:
             //attributes(we ll see later)
+
             // Node<value_type>            *_node;
             AVL<mapped_type>            _avl_tree;
             allocator_type              _alloc_copy;
