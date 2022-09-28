@@ -3,19 +3,24 @@
 template<class T>
 class Node 
 {
+	// typedefs
+
+	typedef T 							value_type;
+	typedef typename value_type::first	key_type;
+
 	public:
 		// T		value;
-		T		key;
-		Node	*parent;
-		Node	*left;
-		Node	*right;
-		int		height;
+		value_type	pair;
+		key_type 	key;
+		Node		*parent;
+		Node		*left;
+		Node		*right;
+		int			height;
 
 	public:
 		Node() : height(1), left(), right(), parent(){}
 
 		~Node(){}
-		
 };
 
 
@@ -31,9 +36,9 @@ class AVL
 		typedef	ALLoc		alloc_node;
 
 	private:
-		Node		*root;
-		compare		_compare;
-		alloc_node	_alloc_node;
+		Node				*root;
+		compare				_compare;
+		alloc_node			_alloc_node;
 
 	public:
 		AVL() : root() {}
@@ -186,9 +191,9 @@ class AVL
 			// locate the node to be deleted
 			if(root == NULL)
 				return root;
-			if(key > root->key)
+			if(_compare(root->key > key))
 				root->right = deleteOneNode(root->right, key);
-			else if(key < root->key)
+			else if(_compare(key > root->key))
 				root->left = deleteOneNode(root->left, key);
 			else
 			{

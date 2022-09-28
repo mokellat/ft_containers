@@ -209,21 +209,18 @@ using namespace std;
 
 int main()
 {
-  std::map<int, int> m;
+  std::map<char, int> m;
  
-  m.insert(pair<int, int>(1, 40));
-  m.insert(pair<int, int>(2, 400));
-  m.insert(pair<int, int>(3, 4));
-  m.insert(pair<int, int>(4, 48));
-  m.insert(pair<int, int>(5, 26));
-  m.insert(pair<int, int>(6, 22));
-  m.insert(pair<int, int>(7, 021));
-  m.insert(pair<int, int>(8, 555));
-  
-  std::map<int, int>::iterator it;
+  m['a'] = 10;
+  m['b'] = 20;
+  m['c'] = 30;
+  m['d'] = 40;
+  m['e'] = 50;
 
-  for(it = m.begin(); it != m.end(); ++it)
+  std::map<char, int>::iterator it;
+  for(it = m.begin(); it != m.end(); it++)
   {
-      std::cout << "it value: " << *it << std::endl;
+    std::cout << it->second << std::endl;
   }
+  // for()
 }

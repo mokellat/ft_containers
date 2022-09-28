@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <iterator>
+#include"map/node_helper.hpp"
 
 
 namespace ft
@@ -11,12 +12,15 @@ namespace ft
     {
         public:
             //typedefs
-            typedef T                                           value_type;
-            typedef Node<value_type>                            node_type;
             typedef typename std::bidirectional_iterator_tag	iterator_category;
+            typedef typename T::first                           value_type;
+            typedef Node<value_type>                            node_type;
+            typedef T*                                          pointer;
+		    typedef T&	                                        reference;
+
 
         private:
-            Node<value_type> *_node;
+            node_type *_node;
 
         public:
             mapIterator() : _node(){}
@@ -49,16 +53,19 @@ namespace ft
             reference	operator*() 
             {
                 //donno what to do here
+                return *(_node->pair);
             }
 
 		    pointer	operator->()
             {
                 //donno what to do here
+                return _node->pair;
             }
 
             mapIterator &operator++()
             {
                 // for later
+                return *this;
             }
 
             mapIterator &operator++(int)
@@ -71,6 +78,7 @@ namespace ft
              mapIterator &operator--()
             {
                 // for later
+                return *this;
             }
 
             mapIterator &operator--(int)

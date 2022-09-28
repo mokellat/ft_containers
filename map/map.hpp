@@ -66,14 +66,14 @@ namespace ft
 
             //constructors-----------------------------------------
             explicit map (const key_compare& comp = key_compare(),
-                            const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp()
+                            const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(comp)
             {
                 _alloc_copy = alloc;
             }
             	
             template <class InputIterator>
             map (InputIterator first, InputIterator last, const key_compare& comp = key_compare(), 
-                            const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(key_compare)
+                            const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(comp)
             {
                 _alloc_copy = alloc;
                 insert(first, last);
