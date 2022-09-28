@@ -65,6 +65,10 @@ namespace ft
             mapIterator &operator++()
             {
                 // for later
+                if(_node == NULL)
+                {
+                    
+                }
                 return *this;
             }
 

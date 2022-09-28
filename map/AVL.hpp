@@ -35,7 +35,7 @@ class AVL
 		typedef	Compare		compare;
 		typedef	ALLoc		alloc_node;
 
-	private:
+	public:
 		Node				*root;
 		compare				_compare;
 		alloc_node			_alloc_node;

@@ -4,6 +4,7 @@
 #include <map>
 #include "map/map_iterator.hpp"
 #include "map/AVL.hpp"
+#include "map/node_helper.hpp"
 
 namespace ft
 {
@@ -34,6 +35,7 @@ namespace ft
 
             //rebind and some typedefs for avl
 		    typedef typename Alloc::rebind<Node>::other         _alloc_node;  //it may throw error
+            typedef AVL<key_type, _alloc_node, key_compare>  avl_type;
 
             //value compare
             class value_compare 
@@ -58,9 +60,10 @@ namespace ft
             //attributes(we ll see later)
 
             // Node<value_type>            *_node;
-            AVL<mapped_type>            _avl_tree;
-            allocator_type              _alloc_copy;
-            key_compare                 _comp;
+
+            avl_type            _avl_tree;
+            allocator_type      _alloc_copy;
+            key_compare         _comp;
 
         public:
 
@@ -105,12 +108,12 @@ namespace ft
             //iterators-------------------------------------
             iterator begin()
             {
-                return iterator();
+                return iterator(MostLeft(_avl_tree.root));
             }
 
             const_iterator begin() const
             {
-
+                return const_iterator(MostLeft(_avl_tree.root));
             }
 
             iterator end()
