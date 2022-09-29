@@ -183,7 +183,7 @@ class AVL
 			return temp;
 		}
 
-		Node	*deleteOneNode(Node *root, int key)
+		Node	*deleteOneNode(Node *root, key_type key)
 		{
 			Node	*temp;
 			int		bf;

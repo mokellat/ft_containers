@@ -212,27 +212,47 @@ namespace ft
 
             void erase (iterator position)
             {
-
+                if(searchNode(_avl_tree.root, (*position)->first, NULL)
+                {
+                    // we found that the key is there
+                    // we start erasing
+                    _size--;
+                    _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, (*position)->first);
+                }
             }	
 
             size_type erase (const key_type& k)
             {
-
+                 if(searchNode(_avl_tree.root, k, NULL)
+                {
+                    // we found that the key is there
+                    // we start erasing
+                    _size--;
+                    _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, k);
+                    return 1;
+                }
+                return 0;
             }	
 
             void erase (iterator first, iterator last)
             {
-
+                while(first != last)
+                {
+                    erase(first);
+                    first++;
+                }
             }
 
             void swap (map& x)
             {
-
+                std::swap(_avl_tree, x._avl_tree);
+                std::swap(_alloc_copy, x._alloc_copy);
+                std::swap(_size, x._size);
             }
 
             void clear()
             {
-
+                //implement a function to delete all nodes
             }
 
             //Observers--------------------------------------------------
