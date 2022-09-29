@@ -35,7 +35,7 @@ namespace ft
 
             //rebind and some typedefs for avl
 		    typedef typename Alloc::rebind<Node>::other         _alloc_node;  //it may throw error
-            typedef AVL<key_type, _alloc_node, key_compare>  avl_type;
+            typedef AVL<key_type, _alloc_node, key_compare>     avl_type;
 
             //value compare
             class value_compare 

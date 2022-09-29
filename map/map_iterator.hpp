@@ -65,9 +65,23 @@ namespace ft
             mapIterator &operator++()
             {
                 // for later
-                if(_node == NULL)
+                if(_node->right != NULL)
                 {
-                    
+                    _node = _node->right;
+                    while (_node->right != NULL)
+                        _node = _node->right;
+                }
+                else
+                {
+                    Node    *temp_par = _node->parent;
+
+                    while (_node == temp_par->right)
+                    {
+                       _node = temp_par;
+                       temp_par = _node->parent;
+                    }
+                    if(_node->right != temp_par)
+                        _node = temp_par;
                 }
                 return *this;
             }
@@ -82,6 +96,24 @@ namespace ft
              mapIterator &operator--()
             {
                 // for later
+                if(_node->left != NULL)
+                {
+                    _node = _node->left;
+                    while (_node->left != NULL)
+                        _node = _node->left;
+                }
+                else
+                {
+                    Node    *temp_par = _node->parent;
+
+                    while (_node == temp_par->left)
+                    {
+                       _node = temp_par;
+                       temp_par = _node->parent;
+                    }
+                    if(_node->left != temp_par)
+                        _node = temp_par;
+                }
                 return *this;
             }
 
