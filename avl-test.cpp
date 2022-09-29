@@ -1,7 +1,9 @@
 #include <iostream>
 // #include "map/AVL.hpp"
 #include <map>
-using namespace std;
+// using namespace std;
+
+#define myprint(X) std::cout << X << std::endl 
 
 // class Node {
 //    public:
@@ -207,18 +209,39 @@ using namespace std;
 // // cout << 
 // }
 
+// int main()
+// {
+//   std::map<char, int> m;
+ 
+//   m['a'] = 10;
+//   m['b'] = 20;
+//   m['c'] = 30;
+//   m['d'] = 40;
+//   m['e'] = 50;
+
+//   std::map<char, int>::iterator it;
+//   for(it = m.begin(); it != m.end(); it++)
+//   {
+//     std::cout << it->second << std::endl;
+//   }
+//   // for()
+// }
+
 int main()
 {
   std::map<char, int> m;
- 
+
   m['a'] = 10;
   m['b'] = 20;
   m['c'] = 30;
   m['d'] = 40;
   m['e'] = 50;
+  std::map<char, int> m1(m);
+  
+  myprint(m1.size());
 
   std::map<char, int>::iterator it;
-  for(it = m.begin(); it != m.end(); it++)
+  for(it = m1.begin(); it != m1.end(); ++it)
   {
     std::cout << it->second << std::endl;
   }

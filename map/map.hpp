@@ -64,6 +64,7 @@ namespace ft
             avl_type            _avl_tree;
             allocator_type      _alloc_copy;
             key_compare         _comp;
+            size_type           _size;
 
         public:
 
@@ -72,6 +73,7 @@ namespace ft
                             const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(comp)
             {
                 _alloc_copy = alloc;
+                _size = 0;
             }
             	
             template <class InputIterator>
@@ -79,11 +81,13 @@ namespace ft
                             const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(comp)
             {
                 _alloc_copy = alloc;
+                _size = std::distance(first, last);
                 insert(first, last);
             }
         	
-            map (const map& x)
+            map (const map& x) : _avl_tree()
             {
+                _size = x._size;
                 _alloc_copy = x._alloc_copy;
                 _comp = x._comp;
                 insert(x.begin(), x.end());
@@ -128,55 +132,46 @@ namespace ft
 
             reverse_iterator rbegin()
             {
-
+                return reverse_iterator(end());
             }
 
             const_reverse_iterator rbegin() const
             {
-
+                return const_reverse_iterator(end());
             }
 
             reverse_iterator rend()
             {
-
+                return reverse_iterator(begin());
             }
 
             const_reverse_iterator rend() const
             {
-
+                return const_reverse_iterator(begin());
             }
 
 
             //capacity-------------------------------------
             bool empty() const
             {
-
+                bool ret = true ? _size != 0 : false;
+                return ret;
             }
 
             size_type size() const
             {
-
+                return _size;
             }
 
             size_type max_size() const
             {
-
+                return _alloc_copy.max_size();
             }
 
             //Element access--------------------------------------------------
             mapped_type& operator[] (const key_type& k)
             {
-
-            }
-
-            mapped_type& at (const key_type& k)
-            {
-
-            }
-
-            const mapped_type& at (const key_type& k) const
-            {
-
+                return (*insert(make_pair(k,mapped_type())).first);
             }
 
             pair<iterator,bool> insert (const value_type& val)
@@ -223,12 +218,12 @@ namespace ft
             //Observers--------------------------------------------------
             key_compare key_comp() const
             {
-
+                return _comp;
             }
 
             value_compare value_comp() const
             {
-
+                return value_compare(_comp;)
             }
 
             //operations---------------------------------------------------
@@ -280,7 +275,7 @@ namespace ft
 
             allocator_type get_allocator() const
             {
-                
+                return _alloc_copy;
             }
     };
 }
