@@ -265,4 +265,21 @@ class AVL
 			}
 			return root;
 		}
+
+		// checks if a node exits
+		bool    SearchNode(Node *node, key_type key)
+		{
+			if(node == NULL)
+				return false;
+			if(std::equal_to<key_type>(node->key, key))
+				return true;
+
+			bool	res1 = SearchNode(node->left, key);
+			if(res1 == true)
+				return true;
+			bool	res2 = SearchNode(node->right, key);
+			if(res2 == true)
+				return true;
+			return false;
+		}
 };

@@ -176,7 +176,20 @@ namespace ft
 
             pair<iterator,bool> insert (const value_type& val)
             {
+                mapIterator it; // what should we initiliaze this iterator
 
+                if(!_avl_tree.SearchNode()) // !!what node to use here and what value
+                {
+                    // we didn't find another node with the same value
+                    _size++;
+                    _avl_tree.root = _avl_tree.insertNde();
+                    return(pair<it, true>);
+                }
+                else
+                {
+                    // the element is not inserted, returning an iterator to this existing element (if the function returns a value).
+                    return(pair<it, false>);
+                }
             }
 
             iterator insert (iterator position, const value_type& val)

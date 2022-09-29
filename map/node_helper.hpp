@@ -1,6 +1,8 @@
 #pragma once
 
 #include "AVL.hpp"
+#include <functional>
+
 
 Node    *MostLeft(Node *node)
 {
@@ -27,5 +29,10 @@ Node    *MostRight(Node *node)
         return iter
     }
     else
-        return NULL:
+        return NULL;
 }
+
+// template <class T> 
+// struct equal_to : binary_function <T,T,bool> {
+//   bool operator() (const T& x, const T& y) const {return x==y;}
+// };
