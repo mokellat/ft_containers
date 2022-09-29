@@ -177,12 +177,12 @@ namespace ft
             pair<iterator,bool> insert (const value_type& val)
             {
                 mapIterator it; // what should we initiliaze this iterator
-
-                if(!_avl_tree.SearchNode()) // !!what node to use here and what value
+                
+                if(!_avl_tree.SearchNode(_avl_tree.root, val->first, it))
                 {
                     // we didn't find another node with the same value
                     _size++;
-                    _avl_tree.root = _avl_tree.insertNde();
+                    _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val->second);
                     return(pair<it, true>);
                 }
                 else
@@ -194,13 +194,20 @@ namespace ft
 
             iterator insert (iterator position, const value_type& val)
             {
+                //Notice that this is just a hint and does not force the new element to be inserted at that position within 
+                // the map container (the elements in a map always follow a specific order depending on their key).
 
+                insert(val);
+                return position;
             }
 
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last)
             {
-
+                while(first != last)
+                {
+                    insert(*first++);
+                }
             }
 
             void erase (iterator position)
