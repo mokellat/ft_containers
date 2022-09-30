@@ -253,6 +253,8 @@ namespace ft
             void clear()
             {
                 //implement a function to delete all nodes
+                _size = 0;
+                _avl_tree.deleteAllNodes(_avl_tree.root, _alloc_node);
             }
 
             //Observers--------------------------------------------------
@@ -269,22 +271,35 @@ namespace ft
             //operations---------------------------------------------------
             iterator find (const key_type& k)
             {
+                mapIterator it;
 
+                if(!_avl_tree.SearchNode(_avl_tree.root, k, it))
+                    it(end());
+                return it;
             }
 
             const_iterator find (const key_type& k) const
             {
+                mapIterator it;
 
+                if(!_avl_tree.SearchNode(_avl_tree.root, k, it))
+                    it(end());
+                return it;
             }
 
             size_type count (const key_type& k) const
             {
-
+                if(!_avl_tree.SearchNode(_avl_tree.root, k, NULL))
+                    return 0;
+                return 1;
             }
 
             iterator lower_bound (const key_type& k)
             {
+                iterator  it = end();
 
+                if(_avl_tree.SearchNode(_avl_tree, ))
+                return it;
             }
 
             const_iterator lower_bound (const key_type& k) const   
