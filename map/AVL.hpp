@@ -1,12 +1,15 @@
+#pragma once
+
 #include <iostream>
+#include "map_iterator.hpp"
 
 template<class T>
 class Node 
 {
 	// typedefs
-
 	typedef T 							value_type;
 	typedef typename value_type::first	key_type;
+
 
 	public:
 		// T		value;
@@ -28,6 +31,13 @@ class Node
 template<class T, class ALLoc, class Compare>
 class AVL
 {
+
+	//typedefs
+	typedef T 							value_type;
+	typedef typename value_type::first	key_type;
+	typedef mapIterator<value_type>     iterator;
+
+
 	//some typedefs to add
 	public:
 		typedef T			mapped_type;
@@ -98,7 +108,7 @@ class AVL
 			neww->height = 1;
 			neww->key = key;
 			neww = _alloc_node.allocate(neww->height * sizeof(mapped_type));
-			_alloc_node.construst(node, key);
+			_alloc_node.construst(neww, key);
 			neww->right = NULL;
 			neww->left = NULL;
 			return neww;
@@ -266,6 +276,33 @@ class AVL
 			return root;
 		}
 
+		Node    *MostLeft(Node *node)
+		{
+			if(node != NULL)
+			{
+				Node *iter = node;
+
+				while (iter->left != NULL)
+					iter = iter->_left;
+				return iter;
+			}
+			else
+				return NULL;
+		}
+
+		Node    *MostRight(Node *node)
+		{
+			if(node != NULL)
+			{
+				Node *iter = node;
+
+				while (iter->right != NULL)
+					iter = iter->right;
+				return iter;
+			}
+			else
+				return NULL;
+		}
 		// checks if a node exits
 		bool    SearchNode(Node *node, key_type key, iterator it)
 		{

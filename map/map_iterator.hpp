@@ -2,7 +2,8 @@
 
 #include <iostream>
 #include <iterator>
-#include"map/node_helper.hpp"
+#include "AVL.hpp"
+// #include "map/node_helper.hpp"
 
 
 namespace ft
@@ -47,7 +48,7 @@ namespace ft
 
             bool &operator!=(mapIterator &rhs)
             {
-                return (node != rhs._node);
+                return (_node != rhs._node);
             }
 
             reference	operator*() 
@@ -73,7 +74,7 @@ namespace ft
                 }
                 else
                 {
-                    Node    *temp_par = _node->parent;
+                    node_type    *temp_par = _node->parent;
 
                     while (_node == temp_par->right)
                     {
@@ -104,7 +105,7 @@ namespace ft
                 }
                 else
                 {
-                    Node    *temp_par = _node->parent;
+                    node_type   *temp_par = _node->parent;
 
                     while (_node == temp_par->left)
                     {

@@ -2,13 +2,15 @@
 
 #include <iostream>
 #include <map>
-#include "map/map_iterator.hpp"
-#include "map/AVL.hpp"
-#include "map/node_helper.hpp"
+#include "map_iterator.hpp"
+#include "AVL.hpp"
+#include <functional>
+#include "map_reverse_iterator.hpp"
+#include "node_helper.hpp"
 
 namespace ft
 {
-    template < class Key, class T, class Compare = less<Key>, class Alloc = allocator<pair<const Key,T>> > 
+    template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
     class map
     {
         public:
@@ -28,13 +30,14 @@ namespace ft
             typedef mapIterator<value_type>                     iterator;
             typedef mapIterator<const value_type>               const_iterator;
 
-            typedef ft::map_reverse_iterator<iterator>          reverse_iterator;
-            typedef ft::map_reverse_iterator<const_iterator>    const_reverse_iterator;
+            typedef ft::reverse_iterator<iterator>              reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
 
 			typedef	size_t	                                    size_type;
 
             //rebind and some typedefs for avl
-		    typedef typename Alloc::rebind<Node>::other         _alloc_node;  //it may throw error
+            typedef Node<key_type>                              node_type;
+		    typedef typename Alloc::rebind<node_type>::other         _alloc_node;  //it may throw error
             typedef AVL<key_type, _alloc_node, key_compare>     avl_type;
 
             //value compare
@@ -176,7 +179,8 @@ namespace ft
 
             pair<iterator,bool> insert (const value_type& val)
             {
-                mapIterator it; // what should we initiliaze this iterator
+                iterator                it; // what should we initiliaze this iterator
+                pair<iterator, bool>    p;
                 
                 if(!_avl_tree.SearchNode(_avl_tree.root, val->first, it))
                 {
@@ -188,7 +192,7 @@ namespace ft
                 else
                 {
                     // the element is not inserted, returning an iterator to this existing element (if the function returns a value).
-                    return(pair<it, false>);
+                   return(pair<it, false>)
                 }
             }
 
@@ -212,7 +216,7 @@ namespace ft
 
             void erase (iterator position)
             {
-                if(searchNode(_avl_tree.root, (*position)->first, NULL)
+                if(searchNode(_avl_tree.root, (*position)->first, NULL))
                 {
                     // we found that the key is there
                     // we start erasing
@@ -223,7 +227,7 @@ namespace ft
 
             size_type erase (const key_type& k)
             {
-                 if(searchNode(_avl_tree.root, k, NULL)
+                 if(searchNode(_avl_tree.root, k, NULL))
                 {
                     // we found that the key is there
                     // we start erasing
@@ -265,13 +269,13 @@ namespace ft
 
             value_compare value_comp() const
             {
-                return value_compare(_comp;)
+                return value_compare(_comp);
             }
 
             //operations---------------------------------------------------
             iterator find (const key_type& k)
             {
-                mapIterator it;
+                iterator it;
 
                 if(!_avl_tree.SearchNode(_avl_tree.root, k, it))
                     it(end());
@@ -280,7 +284,7 @@ namespace ft
 
             const_iterator find (const key_type& k) const
             {
-                mapIterator it;
+                iterator it;
 
                 if(!_avl_tree.SearchNode(_avl_tree.root, k, it))
                     it(end());
@@ -294,38 +298,38 @@ namespace ft
                 return 1;
             }
 
-            iterator lower_bound (const key_type& k)
-            {
-                iterator  it = end();
+            // iterator lower_bound (const key_type& k)
+            // {
+            //     iterator  it = end();
 
-                if(_avl_tree.SearchNode(_avl_tree, ))
-                return it;
-            }
+            //     if(_avl_tree.SearchNode(_avl_tree, ))
+            //     return it;
+            // }
 
-            const_iterator lower_bound (const key_type& k) const   
-            {
+            // const_iterator lower_bound (const key_type& k) const   
+            // {
 
-            }
+            // }
 
-            iterator upper_bound (const key_type& k)
-            {
+            // iterator upper_bound (const key_type& k)
+            // {
 
-            }
+            // }
 
-            const_iterator upper_bound (const key_type& k) const
-            {
+            // const_iterator upper_bound (const key_type& k) const
+            // {
 
-            }
+            // }
 
-            pair<const_iterator,const_iterator> equal_range (const key_type& k) const
-            {
+            // pair<const_iterator,const_iterator> equal_range (const key_type& k) const
+            // {
 
-            }
+            // }
 
-            pair<iterator,iterator>             equal_range (const key_type& k)
-            {
+            // pair<iterator,iterator>             equal_range (const key_type& k)
+            // {
 
-            }
+            // }
 
 
             allocator_type get_allocator() const
