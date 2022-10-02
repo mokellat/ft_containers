@@ -36,12 +36,12 @@ class AVL
 	public:
 		typedef T 								value_type;
 		typedef typename value_type::first_type	key_type;
-		typedef mapIterator<value_type>         iterator;
+		typedef ft::mapIterator<value_type>     iterator;
 
 
 	//some typedefs to add
 	public:
-		typedef T								mapped_type;
+		// typedef T								key_type;
 		typedef Node<T>							Node;	
 		typedef	Compare							compare;
 		typedef	ALLoc							alloc_node;
@@ -108,7 +108,7 @@ class AVL
 			// we have to change it with the allocator
 			neww->height = 1;
 			neww->key = key;
-			neww = _alloc_node.allocate(neww->height * sizeof(mapped_type));
+			neww = _alloc_node.allocate(neww->height * sizeof(neww));
 			_alloc_node.construst(neww, key);
 			neww->right = NULL;
 			neww->left = NULL;
@@ -122,7 +122,7 @@ class AVL
 			return height(node->left) - height(node->right);
 		}
 
-		Node  *insertNode(Node *root, mapped_type key)
+		Node  *insertNode(Node *root, key_type key)
 		{
 			int bf;
 
@@ -328,12 +328,12 @@ class AVL
 			return false;
 		}
 
-		void	deleteAllNodes(Node &node, alloc_node _alloc)
+		void	deleteAllNodes(Node *node, alloc_node _alloc)
 		{
 			if(node != NULL) 
 			{
-				deleteAllNodes(node->left);
-				deleteAllNodes(node->right);
+				deleteAllNodes(node->left, _alloc);
+				deleteAllNodes(node->right, _alloc);
 				_alloc.destroy(node);
 				_alloc.deallocate(node, sizeof(node));
 			}
