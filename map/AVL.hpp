@@ -7,8 +7,9 @@ template<class T>
 class Node 
 {
 	// typedefs
-	typedef T 							value_type;
-	typedef typename value_type::first	key_type;
+	public:
+		typedef T 								value_type;
+		typedef typename value_type::first_type	key_type;
 
 
 	public:
@@ -33,22 +34,23 @@ class AVL
 {
 
 	//typedefs
-	typedef T 							value_type;
-	typedef typename value_type::first	key_type;
-	typedef mapIterator<value_type>     iterator;
+	public:
+		typedef T 								value_type;
+		typedef typename value_type::first_type	key_type;
+		typedef mapIterator<value_type>         iterator;
 
 
 	//some typedefs to add
 	public:
-		typedef T			mapped_type;
-		typedef Node<T>		Node;	
-		typedef	Compare		compare;
-		typedef	ALLoc		alloc_node;
+		typedef T								mapped_type;
+		typedef Node<T>							Node;	
+		typedef	Compare							compare;
+		typedef	ALLoc							alloc_node;
 
 	public:
-		Node				*root;
-		compare				_compare;
-		alloc_node			_alloc_node;
+		Node									*root;
+		compare									_compare;
+		alloc_node								_alloc_node;
 
 	public:
 		AVL() : root() {}

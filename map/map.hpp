@@ -2,7 +2,7 @@
 
 #include <iostream>
 #include <map>
-#include "map_iterator.hpp"
+// #include "map_iterator.hpp"
 #include "AVL.hpp"
 #include <functional>
 #include "map_reverse_iterator.hpp"
@@ -14,31 +14,31 @@ namespace ft
     class map
     {
         public:
-            typedef	Key	                                        key_type;
-			typedef T	                                        mapped_type;
-			typedef pair<const key_type, mapped_type>	        value_type;
-			typedef	Compare	                                    key_compare;
-			typedef Alloc	                                    allocator_type;
-			typedef	typename allocator_type::reference          reference;
-			typedef	typename allocator_type::const_reference    const_reference;
-			typedef	typename allocator_type::pointer	        pointer;
-			typedef	typename allocator_type::const_pointer	    const_pointer;
-			typedef ptrdiff_t	                                difference_type;
+            typedef	Key	                                                key_type;
+			typedef T	                                                mapped_type;
+			typedef pair<const key_type, mapped_type>	                value_type;
+			typedef	Compare	                                            key_compare;
+			typedef Alloc	                                            allocator_type;
+			typedef	typename allocator_type::reference                  reference;
+			typedef	typename allocator_type::const_reference            const_reference;
+			typedef	typename allocator_type::pointer	                pointer;
+			typedef	typename allocator_type::const_pointer	            const_pointer;
+			typedef ptrdiff_t	                                        difference_type;
 
-            //create an iterator bidericotinal and reverse iterator bellow
+            //create an iterator bidericotinal and reverse itera        tor bellow
 
-            typedef mapIterator<value_type>                     iterator;
-            typedef mapIterator<const value_type>               const_iterator;
+            typedef mapIterator<value_type>                             iterator;
+            typedef mapIterator<const value_type>                       const_iterator;
 
-            typedef ft::reverse_iterator<iterator>              reverse_iterator;
-            typedef ft::reverse_iterator<const_iterator>        const_reverse_iterator;
+            typedef ft::reverse_iterator<iterator>                      reverse_iterator;
+            typedef ft::reverse_iterator<const_iterator>                const_reverse_iterator;
 
-			typedef	size_t	                                    size_type;
+			typedef	size_t	                                            size_type;
 
             //rebind and some typedefs for avl
-            typedef Node<key_type>                              node_type;
-		    typedef typename Alloc::rebind<node_type>::other         _alloc_node;  //it may throw error
-            typedef AVL<key_type, _alloc_node, key_compare>     avl_type;
+            typedef Node<key_type>                                      node_type;
+		    typedef typename Alloc::template rebind<node_type>::other   alloc_node;  //it may throw error
+            typedef AVL<value_type, alloc_node, key_compare>            avl_type;
 
             //value compare
             class value_compare 
@@ -53,6 +53,7 @@ namespace ft
                     typedef bool        result_type;
                     typedef value_type  first_argument_type;
                     typedef value_type  second_argument_type;
+
                     bool operator() (const value_type& x, const value_type& y) const
                     {
                         return comp(x.first, y.first);
@@ -68,6 +69,7 @@ namespace ft
             allocator_type      _alloc_copy;
             key_compare         _comp;
             size_type           _size;
+            alloc_node         _node_alloc;
 
         public:
 
@@ -187,12 +189,14 @@ namespace ft
                     // we didn't find another node with the same value
                     _size++;
                     _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val->second);
-                    return(pair<it, true>);
+                    p[it] = true;
+                    return(p);
                 }
                 else
                 {
                     // the element is not inserted, returning an iterator to this existing element (if the function returns a value).
-                   return(pair<it, false>)
+                   p[it] = false;
+                   return(p);
                 }
             }
 
@@ -257,8 +261,9 @@ namespace ft
             void clear()
             {
                 //implement a function to delete all nodes
+
                 _size = 0;
-                _avl_tree.deleteAllNodes(_avl_tree.root, _alloc_node);
+                _avl_tree.deleteAllNodes(_avl_tree.root, _node_alloc);
             }
 
             //Observers--------------------------------------------------

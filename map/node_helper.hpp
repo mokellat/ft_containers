@@ -6,38 +6,38 @@
 
 namespace ft
 {
-// Node    *MostLeft(Node *node)
-// {
-//     if(node != NULL)
-//     {
-//         Node *iter = node;
+    // Node    *MostLeft(Node *node)
+    // {
+    //     if(node != NULL)
+    //     {
+    //         Node *iter = node;
 
-//         while (iter->left != NULL)
-//             iter = iter->_left;
-//         return iter
-//     }
-//     else
-//         return NULL:
-// }
+    //         while (iter->left != NULL)
+    //             iter = iter->_left;
+    //         return iter
+    //     }
+    //     else
+    //         return NULL:
+    // }
 
-// Node    *MostRight(Node *node)
-// {
-//     if(node != NULL)
-//     {
-//         Node *iter = node;
+    // Node    *MostRight(Node *node)
+    // {
+    //     if(node != NULL)
+    //     {
+    //         Node *iter = node;
 
-//         while (iter->right != NULL)
-//             iter = iter->right;
-//         return iter
-//     }
-//     else
-//         return NULL;
-// }
+    //         while (iter->right != NULL)
+    //             iter = iter->right;
+    //         return iter
+    //     }
+    //     else
+    //         return NULL;
+    // }
 
-// template <class T> 
-// struct equal_to : binary_function <T,T,bool> {
-//   bool operator() (const T& x, const T& y) const {return x==y;}
-// };
+    // template <class T> 
+    // struct equal_to : binary_function <T,T,bool> {
+    //   bool operator() (const T& x, const T& y) const {return x==y;}
+    // };
 
     template <class T1, class T2>
     struct pair // all members all public by default
@@ -47,7 +47,7 @@ namespace ft
         typedef T1  first_type;
         typedef T2  second_type;
 
-        private:
+        public:
             first_type  first;
             second_type second;
 

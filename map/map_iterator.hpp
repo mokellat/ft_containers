@@ -15,13 +15,13 @@ namespace ft
             //typedefs
             typedef typename std::bidirectional_iterator_tag	iterator_category;
             typedef typename T::first                           value_type;
-            typedef Node<value_type>                            node_type;
+            typedef Node<T>                                     node_type;
             typedef T*                                          pointer;
 		    typedef T&	                                        reference;
 
 
         private:
-            node_type *_node;
+            node_type   *_node;
 
         public:
             mapIterator() : _node(){}
@@ -94,7 +94,7 @@ namespace ft
                 return it;
             }
 
-             mapIterator &operator--()
+            mapIterator &operator--()
             {
                 // for later
                 if(_node->left != NULL)
