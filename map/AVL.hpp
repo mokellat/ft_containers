@@ -103,13 +103,13 @@ class AVL
 			return x;
 		}
 
-		Node   *newNode(Node *neww, int key)
+		Node   *newNode(Node *neww, key_type key)
 		{
 			// we have to change it with the allocator
 			neww->height = 1;
 			neww->key = key;
 			neww = _alloc_node.allocate(neww->height * sizeof(neww));
-			_alloc_node.construst(neww, key);
+			_alloc_node.construct(neww->key, key);
 			neww->right = NULL;
 			neww->left = NULL;
 			return neww;
@@ -305,11 +305,11 @@ class AVL
 				return NULL;
 		}
 		// checks if a node exits
-		bool    SearchNode(Node *node, key_type key, iterator it)
+		bool    SearchNode(Node *node, key_type key, iterator it=end())
 		{
 			if(node == NULL)
 				return false;
-			if(std::equal_to<key_type>(node->key, key))
+			if(node->key == key)
 			{
 				it(node);
 				return true;

@@ -176,7 +176,7 @@ namespace ft
             //Element access--------------------------------------------------
             mapped_type& operator[] (const key_type& k)
             {
-                return (*insert(make_pair(k,mapped_type())).first);
+                return ((*((this->insert(make_pair(k,mapped_type()))).first)).second);
             }
 
             pair<iterator,bool> insert (const value_type& val)
@@ -184,11 +184,11 @@ namespace ft
                 iterator                it; // what should we initiliaze this iterator
                 pair<iterator, bool>    p;
                 
-                if(!_avl_tree.SearchNode(_avl_tree.root, val->first, it))
+                if(!_avl_tree.SearchNode(_avl_tree.root, val.first, it))
                 {
                     // we didn't find another node with the same value
                     _size++;
-                    _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val->second);
+                    _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val.second);
                     p[it] = true;
                     return(p);
                 }

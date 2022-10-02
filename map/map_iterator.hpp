@@ -13,7 +13,7 @@ namespace ft
         public:
             //typedefs
             typedef typename std::bidirectional_iterator_tag	iterator_category;
-            typedef typename T::first                           value_type;
+            // typedef typename T::first                           value_type;
             typedef Node<T>                                     node_type;
             typedef T*                                          pointer;
 		    typedef T&	                                        reference;
