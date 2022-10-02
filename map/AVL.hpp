@@ -1,7 +1,7 @@
 #pragma once
 
 #include <iostream>
-#include "map_iterator.hpp"
+// #include "map_iterator.hpp"
 
 template<class T>
 class Node 
@@ -26,7 +26,7 @@ class Node
 		~Node(){}
 };
 
-
+#include "map_iterator.hpp"
 
 template<class T, class ALLoc, class Compare>
 class AVL
