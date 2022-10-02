@@ -11,15 +11,14 @@ class Node
 		typedef T 								value_type;
 		typedef typename value_type::first_type	key_type;
 
-
 	public:
 		// T		value;
-		value_type	pair;
-		key_type 	key;
-		Node		*parent;
-		Node		*left;
-		Node		*right;
-		int			height;
+		value_type								pair;
+		key_type 								key;
+		Node									*parent;
+		Node									*left;
+		Node									*right;
+		int										height;
 
 	public:
 		Node() : height(1), left(), right(), parent(){}
