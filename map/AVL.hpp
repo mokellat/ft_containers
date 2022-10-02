@@ -42,7 +42,7 @@ class AVL
 	//some typedefs to add
 	public:
 		// typedef T								key_type;
-		typedef Node<T>							Node;	
+		typedef Node<value_type>				Node;	
 		typedef	Compare							compare;
 		typedef	ALLoc							alloc_node;
 
@@ -328,14 +328,14 @@ class AVL
 			return false;
 		}
 
-		void	deleteAllNodes(Node *node, alloc_node _alloc)
+		void	deleteAllNodes(Node *node)
 		{
 			if(node != NULL) 
 			{
-				deleteAllNodes(node->left, _alloc);
-				deleteAllNodes(node->right, _alloc);
-				_alloc.destroy(node);
-				_alloc.deallocate(node, sizeof(node));
+				deleteAllNodes(node->left);
+				deleteAllNodes(node->right);
+				_alloc_node.destroy(node);
+				_alloc_node.deallocate(node, sizeof(node));
 			}
 			node = NULL;
 		}

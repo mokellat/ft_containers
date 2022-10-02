@@ -36,7 +36,7 @@ namespace ft
 			typedef	size_t	                                            size_type;
 
             //rebind and some typedefs for avl
-            typedef Node<key_type>                                      node_type;
+            typedef Node<value_type>                                      node_type;
 		    typedef typename Alloc::template rebind<node_type>::other   alloc_node;  //it may throw error
             typedef AVL<value_type, alloc_node, key_compare>            avl_type;
 
@@ -263,7 +263,7 @@ namespace ft
                 //implement a function to delete all nodes
 
                 _size = 0;
-                _avl_tree.deleteAllNodes(_avl_tree.root, _node_alloc);
+                _avl_tree.deleteAllNodes(_avl_tree.root);
             }
 
             //Observers--------------------------------------------------
