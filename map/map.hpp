@@ -188,7 +188,7 @@ namespace ft
                 {
                     // we didn't find another node with the same value
                     _size++;
-                    _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val.second);
+                    _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val);
                     // p[it] = true;
                     return (make_pair(it, true));
                 }

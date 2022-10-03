@@ -53,6 +53,12 @@ namespace ft
 
         pair() {}
 
+        pair (const first_type& a, const second_type& b) : first(a), second(b)
+        {
+            // first = a;
+            // second = b;
+        }
+        
         template<class U, class V> 
         pair (const pair<U,V>& pr) : first(pr.first), second(pr.second)
         {
@@ -60,11 +66,6 @@ namespace ft
             // second = pr.second;
         }
 
-        pair (const first_type& a, const second_type& b)
-        {
-            first = a;
-            second = b;
-        }
 
         pair& operator= (const pair& pr)
         {

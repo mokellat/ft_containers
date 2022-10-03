@@ -14,7 +14,7 @@ class Node
 	public:
 		// T		value;
 		value_type								pair;
-		value_type 								key;
+		value_type 								*key;
 		Node									*parent;
 		Node									*left;
 		Node									*right;
@@ -49,7 +49,7 @@ class AVL
 
 	public:
 		Node									*root;
-		compare									_compare;
+		compare									 _compare;
 		alloc_node								_alloc_node;
 		alloc_type								_alloc_type;
 
@@ -105,7 +105,7 @@ class AVL
 			return x;
 		}
 
-		Node   *newNode(Node *neww, key_type key)
+		Node   *newNode(Node *neww, value_type key)
 		{
 			// we have to change it with the allocator
 			neww->height = 1;
@@ -125,7 +125,7 @@ class AVL
 			return height(node->left) - height(node->right);
 		}
 
-		Node  *insertNode(Node *root, key_type key)
+		Node  *insertNode(Node *root, value_type key)
 		{
 			int bf;
 
@@ -142,9 +142,9 @@ class AVL
 				return newNode(root, key);
 
 			//(2)
-			if(_compare(root->key, key))
+			if(_compare(root->key->first, key.first))
 				root->right = insertNode(root->right, key);
-			else if(_compare(key, root->key))
+			else if(_compare(key.first, root->key->first))
 				root->left = insertNode(root->left, key);
 			else
 				return root;
@@ -155,7 +155,7 @@ class AVL
 			if(bf > 1)
 			{
 				//means the height of the right subtree is greater then the left one
-				if(_compare(key, root->left->key))
+				if(_compare(key.first, root->left->key->first))
 				{
 					//right rotation
 					root->right = rotate_right(root->right);
@@ -171,7 +171,7 @@ class AVL
 			else if(bf < -1)
 			{
 				// means the height of the right subtree is greater than that of the left subtree
-				if(_compare(root->right->key, key))
+				if(_compare(root->right->key->first, key.first))
 				{
 					//left rotation
 					root->left = rotate_left(root->left);

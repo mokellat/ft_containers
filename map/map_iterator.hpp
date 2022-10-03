@@ -53,13 +53,13 @@ namespace ft
             reference	operator*() 
             {
                 //donno what to do here
-                return *(_node->pair);
+                return *(_node->key);
             }
 
 		    pointer	operator->()
             {
                 //donno what to do here
-                return _node->pair;
+                return _node->key;
             }
 
             mapIterator &operator++()
