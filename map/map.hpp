@@ -36,9 +36,9 @@ namespace ft
 			typedef	size_t	                                                     size_type;
 
             //rebind and some typedefs for avl
-            typedef Node<value_type>                                            node_type;
-		    typedef typename Alloc::template rebind<node_type>::other           alloc_node;  //it may throw error
-            typedef AVL<value_type, alloc_node, key_compare, allocator_type>    avl_type;
+            typedef Node<value_type>                                             node_type;
+		    typedef typename Alloc::template rebind<node_type>::other            alloc_node;  //it may throw error
+            typedef AVL<value_type, alloc_node, key_compare, allocator_type>     avl_type;
 
             //value compare
             class value_compare 
@@ -208,7 +208,6 @@ namespace ft
             {
                 //Notice that this is just a hint and does not force the new element to be inserted at that position within 
                 // the map container (the elements in a map always follow a specific order depending on their key).
-
                 insert(val);
                 return position;
             }
@@ -238,16 +237,6 @@ namespace ft
 
             size_type erase (const key_type& k)
             {
-                // if(searchNode(_avl_tree.root, k, NULL))
-                // {
-                //     // we found that the key is there
-                //     // we start erasing
-                //     _size--;
-                //     _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, k);
-                //     return 1;
-                // }
-                // return 0;
-
                 iterator it;
 
                 it(searchNode(_avl_tree.root, k));
@@ -326,17 +315,25 @@ namespace ft
                 return 1;
             }
 
-            // iterator lower_bound (const key_type& k)
-            // {
-            //     iterator  it = end();
+            iterator lower_bound (const key_type& k)
+            {
+                iterator it;
 
-            //     if(_avl_tree.SearchNode(_avl_tree, ))
-            //     return it;
-            // }
+                it = begin();
+                while(it != end())
+                {
+                    if(_comp(it->first, k))
+                        ++it;
+                    else
+                        return it;
+                    // ++it;
+                }
+                return it;
+            }
 
             const_iterator lower_bound (const key_type& k) const   
             {
-                iterator it;
+                const_iterator it;
                 iterator temp;
 
                 it = begin();
@@ -348,28 +345,66 @@ namespace ft
                         return it;
                     // ++it;
                 }
-                return temp;
+                return it;
             }
 
-            // iterator upper_bound (const key_type& k)
-            // {
+            iterator upper_bound (const key_type& k)
+            {
+                iterator it;
 
-            // }
+                it = begin();
+                while(it != end())
+                {
+                    if(_comp(k, it->first))
+                        ++it;
+                    else
+                        return it;
+                    // ++it;
+                }
+                return it;
+            }
 
-            // const_iterator upper_bound (const key_type& k) const
-            // {
+            const_iterator upper_bound (const key_type& k) const
+            {
+                const_iterator it;
 
-            // }
+                it = begin();
+                while(it != end())
+                {
+                    if(_comp(k, it->first))
+                        ++it;
+                    else
+                        return it;
+                    // ++it;
+                }
+                return it;
+            }
 
-            // pair<const_iterator,const_iterator> equal_range (const key_type& k) const
-            // {
+            pair<const_iterator,const_iterator> equal_range (const key_type& k) const
+            {
+                const_iterator                      it;
+                const_iterator                      ite;
+                pair<const_iterator,const_iterator> pr;
 
-            // }
+                it = lower_bound(k);
+                ite = upper_bound(k);
+                pr.first = it;
+                pr.second = ite;
+                return pr;
+            }
 
-            // pair<iterator,iterator>             equal_range (const key_type& k)
-            // {
+            pair<iterator,iterator>             equal_range (const key_type& k)
+            {
+                iterator                it;
+                iterator                ite;
+                pair<iterator,iterator> pr;
 
-            // }
+                it = lower_bound(k);
+                ite = upper_bound(k);
+                pr.first = it;
+                pr.second = ite;
+                return pr;
+            }
 
 
             allocator_type get_allocator() const
