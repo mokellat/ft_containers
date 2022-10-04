@@ -127,7 +127,7 @@ namespace ft
 
             iterator end()
             {
-                // return iterator();
+                return iterator();
             }
 
             const_iterator end() const
@@ -334,21 +334,22 @@ namespace ft
             //     return it;
             // }
 
-            // const_iterator lower_bound (const key_type& k) const   
-            // {
-            //     iterator it;
-            //     iterator temp;
+            const_iterator lower_bound (const key_type& k) const   
+            {
+                iterator it;
+                iterator temp;
 
-            //     it = begin();
-            //     while(it != end())
-            //     {
-            //         if(_comp(it->first, key))
-            //             temp(it);
-            //         else
-            //             return temp;
-            //         ++it;
-            //     }
-            // }
+                it = begin();
+                while(it != end())
+                {
+                    if(_comp(it->first, k))
+                        ++it;
+                    else
+                        return it;
+                    // ++it;
+                }
+                return temp;
+            }
 
             // iterator upper_bound (const key_type& k)
             // {
