@@ -127,12 +127,12 @@ namespace ft
 
             iterator end()
             {
-                return iterator();
+                return iterator(nullptr);
             }
 
             const_iterator end() const
             {
-                return const_iterator();
+                return const_iterator(nullptr);
             }
 
             reverse_iterator rbegin()
@@ -405,7 +405,6 @@ namespace ft
                 pr.second = ite;
                 return pr;
             }
-
 
             allocator_type get_allocator() const
             {

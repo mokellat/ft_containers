@@ -38,6 +38,7 @@ class AVL
 		typedef typename value_type::first_type	key_type;
 		typedef ft::mapIterator<value_type>     iterator;
 		typedef	Main_Alloc						alloc_type;
+		
 
 
 	//some typedefs to add

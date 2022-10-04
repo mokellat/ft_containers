@@ -238,9 +238,12 @@ int main()
   m['e'] = 50;
   // std::map<char, int> m1(m);
 
-  std::map<char, int>::iterator it = m.lower_bound('d');
-  std::map<char, int>::iterator ite = m.upper_bound('d');
+  std::map<char, int>::iterator it;
+  // std::map<char, int>::iterator ite = m.upper_bound('d');
   
+  while(it != m.end())
+    it++;
+  it--;
   myprint(it->first);
   // for()
 }
