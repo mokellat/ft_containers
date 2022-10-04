@@ -117,22 +117,22 @@ namespace ft
             //iterators-------------------------------------
             iterator begin()
             {
-                return iterator(MostLeft(_avl_tree.root));
+                return iterator(_avl_tree.MostLeft(_avl_tree.root));
             }
 
             const_iterator begin() const
             {
-                return const_iterator(MostLeft(_avl_tree.root));
+                return const_iterator(_avl_tree.MostLeft(_avl_tree.root));
             }
 
             iterator end()
             {
-
+                // return iterator();
             }
 
             const_iterator end() const
             {
-
+                return const_iterator();
             }
 
             reverse_iterator rbegin()
@@ -181,23 +181,27 @@ namespace ft
 
             pair<iterator,bool> insert (const value_type& val)
             {
-                iterator                it; // what should we initiliaze this iterator
+                iterator                it(_avl_tree.SearchNode(_avl_tree.root, val.first)); // what should we initiliaze this iterator
                 pair<iterator, bool>    p;
-                
-                if(!_avl_tree.SearchNode(_avl_tree.root, val.first, it))
+
+                // it(_avl_tree.SearchNode(_avl_tree.root, val.first));
+                if(it == end())
                 {
                     // we didn't find another node with the same value
                     _size++;
                     _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val);
                     // p[it] = true;
-                    return (make_pair(it, true));
+                    p.first = it;
+                    p.second = true;
                 }
                 else
                 {
                     // the element is not inserted, returning an iterator to this existing element (if the function returns a value).
                     // p[it] = false;
-                    return(make_pair(it, false));
+                    p.first = it;
+                    p.second = false;
                 }
+                return p;
             }
 
             iterator insert (iterator position, const value_type& val)
@@ -220,7 +224,10 @@ namespace ft
 
             void erase (iterator position)
             {
-                if(searchNode(_avl_tree.root, (*position)->first, NULL))
+                iterator it;
+
+                it(searchNode(_avl_tree.root, (*position)->first));
+                if(it != end())
                 {
                     // we found that the key is there
                     // we start erasing
@@ -231,7 +238,20 @@ namespace ft
 
             size_type erase (const key_type& k)
             {
-                 if(searchNode(_avl_tree.root, k, NULL))
+                // if(searchNode(_avl_tree.root, k, NULL))
+                // {
+                //     // we found that the key is there
+                //     // we start erasing
+                //     _size--;
+                //     _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, k);
+                //     return 1;
+                // }
+                // return 0;
+
+                iterator it;
+
+                it(searchNode(_avl_tree.root, k));
+                if(it != end())
                 {
                     // we found that the key is there
                     // we start erasing
@@ -298,7 +318,10 @@ namespace ft
 
             size_type count (const key_type& k) const
             {
-                if(!_avl_tree.SearchNode(_avl_tree.root, k, NULL))
+                iterator it;
+
+                it(_avl_tree.SearchNode(_avl_tree.root, k));
+                if(it != end())
                     return 0;
                 return 1;
             }
@@ -313,7 +336,18 @@ namespace ft
 
             // const_iterator lower_bound (const key_type& k) const   
             // {
+            //     iterator it;
+            //     iterator temp;
 
+            //     it = begin();
+            //     while(it != end())
+            //     {
+            //         if(_comp(it->first, key))
+            //             temp(it);
+            //         else
+            //             return temp;
+            //         ++it;
+            //     }
             // }
 
             // iterator upper_bound (const key_type& k)

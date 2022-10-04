@@ -307,28 +307,22 @@ class AVL
 			else
 				return NULL;
 		}
+
 		// checks if a node exits
-		bool    SearchNode(Node *node, key_type key, iterator it=end())
+		Node    *SearchNode(Node *node, key_type key)
 		{
 			if(node == NULL)
-				return false;
+				return NULL;
 			if(node->key->first == key)
-			{
-				it(node);
-				return true;
-			}
+				return node;
 
-			bool	res1 = SearchNode(node->left, key);
-			if(res1 == true)
-				return true;
-			else
-				it(node->left);
-			bool	res2 = SearchNode(node->right, key);
-			if(res2 == true)
-				return true;
-			else
-				it(node->right);
-			return false;
+			Node *res1 = SearchNode(node->left, key);
+			if(res1)
+				return res1;
+			Node *res2 = SearchNode(node->right, key);
+			if(res2)
+				return res2;
+			return NULL;
 		}
 
 		void	deleteAllNodes(Node *node)
