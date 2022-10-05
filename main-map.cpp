@@ -42,12 +42,14 @@ int main()
     // m[4] = 30;
 
     //iterators
+    // ft::map<int, int>::iterator it = m.begin();
+    // for( ;it != m.end(); it++)
+    // {
+    //     myprint(it->first);
+    //     myprint(it->second);
+    // }
 
-    ft::map<int, int>::iterator it = m.begin();
-    for( ;it != m.end(); ++it)
-    {
-        myprint(it->first);
-        myprint(it->second);
-    }
+    // erase
+    m.erase(3);
     return 0;
 }

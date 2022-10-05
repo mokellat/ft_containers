@@ -66,7 +66,6 @@ namespace ft
             // second = pr.second;
         }
 
-
         pair& operator= (const pair& pr)
         {
             first = pr.first;

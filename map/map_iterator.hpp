@@ -34,7 +34,7 @@ namespace ft
 
             ~mapIterator(){}        
 
-            mapIterator &operator=(mapIterator &rhs)
+            mapIterator &operator=(mapIterator const &rhs)
             {
                 _node = rhs._node;
                 return *this;
@@ -86,14 +86,14 @@ namespace ft
                 return *this;
             }
 
-            mapIterator &operator++(int)
+            mapIterator operator++(int)
             {
                 mapIterator it(*this);
-                (this)++;
+                ++(*this);
                 return it;
             }
 
-            mapIterator &operator--()
+            mapIterator operator--()
             {
                 // for later
                 if(_node->left != NULL)

@@ -101,6 +101,7 @@ namespace ft
             //destructor---------------------------------------------
             ~map()
             {
+                // std::cout << "we doone" << std::endl;
                 clear();
             }
 
@@ -237,9 +238,9 @@ namespace ft
 
             size_type erase (const key_type& k)
             {
-                iterator it;
+                iterator it(_avl_tree.SearchNode(_avl_tree.root, k));
 
-                it(searchNode(_avl_tree.root, k));
+                // it(_avl_tree.SearchNode(_avl_tree.root, k));
                 if(it != end())
                 {
                     // we found that the key is there

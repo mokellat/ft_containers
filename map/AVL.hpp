@@ -211,18 +211,13 @@ class AVL
 			// locate the node to be deleted
 			if(root == NULL)
 				return root;
-			if(_compare(root->key > key))
+			if(_compare(root->key->first, key))
 				root->right = deleteOneNode(root->right, key);
-			else if(_compare(key > root->key))
+			else if(_compare(key, root->key->first))
 				root->left = deleteOneNode(root->left, key);
 			else
 			{
 				//found the node to be deleted
-				// if(root->right == NULL && root->left == NULL)
-				// {
-				// 	// no childs, delete the node immeadiately
-				// 	std::cout << "im fucking here" << std::endl;
-				// }
 				if(root->right == NULL || root->left == NULL)
 				{
 					// has one child, replace the parent with the child
@@ -252,7 +247,7 @@ class AVL
 					Node *temp = inorderSuccessor(root->right);
 
 					root->key = temp->key;
-					root->right = deleteOneNode(root->right, temp->key);
+					root->right = deleteOneNode(root->right, temp->key->first);
 				}
 			}
 
