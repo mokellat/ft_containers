@@ -319,7 +319,7 @@ class AVL
 		{
 			if(node == NULL)
 				return NULL;
-			if(node->key->first == key)
+			else if(node->key->first == key)
 				return node;
 
 			Node *res1 = SearchNode(node->left, key);

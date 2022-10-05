@@ -411,4 +411,4 @@ namespace ft
                 return _alloc_copy;
             }
     };
-    
+}
