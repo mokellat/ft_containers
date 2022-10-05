@@ -45,7 +45,7 @@ namespace ft
                 return (_node == rhs._node);
             }
 
-            bool &operator!=(mapIterator &rhs)
+            bool operator!=(mapIterator const &rhs) const
             {
                 return (_node != rhs._node);
             }

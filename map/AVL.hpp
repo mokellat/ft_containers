@@ -293,7 +293,7 @@ class AVL
 				Node *iter = node;
 
 				while (iter->left != NULL)
-					iter = iter->_left;
+					iter = iter->left;
 				return iter;
 			}
 			else
