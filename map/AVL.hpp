@@ -23,10 +23,15 @@ class Node
 	public:
 		Node() : height(1), left(), right(), parent(){}
 
+		Node( value_type pr)
+		{
+			this->key = &pr;
+		}
+
 		~Node(){}
 };
 
-#include "map_iterator.hpp"
+// #include "map_iterator.hpp"
 
 template<class T, class ALLoc, class Compare, class Main_Alloc>
 class AVL
@@ -36,7 +41,7 @@ class AVL
 	public:
 		typedef T 								value_type;
 		typedef typename value_type::first_type	key_type;
-		typedef ft::mapIterator<value_type>     iterator;
+		// typedef ft::mapIterator<value_type>     iterator;
 		typedef	Main_Alloc						alloc_type;
 		
 
@@ -110,10 +115,10 @@ class AVL
 		{
 			// we have to change it with the allocator
 			neww->height = 1;
-			neww->key =  _alloc_type.allocate(sizeof(neww->key));
-			_alloc_type.construct(neww->key, key);
+			// neww->key =  _alloc_type.allocate(sizeof(neww->key));
+			// _alloc_type.construct(neww->key, key);
 			neww = _alloc_node.allocate(neww->height * sizeof(neww));
-			_alloc_node.construct(neww->key, key);
+			_alloc_node.construct(neww, key);
 			neww->right = NULL;
 			neww->left = NULL;
 			return neww;

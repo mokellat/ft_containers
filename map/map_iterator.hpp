@@ -27,7 +27,7 @@ namespace ft
 
             mapIterator(node_type *node) : _node(node){}
 
-            mapIterator(mapIterator &it)
+            mapIterator(mapIterator const &it)
             {
                 _node = it._node;
             }
@@ -40,9 +40,9 @@ namespace ft
                 return *this;
             }
 
-            bool &operator==(mapIterator &rhs)
+            bool operator==(mapIterator const &rhs) const
             {
-                return (_node == rhs.node);
+                return (_node == rhs._node);
             }
 
             bool &operator!=(mapIterator &rhs)
