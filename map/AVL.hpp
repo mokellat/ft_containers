@@ -114,11 +114,11 @@ class AVL
 		Node   *newNode(Node *neww, value_type key)
 		{
 			// we have to change it with the allocator
-			neww->height = 1;
 			// neww->key =  _alloc_type.allocate(sizeof(neww->key));
 			// _alloc_type.construct(neww->key, key);
-			neww = _alloc_node.allocate(neww->height * sizeof(neww));
+			neww = _alloc_node.allocate(sizeof(neww));
 			_alloc_node.construct(neww, key);
+			neww->height = 1;
 			neww->right = NULL;
 			neww->left = NULL;
 			return neww;
