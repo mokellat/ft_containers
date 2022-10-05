@@ -23,10 +23,10 @@ class Node
 	public:
 		Node() : height(1), left(), right(), parent(){}
 
-		Node( value_type pr)
-		{
-			this->key = &pr;
-		}
+		// Node( value_type pr)
+		// {
+		// 	this->key = &pr;
+		// }
 
 		~Node(){}
 };
@@ -114,10 +114,10 @@ class AVL
 		Node   *newNode(Node *neww, value_type key)
 		{
 			// we have to change it with the allocator
-			// neww->key =  _alloc_type.allocate(sizeof(neww->key));
-			// _alloc_type.construct(neww->key, key);
 			neww = _alloc_node.allocate(sizeof(neww));
-			_alloc_node.construct(neww, key);
+			_alloc_node.construct(neww);
+			neww->key =  _alloc_type.allocate(sizeof(neww->key));
+			_alloc_type.construct(neww->key, key);
 			neww->height = 1;
 			neww->right = NULL;
 			neww->left = NULL;
@@ -164,8 +164,8 @@ class AVL
 				if(_compare(key.first, root->left->key->first))
 				{
 					//right rotation
-					root->right = rotate_right(root->right);
-					return root;
+					return rotate_right(root->right);
+					// return root;
 				}
 				else
 				{
@@ -180,8 +180,8 @@ class AVL
 				if(_compare(root->right->key->first, key.first))
 				{
 					//left rotation
-					root->left = rotate_left(root->left);
-					return root;
+					return rotate_left(root);
+					// return root;
 				}
 				else
 				{
@@ -319,16 +319,16 @@ class AVL
 		{
 			if(node == NULL)
 				return NULL;
-			else if(node->key->first == key)
+			if(node->key->first == key)
 				return node;
 
 			Node *res1 = SearchNode(node->left, key);
 			if(res1)
 				return res1;
 			Node *res2 = SearchNode(node->right, key);
-			if(res2)
-				return res2;
-			return NULL;
+			// if(res2)
+			// 	return res2;
+			return res2;
 		}
 
 		void	deleteAllNodes(Node *node)
