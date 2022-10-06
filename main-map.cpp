@@ -35,6 +35,9 @@ int main()
     // m.insert(ft::pair<int, int>(1, 10));
     // printTree(m, "", true);
 
+    //construct using iterator
+    // ft::map<int, int> m2(m.begin(), m.end());
+
     //[] insert using [] operator
     // m[2] = 10;
     // m[3] = 20;
@@ -50,6 +53,22 @@ int main()
     // }
 
     // erase
-    m.erase(3);
+    // m.erase(3);
+
+    // lower_bound and upper_bound
+    // ft::map<int, int>::iterator it = m.lower_bound(5);
+    // ft::map<int, int>::iterator ite = m.upper_bound(5);
+
+    //SWAP
+
+    ft::map<char, int> m1;
+    m1.insert(ft::pair<char, int>('1', 10));
+    m1.insert(ft::pair<char, int>('2', 20));
+    m1.insert(ft::pair<char, int>('2', 20));
+    m1.insert(ft::pair<char, int>('3', 30));
+    m1.insert(ft::pair<char, int>('0', 35));
+
+    
+
     return 0;
 }

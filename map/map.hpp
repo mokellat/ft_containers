@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <map>
+#include <iterator>
 #include "map_iterator.hpp"
 // #include "AVL.hpp"
 #include <functional>
@@ -86,7 +87,7 @@ namespace ft
                             const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(comp)
             {
                 _alloc_copy = alloc;
-                _size = std::distance(first, last);
+                // _size = std::distance(first, last);
                 insert(first, last);
             }
         	
