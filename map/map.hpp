@@ -183,10 +183,11 @@ namespace ft
 
             pair<iterator,bool> insert (const value_type& val)
             {
-                iterator                it(_avl_tree.SearchNode(_avl_tree.root, val.first)); // what should we initiliaze this iterator
+                iterator                it; // what should we initiliaze this iterator
                 pair<iterator, bool>    p;
 
                 // it(_avl_tree.SearchNode(_avl_tree.root, val.first));
+                it = _avl_tree.SearchNode(_avl_tree.root, val.first);
                 if(it == end())
                 {
                     // we didn't find another node with the same value
@@ -336,7 +337,7 @@ namespace ft
             const_iterator lower_bound (const key_type& k) const   
             {
                 const_iterator it;
-                iterator temp;
+                // iterator temp;
 
                 it = begin();
                 while(it != end())

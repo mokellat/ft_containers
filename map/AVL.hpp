@@ -88,7 +88,7 @@ class AVL
 			temp = y->left;
 			//rotate here
 			y->left = x;
-			x->right = temp;
+			x->right = temp;			
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left),height(y->right)) + 1;
 			x->height = max(height(x->left),height(x->right)) + 1;
@@ -332,6 +332,8 @@ class AVL
 			{
 				deleteAllNodes(node->left);
 				deleteAllNodes(node->right);
+				_alloc_type.destroy(node->key);
+				_alloc_type.deallocate(node->key, sizeof(node->key));
 				_alloc_node.destroy(node);
 				_alloc_node.deallocate(node, sizeof(node));
 			}

@@ -50,10 +50,12 @@ namespace ft
                 return (_node != rhs._node);
             }
 
-            reference	operator*() 
+            reference	operator*() const
             {
                 //donno what to do here
-                return *(_node->key);
+                // if(!_node)
+                //     puts("12");
+                return *_node->key;
             }
 
 		    pointer	operator->()
