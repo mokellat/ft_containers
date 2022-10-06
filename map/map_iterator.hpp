@@ -102,15 +102,6 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
-                node_type *temp;
-
-                temp = MostRight(_check);
-                if(_node == temp)
-                {
-                    _node = NULL;
-                    return *this;
-                }
-                
                 if(_node->right != NULL)
                 {
                     _node = _node->right;
@@ -144,14 +135,14 @@ namespace ft
                 // for later
                 node_type *temp;
 
-                temp = MostLeft(_check);
-                if(_node == temp)
+                temp = MostRight(_check);
+                if(_node == NULL)
                 {
-                    _node = NULL;
-                    _check = NULL;
+                    _node = temp;
+                    // _check = NULL;
                     return *this;
                 }
-                
+
                 if(_node->left != NULL)
                 {
                     _node = _node->left;
@@ -162,21 +153,21 @@ namespace ft
                 {
                     node_type   *temp_par = _node->parent;
 
-                    while (_node == temp_par->left)
+                    while (temp_par && _node == temp_par->left)
                     {
                        _node = temp_par;
                        temp_par = _node->parent;
                     }
-                    if(_node->left != temp_par)
-                        _node = temp_par;
+                    // if(_node->left != temp_par)
+                    _node = temp_par;
                 }
                 return *this;
             }
 
-            mapIterator &operator--(int)
+            mapIterator operator--(int)
             {
                 mapIterator it(*this);
-                (*this)--;
+                --(*this);
                 return it;
             }
     };

@@ -23,13 +23,37 @@ int main()
     // #define std::cout << y << std::endl myprint(y)
     //int int
     ft::map<int, int> m;
+    // ft::pair<ft::map<int, int>::iterator, bool> it;
 
-    //insert
-    m.insert(ft::pair<int, int>(1, 10));
-    m.insert(ft::pair<int, int>(2, 20));
-    m.insert(ft::pair<int, int>(2, 20));
-    m.insert(ft::pair<int, int>(3, 30));
-    m.insert(ft::pair<int, int>(0, 35));
+    // //insert
+    // it = m.insert(ft::pair<int, int>(1, 10));
+    // myprint(it.first->first);
+    // myprint(it.first->second);
+    // myprint(it.second);
+
+    // myprint("----------------------------");
+
+    // it = m.insert(ft::pair<int, int>(2, 20));
+    // myprint(it.first->first);
+    // myprint(it.first->second);
+    // myprint(it.second);
+
+    // myprint("----------------------------");
+
+
+    // it = m.insert(ft::pair<int, int>(3, 30));
+    // myprint(it.first->first);
+    // myprint(it.first->second);
+    // myprint(it.second);
+
+
+    // m.insert(ft::pair<int, int>(2, 20));
+    // m.insert(ft::pair<int, int>(2, 20));
+    // m.insert(ft::pair<int, int>(3, 30));
+    // m.insert(ft::pair<int, int>(0, 35));
+    
+    // m.print();
+    // m.root();
     // m.insert(ft::pair<int, int>(1, 10));
     // m.insert(ft::pair<int, int>(1, 10));
     // m.insert(ft::pair<int, int>(1, 10));
@@ -40,19 +64,23 @@ int main()
 
     // [] insert using [] operator
     // m.insert(ft::pair<int, int>(1, 10));
-    // m[2] = 10;
-    // m[3] = 20;
-    // m[4] = 30;
-    // m[4] = 30;
+    m[2] = 10;
+    m[3] = 20;
+    m[4] = 30;
+    m[4] = 30;
+    // m.print();
 
     //iterators
-    ft::map<int, int>::iterator it;
-    for(it = m.begin() ;it != m.end(); it++)
+    ft::map<int, int>::iterator it = m.end();
+    for(it--; it != m.begin(); it--)
     {
-        puts("hree");
+        // puts("hree");
         myprint(it->first);
         myprint(it->second);
     }
+    // it++;
+    // myprint(it->first);
+    // myprint(it->second);
 
     // erase
     // m.erase(3);

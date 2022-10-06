@@ -67,6 +67,21 @@ class AVL
 
 	public:
 
+		void	root_print()
+		{
+			std::cout << root->key->first << std::endl; 
+		}
+
+		void	inorder_traversal(Node *node)
+		{
+			if(node == nullptr)
+				return;
+			inorder_traversal(node->left);
+			std::cout << node->key->first << std::endl;
+			inorder_traversal(node->right);
+		}
+
+
 		int height(Node *node)
 		{
 			if (node == NULL)
@@ -121,7 +136,7 @@ class AVL
 			//rotate here
 			y->left = temp;
 			x->right = y;
-			
+
 			x->parent = y->parent;
     		y->parent = x;
 			if (x->parent != NULL && y->key < x->parent->key)

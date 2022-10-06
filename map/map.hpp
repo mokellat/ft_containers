@@ -74,6 +74,17 @@ namespace ft
 
         public:
 
+            void    print()
+            {
+                _avl_tree.inorder_traversal(_avl_tree.root);
+            }
+
+            void    root()
+            {
+                _avl_tree.root_print();
+            }
+
+
             //constructors-----------------------------------------
             explicit map (const key_compare& comp = key_compare(),
                             const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(comp)
@@ -193,6 +204,7 @@ namespace ft
                     // we didn't find another node with the same value
                     _size++;
                     _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val);
+                    it = _avl_tree.SearchNode(_avl_tree.root, val.first);
                     // p[it] = true;
                     p.first = it;
                     p.second = true;
