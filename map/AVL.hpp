@@ -98,8 +98,10 @@ class AVL
 			if (y->parent != NULL && x->key < y->parent->key)
 				y->parent->left = y;
 			else
+			{
 				if (y->parent != NULL)
 					y->parent->right = y;
+			}
 
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left),height(y->right)) + 1;
@@ -117,8 +119,11 @@ class AVL
 			if (x->right != NULL)
         		x->right->parent = y;
 			//rotate here
-			x->right = y;
 			y->left = temp;
+			x->right = y;
+			
+			x->parent = y->parent;
+    		y->parent = x;
 			if (x->parent != NULL && y->key < x->parent->key)
         		x->parent->left = x;
 			else

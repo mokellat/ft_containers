@@ -21,6 +21,36 @@ namespace ft
 
         private:
             node_type   *_node;
+            node_type   *_check;
+
+        private:
+            node_type    *MostLeft(node_type *node)
+            {
+                if(node != NULL)
+                {
+                    node_type *iter = node;
+
+                    while (iter->left != NULL)
+                        iter = iter->left;
+                    return iter;
+                }
+                else
+                    return NULL;
+            }
+
+            node_type    *MostRight(node_type *node)
+            {
+                if(node != NULL)
+                {
+                    node_type *iter = node;
+
+                    while (iter->right != NULL)
+                        iter = iter->right;
+                    return iter;
+                }
+                else
+                    return NULL;
+            }
 
         public:
             mapIterator() : _node(){}
@@ -30,6 +60,11 @@ namespace ft
             mapIterator(mapIterator const &it)
             {
                 _node = it._node;
+            }
+
+            mapIterator(node_type *node, node_type *check) : _node(node), _check(check)
+            {
+                
             }
 
             ~mapIterator(){}        
@@ -67,6 +102,15 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
+                node_type *temp;
+
+                temp = MostRight(_check);
+                if(_node == temp)
+                {
+                    _node = NULL;
+                    return *this;
+                }
+                
                 if(_node->right != NULL)
                 {
                     _node = _node->right;
@@ -77,13 +121,13 @@ namespace ft
                 {
                     node_type    *temp_par = _node->parent;
 
-                    while (_node == temp_par->right)
+                    while (temp_par && _node == temp_par->right)
                     {
                        _node = temp_par;
                        temp_par = _node->parent;
                     }
-                    if(_node->right != temp_par)
-                        _node = temp_par;
+                    // if(_node->right != temp_par)
+                    _node = temp_par;
                 }
                 return *this;
             }
@@ -98,6 +142,16 @@ namespace ft
             mapIterator operator--()
             {
                 // for later
+                node_type *temp;
+
+                temp = MostLeft(_check);
+                if(_node == temp)
+                {
+                    _node = NULL;
+                    _check = NULL;
+                    return *this;
+                }
+                
                 if(_node->left != NULL)
                 {
                     _node = _node->left;

@@ -129,12 +129,12 @@ namespace ft
 
             iterator end()
             {
-                return iterator(nullptr);
+                return iterator(nullptr, _avl_tree.root);
             }
 
             const_iterator end() const
             {
-                return const_iterator(nullptr);
+                return const_iterator(nullptr, _avl_tree.root);
             }
 
             reverse_iterator rbegin()

@@ -46,9 +46,10 @@ int main()
     // m[4] = 30;
 
     //iterators
-    ft::map<int, int>::iterator it = m.begin();
-    for( ;it != m.end(); it++)
+    ft::map<int, int>::iterator it;
+    for(it = m.begin() ;it != m.end(); it++)
     {
+        puts("hree");
         myprint(it->first);
         myprint(it->second);
     }
