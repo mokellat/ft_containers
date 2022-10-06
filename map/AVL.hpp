@@ -13,7 +13,7 @@ class Node
 
 	public:
 		// T		value;
-		value_type								pair;
+		// value_type								pair;
 		value_type 								*key;
 		Node									*parent;
 		Node									*left;
@@ -86,9 +86,21 @@ class AVL
 
 			y = x->right;
 			temp = y->left;
+
 			//rotate here
+			x->right = temp;	
+			if (y->left != NULL)
+        		y->left->parent = x;
 			y->left = x;
-			x->right = temp;			
+			y->parent = x->parent;
+			x->parent = y;
+
+			if (y->parent != NULL && x->key < y->parent->key)
+				y->parent->left = y;
+			else
+				if (y->parent != NULL)
+					y->parent->right = y;
+
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left),height(y->right)) + 1;
 			x->height = max(height(x->left),height(x->right)) + 1;
@@ -102,9 +114,16 @@ class AVL
 
 			x = y->left;
 			temp = x->right;
+			if (x->right != NULL)
+        		x->right->parent = y;
 			//rotate here
 			x->right = y;
 			y->left = temp;
+			if (x->parent != NULL && y->key < x->parent->key)
+        		x->parent->left = x;
+			else
+				if (x->parent != NULL)
+					x->parent->right = x;
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left), height(y->right)) + 1;
 			x->height = max(height(x->left), height(x->right)) + 1;
@@ -113,14 +132,19 @@ class AVL
 
 		Node   *newNode(Node *neww, value_type key)
 		{
-			// we have to change it with the allocator
+
+			//allocating the whole node
 			neww = _alloc_node.allocate(sizeof(neww));
 			_alloc_node.construct(neww);
+
+			//allocating the value_type objcect
 			neww->key =  _alloc_type.allocate(sizeof(neww->key));
 			_alloc_type.construct(neww->key, key);
+
 			neww->height = 1;
 			neww->right = NULL;
 			neww->left = NULL;
+			neww->parent = NULL;
 			return neww;
 		}
 
