@@ -203,7 +203,7 @@ namespace ft
                 {
                     // we didn't find another node with the same value
                     _size++;
-                    _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val);
+                    _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val, _avl_tree.root);
                     it = _avl_tree.SearchNode(_avl_tree.root, val.first);
                     // p[it] = true;
                     p.first = it;

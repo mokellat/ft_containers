@@ -51,6 +51,8 @@ int main()
     // m.insert(ft::pair<int, int>(2, 20));
     // m.insert(ft::pair<int, int>(3, 30));
     // m.insert(ft::pair<int, int>(0, 35));
+    // m.insert(ft::pair<int, int>(4, 40));
+    // m.insert(ft::pair<int, int>(5, 50));
     
     // m.print();
     // m.root();
@@ -64,19 +66,34 @@ int main()
 
     // [] insert using [] operator
     // m.insert(ft::pair<int, int>(1, 10));
-    m[2] = 10;
-    m[3] = 20;
-    m[4] = 30;
+    m[9] = 20;
+    m[12] = 20;
+    m[33] = 20;
+    m[16] = 20;
+    m[10] = 20;
+    m[0] = 20;
+    m[-1] = 20;
+    m[20] = 30;
+    m[1] = 10;
     m[4] = 30;
     // m.print();
 
     //iterators
-    ft::map<int, int>::iterator it = m.end();
-    for(it--; it != m.begin(); it--)
+    // ft::map<int, int>::iterator it = m.end();
+    // for(it--; it != m.begin(); it--)
+    // {
+    //     // puts("hree");
+    //     myprint(it->first);
+    //     // myprint(it->second);
+    // }
+        // myprint(it->first);
+
+    ft::map<int, int>::iterator it;
+    for(it = m.begin(); it!=m.end(); it++)
     {
         // puts("hree");
         myprint(it->first);
-        myprint(it->second);
+        // myprint(it->second);
     }
     // it++;
     // myprint(it->first);

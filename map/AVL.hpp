@@ -150,7 +150,7 @@ class AVL
 			return x;
 		}
 
-		Node   *newNode(Node *neww, value_type key)
+		Node   *newNode(Node *neww, value_type key, Node *parent)
 		{
 
 			//allocating the whole node
@@ -164,7 +164,7 @@ class AVL
 			neww->height = 1;
 			neww->right = NULL;
 			neww->left = NULL;
-			neww->parent = NULL;
+			neww->parent = parent;
 			return neww;
 		}
 
@@ -175,7 +175,7 @@ class AVL
 			return height(node->left) - height(node->right);
 		}
 
-		Node  *insertNode(Node *root, value_type key)
+		Node  *insertNode(Node *root, value_type key, Node *parent)
 		{
 			int bf;
 
@@ -189,13 +189,13 @@ class AVL
 
 			//(1)
 			if(root == NULL)
-				return newNode(root, key);
+				return newNode(root, key, parent);
 
 			//(2)
 			if(_compare(root->key->first, key.first))
-				root->right = insertNode(root->right, key);
+				root->right = insertNode(root->right, key, root);
 			else if(_compare(key.first, root->key->first))
-				root->left = insertNode(root->left, key);
+				root->left = insertNode(root->left, key, root);
 			else
 				return root;
 
@@ -208,7 +208,7 @@ class AVL
 				if(_compare(key.first, root->left->key->first))
 				{
 					//right rotation
-					return rotate_right(root->right);
+					return rotate_right(root);
 					// return root;
 				}
 				else

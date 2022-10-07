@@ -105,8 +105,8 @@ namespace ft
                 if(_node->right != NULL)
                 {
                     _node = _node->right;
-                    while (_node->right != NULL)
-                        _node = _node->right;
+                    while (_node->left != NULL)
+                        _node = _node->left;
                 }
                 else
                 {
@@ -133,21 +133,21 @@ namespace ft
             mapIterator operator--()
             {
                 // for later
-                node_type *temp;
-
-                temp = MostRight(_check);
                 if(_node == NULL)
                 {
+                    node_type *temp;
+
+                    temp = MostRight(_check);
                     _node = temp;
-                    // _check = NULL;
+                    _check = NULL;
                     return *this;
                 }
 
                 if(_node->left != NULL)
                 {
                     _node = _node->left;
-                    while (_node->left != NULL)
-                        _node = _node->left;
+                    while (_node->right != NULL)
+                        _node = _node->right;
                 }
                 else
                 {
@@ -156,7 +156,7 @@ namespace ft
                     while (temp_par && _node == temp_par->left)
                     {
                        _node = temp_par;
-                       temp_par = _node->parent;
+                       temp_par = temp_par->parent;
                     }
                     // if(_node->left != temp_par)
                     _node = temp_par;
