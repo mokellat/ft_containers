@@ -23,11 +23,6 @@ class Node
 	public:
 		Node() : height(1), left(), right(), parent(){}
 
-		// Node( value_type pr)
-		// {
-		// 	this->key = &pr;
-		// }
-
 		~Node(){}
 };
 
@@ -117,7 +112,6 @@ class AVL
 				if (y->parent != NULL)
 					y->parent->right = y;
 			}
-
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left),height(y->right)) + 1;
 			x->height = max(height(x->left),height(x->right)) + 1;
@@ -131,11 +125,11 @@ class AVL
 
 			x = y->left;
 			temp = x->right;
-			if (x->right != NULL)
+			if (x->right)
         		x->right->parent = y;
 			//rotate here
-			y->left = temp;
 			x->right = y;
+			y->left = temp;
 
 			x->parent = y->parent;
     		y->parent = x;
@@ -192,10 +186,10 @@ class AVL
 				return newNode(root, key, parent);
 
 			//(2)
-			if(_compare(root->key->first, key.first))
-				root->right = insertNode(root->right, key, root);
-			else if(_compare(key.first, root->key->first))
+			if(_compare(key.first, root->key->first))
 				root->left = insertNode(root->left, key, root);
+			else if(_compare(root->key->first, key.first))
+				root->right = insertNode(root->right, key, root);
 			else
 				return root;
 
@@ -211,14 +205,14 @@ class AVL
 					return rotate_right(root);
 					// return root;
 				}
-				else
+				else if(_compare(root->left->key->first, key.first))
 				{
 					//left-right rotation
 					root->left = rotate_left(root->left);
 					return rotate_right(root);
 				}
 			}
-			else if(bf < -1)
+			if(bf < -1)
 			{
 				// means the height of the right subtree is greater than that of the left subtree
 				if(_compare(root->right->key->first, key.first))
@@ -356,18 +350,16 @@ class AVL
 		// checks if a node exits
 		Node    *SearchNode(Node *node, key_type key)
 		{
+			Node*	res;
+
 			if(node == NULL)
 				return NULL;
-			if(node->key->first == key)
-				return node;
 
-			Node *res2 = SearchNode(node->right, key);
-			if(res2)
-				return res2;
-			Node *res1 = SearchNode(node->left, key);
-			if(res1)
-				return res1;
-			return NULL;
+			if (_compare(node->key->first, key) == true)
+				return (SearchNode(node->right, key));
+			else if (_compare(key, node->key->first) == true)
+				return (SearchNode(node->left, key));
+			return (node);
 		}
 
 		void	deleteAllNodes(Node *node)

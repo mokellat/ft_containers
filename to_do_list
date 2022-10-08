@@ -5,3 +5,4 @@
 5. insert with a big range resolve a stack overflow
 6. lower_bound if the value is bigger than the max
 7. upper_bound isnt working
+8. rotate right seems to have a problem
