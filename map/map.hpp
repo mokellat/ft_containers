@@ -4,9 +4,10 @@
 #include <map>
 #include <iterator>
 #include "map_iterator.hpp"
+#include "../vector/reverse_iterator.hpp"
 // #include "AVL.hpp"
 #include <functional>
-#include "map_reverse_iterator.hpp"
+// #include "map_reverse_iterator.hpp"
 #include "node_helper.hpp"
 
 namespace ft
@@ -104,6 +105,7 @@ namespace ft
         	
             map (const map& x) : _avl_tree()
             {
+                // puts("tab");
                 _size = x._size;
                 _alloc_copy = x._alloc_copy;
                 _comp = x._comp;
@@ -135,7 +137,12 @@ namespace ft
 
             const_iterator begin() const
             {
-                return const_iterator(_avl_tree.MostLeft(_avl_tree.root));
+                const node_type *temp;
+
+                temp = (const node_type *)_avl_tree.MostLeft(_avl_tree.root);
+                const_iterator  it(temp);
+                return it;
+                // return const_iterator(_avl_tree.MostLeft(_avl_tree.root));
             }
 
             iterator end()
@@ -172,7 +179,7 @@ namespace ft
             //capacity-------------------------------------
             bool empty() const
             {
-                bool ret = true ? _size != 0 : false;
+                bool ret = true ? _size == 0 : false;
                 return ret;
             }
 

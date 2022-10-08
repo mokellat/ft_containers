@@ -154,7 +154,7 @@ class AVL
 		{
 
 			//allocating the whole node
-			neww = _alloc_node.allocate(sizeof(neww));
+			neww = _alloc_node.allocate(sizeof(Node *));
 			_alloc_node.construct(neww);
 
 			//allocating the value_type objcect
@@ -325,7 +325,7 @@ class AVL
 			return root;
 		}
 
-		Node    *MostLeft(Node *node)
+		Node    *MostLeft(Node *node) const
 		{
 			if(node != NULL)
 			{
@@ -361,13 +361,13 @@ class AVL
 			if(node->key->first == key)
 				return node;
 
+			Node *res2 = SearchNode(node->right, key);
+			if(res2)
+				return res2;
 			Node *res1 = SearchNode(node->left, key);
 			if(res1)
 				return res1;
-			Node *res2 = SearchNode(node->right, key);
-			// if(res2)
-			// 	return res2;
-			return res2;
+			return NULL;
 		}
 
 		void	deleteAllNodes(Node *node)

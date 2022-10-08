@@ -229,21 +229,36 @@
 
 int main()
 {
-  std::map<char, int> m;
+  std::map<int, int> m;
 
-  m['a'] = 10;
-  m['b'] = 20;
-  m['c'] = 30;
-  // m['d'] = 40;
-  m['e'] = 50;
+  m.insert(std::pair<int, int>(9, 20));
+  m.insert(std::pair<int, int>(12, 30));
+  m.insert(std::pair<int, int>(33, 35));
+  m.insert(std::pair<int, int>(16, 40));
+  // m[2] = 10;
+  // m[0] = 20;
+  // m[3] = 30;
+  // m[1] = 50;
   // std::map<char, int> m1(m);
 
-  std::map<char, int>::iterator it;
-  // std::map<char, int>::iterator ite = m.upper_bound('d');
+  // std::map<char, int>::iterator it;
+  // // std::map<char, int>::iterator ite = m.upper_bound('d');
   
-  while(it != m.end())
-    it++;
-  it--;
-  myprint(it->first);
+  // while(it != m.end())
+  //   it++;
+  // it--;
+  // myprint(it->first);
   // for()
+  // std::map<int, int>::reverse_iterator rit;
+  // for(rit = m.rbegin(); rit !=m.rend(); ++rit)
+  // {
+  //     // puts("hree");
+  //     myprint(rit->first);
+  //     // myprint(it->second);
+  // }
+
+  std::map<int, int>::iterator it = m.lower_bound(30);
+  // std::map<int, int>::iterator ite = m.upper_bound(16);
+  myprint(it->first);
+  // myprint(ite->first);
 }

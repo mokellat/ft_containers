@@ -13,7 +13,8 @@ namespace ft
         public:
             //typedefs
             typedef typename std::bidirectional_iterator_tag	iterator_category;
-            // typedef typename T::first                           value_type;
+            typedef T                                           value_type;
+            typedef ptrdiff_t	                                difference_type;
             typedef Node<T>                                     node_type;
             typedef T*                                          pointer;
 		    typedef T&	                                        reference;
@@ -56,6 +57,11 @@ namespace ft
             mapIterator() : _node(){}
 
             mapIterator(node_type *node) : _node(node){}
+
+            mapIterator(const node_type *node)
+            {
+                (const node_type) _node = node;
+            }
 
             mapIterator(mapIterator const &it)
             {

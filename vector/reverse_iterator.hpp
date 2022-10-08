@@ -1,7 +1,7 @@
 #ifndef REVERSEITERATOR_HPP
 #define REVERSEITERATOR_HPP
 
-#include "../utilities.hpp"
+#include "utilities.hpp"
 
 namespace ft
 {
@@ -108,7 +108,7 @@ namespace ft
 
             pointer operator->() const
             {
-                return *_it;
+                return &(*_it);
             }
 
             reference operator[] (difference_type n) const
@@ -122,7 +122,7 @@ namespace ft
     bool operator== (const reverse_iterator<Iterator>& lhs,
                     const reverse_iterator<Iterator>& rhs)
     {
-        if(lhs._it == rhs._it)
+        if(lhs.base() == rhs.base())
             return true;
         else
             return false;
@@ -131,7 +131,7 @@ namespace ft
     bool operator!= (const reverse_iterator<Iterator>& lhs,
                     const reverse_iterator<Iterator>& rhs)
     {
-            if(lhs._it != rhs._it)
+            if(lhs.base() != rhs.base())
             return true;
         else
             return false;
@@ -140,7 +140,7 @@ namespace ft
     bool operator<  (const reverse_iterator<Iterator>& lhs,
                     const reverse_iterator<Iterator>& rhs)
     {
-            if(lhs._it > rhs._it)
+            if(lhs.base() > rhs.base())
             return true;
         else
             return false;
@@ -149,7 +149,7 @@ namespace ft
     bool operator<= (const reverse_iterator<Iterator>& lhs,
                     const reverse_iterator<Iterator>& rhs)
     {
-            if(lhs._it >= rhs._it)
+            if(lhs.base() >= rhs.base())
             return true;
         else
             return false;
@@ -158,7 +158,7 @@ namespace ft
     bool operator>  (const reverse_iterator<Iterator>& lhs,
                     const reverse_iterator<Iterator>& rhs)
     {
-            if(lhs._it < rhs._it)
+            if(lhs.base() < rhs.base())
             return true;
         else
             return false;
@@ -167,7 +167,7 @@ namespace ft
     bool operator>= (const reverse_iterator<Iterator>& lhs,
                     const reverse_iterator<Iterator>& rhs)
     {
-            if(lhs._it <= rhs._it)
+            if(lhs.base() <= rhs.base())
             return true;
         else
             return false;
@@ -186,7 +186,7 @@ namespace ft
         const reverse_iterator<Iterator>& lhs,
         const reverse_iterator<Iterator>& rhs)
     {
-        return lhs._it - rhs._it;
+        return lhs.base() - rhs.base();
     }
 }
 
