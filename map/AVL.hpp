@@ -76,6 +76,26 @@ class AVL
 			inorder_traversal(node->right);
 		}
 
+		void printTree(Node *root, std::string indent, bool last) 
+		{
+			if (root != nullptr) {
+				std::cout << indent;
+			if (last) 
+			{
+				std::cout << "R---- ";
+				indent += "   ";
+			} 
+			else 
+			{
+				std::cout << "L---- ";
+				indent += "|  ";
+			}
+			std::cout << root->key->first << std::endl;
+			printTree(root->left, indent, false);
+			printTree(root->right, indent, true);
+		}
+}
+
 
 		int height(Node *node)
 		{
@@ -98,14 +118,15 @@ class AVL
 			temp = y->left;
 
 			//rotate here
-			x->right = temp;	
+			x->right = temp;
 			if (y->left != NULL)
         		y->left->parent = x;
 			y->left = x;
+
 			y->parent = x->parent;
 			x->parent = y;
 
-			if (y->parent != NULL && x->key < y->parent->key)
+			if (y->parent != NULL && _compare(x->key->first,y->parent->key->first))
 				y->parent->left = y;
 			else
 			{
@@ -133,7 +154,7 @@ class AVL
 
 			x->parent = y->parent;
     		y->parent = x;
-			if (x->parent != NULL && y->key < x->parent->key)
+			if (x->parent != NULL && _compare(y->key->first, x->parent->key->first) == true)
         		x->parent->left = x;
 			else
 				if (x->parent != NULL)

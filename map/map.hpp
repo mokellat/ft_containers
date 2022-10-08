@@ -85,6 +85,11 @@ namespace ft
                 _avl_tree.root_print();
             }
 
+            void tree_print()
+            {
+                _avl_tree.printTree(_avl_tree.root, "", true);
+            }
+
 
             //constructors-----------------------------------------
             explicit map (const key_compare& comp = key_compare(),

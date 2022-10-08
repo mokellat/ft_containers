@@ -1,5 +1,11 @@
-// Operator ++ --------------
+// Operator ++
 https://stackoverflow.com/questions/12684191/implementing-an-iterator-over-binary-or-arbitrary-tree-using-c-11
 
 // parent adaptation
 https://www.codingninjas.com/codestudio/library/insertion-searching-and-deletion-in-avl-trees-containing-a-parent-node-pointer
+
+//rotation logic
+https://www.programiz.com/dsa/avl-tree
+
+//tree_traversal
+https://www.cs.odu.edu/~zeil/cs361/latest/Public/treetraversal/index.html
