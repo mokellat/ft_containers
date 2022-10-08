@@ -159,6 +159,7 @@ class AVL
 			else
 				if (x->parent != NULL)
 					x->parent->right = x;
+			// y = x;
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left), height(y->right)) + 1;
 			x->height = max(height(x->left), height(x->right)) + 1;

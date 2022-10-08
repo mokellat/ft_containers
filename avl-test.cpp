@@ -231,14 +231,21 @@ int main()
 {
   std::map<int, int> m;
 
-  m.insert(std::pair<int, int>(9, 20));
-  m.insert(std::pair<int, int>(12, 30));
-  m.insert(std::pair<int, int>(33, 35));
-  m.insert(std::pair<int, int>(16, 40));
-  // m[2] = 10;
-  // m[0] = 20;
-  // m[3] = 30;
-  // m[1] = 50;
+  // m.insert(std::pair<int, int>(9, 20));
+  // m.insert(std::pair<int, int>(12, 30));
+  // m.insert(std::pair<int, int>(33, 35));
+  // m.insert(std::pair<int, int>(16, 40));
+  m[10] = 20;
+  m[5] = 20;
+  m[20] = 20;
+  m[7] = 20;
+  m[4] = 20;
+  m[8] = 20;
+  m[0] = 20;
+  m[-1] = 20;
+  m[2] = 30;
+  m[13] = 10;
+  m[30] = 10;
   // std::map<char, int> m1(m);
 
   // std::map<char, int>::iterator it;
@@ -258,7 +265,7 @@ int main()
   // }
 
   std::map<int, int>::iterator it = m.lower_bound(30);
-  // std::map<int, int>::iterator ite = m.upper_bound(16);
+  std::map<int, int>::iterator ite = m.upper_bound(30);
   myprint(it->first);
-  // myprint(ite->first);
+  myprint(ite->first);
 }

@@ -377,18 +377,10 @@ namespace ft
 
             iterator upper_bound (const key_type& k)
             {
-                iterator it;
-
-                it = begin();
-                while(it != end())
-                {
-                    if(_comp(k, it->first))
-                        ++it;
-                    else
-                        return it;
-                    // ++it;
-                }
-                return it;
+               iterator it(lower_bound(k));
+               if(it->first == k)
+                    it++;
+               return it;
             }
 
             const_iterator upper_bound (const key_type& k) const

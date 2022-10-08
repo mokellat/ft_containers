@@ -140,10 +140,10 @@ int main()
     //     myprint(it->first);
     //     // myprint(it->second);
     // }
-    m.erase(30);
-    m.erase(10);
+    // m.erase(30);
+    // m.erase(10);
     // m.erase(7);
-    m.tree_print();
+    // m.tree_print();
     // it = m.begin();
     // ft::map<int, int>::iterator it = m.begin();
     // for(; it != m.end(); it++)
@@ -184,10 +184,10 @@ int main()
     // }
 
     // lower_bound and upper_bound--------------------------------------------------------------------
-    // ft::map<int, int>::iterator it = m.lower_bound(30);
-    // ft::map<int, int>::iterator ite = m.upper_bound(5);
-    // myprint(it->first);
-    // myprint(ite->first);
+    ft::map<int, int>::iterator it = m.lower_bound(30);
+    ft::map<int, int>::iterator ite = m.upper_bound(30);
+    myprint(it->first);
+    myprint(ite->first);
 
     //char int
     // ft::map<char, int> m1;
