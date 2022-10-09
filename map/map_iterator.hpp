@@ -163,8 +163,8 @@ namespace ft
 
                         while (temp_par && _node == temp_par->left)
                         {
-                        _node = temp_par;
-                        temp_par = temp_par->parent;
+                            _node = temp_par;
+                            temp_par = temp_par->parent;
                         }
                         // if(_node->left != temp_par)
                         _node = temp_par;

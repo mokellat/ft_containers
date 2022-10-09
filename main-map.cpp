@@ -76,10 +76,10 @@ int main()
     m[4] = 20;
     m[8] = 20;
     m[0] = 20;
-    // m[-1] = 20;
-    // m[2] = 30;
-    // m[13] = 10;
-    // m[30] = 10;
+    m[-1] = 20;
+    m[2] = 30;
+    m[13] = 10;
+    m[30] = 10;
     // m[30] = 10;
     // m.tree_print();
     // m[-30] = 10;
@@ -113,13 +113,13 @@ int main()
     // myprint(it->second);
 
     //reverse_iterators-------------------------------------------------------------------------------
-    ft::map<int, int>::reverse_iterator rit;
-    for(rit = m.rbegin(); rit !=m.rend(); ++rit)
-    {
-        // puts("hree");
-        myprint(rit->first);
-        // myprint(it->second);
-    }
+    // ft::map<int, int>::reverse_iterator rit;
+    // for(rit = m.rbegin(); rit !=m.rend(); ++rit)
+    // {
+    //     // puts("hree");
+    //     myprint(rit->first);
+    //     // myprint(it->second);
+    // }
 
     // empty and size and max size------------------------------------------------------------------------------------------
     // ft::map<int, int> m5;
@@ -142,6 +142,7 @@ int main()
     //     myprint(it->first);
     //     // myprint(it->second);
     // }
+    // m.tree_print();
     // m.erase(30);
     // m.erase(10);
     // m.erase(7);

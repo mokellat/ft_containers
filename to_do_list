@@ -4,7 +4,8 @@
 
 3. reverse iterator segv
 
-4. erase isnt working
+4. erase isnt working 
+    (update) : i guess i resolved the problem with the erase
 
 5. insert with a big range resolve a stack overflow
     (update) : here what happened that the the last node stores the root, wtf???    : done
@@ -24,6 +25,7 @@ done:
 8.
 7.
 6.
+4.
 
 
 left:

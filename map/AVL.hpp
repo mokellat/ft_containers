@@ -286,7 +286,7 @@ class AVL
 
 		Node	*deleteOneNode(Node *root, key_type key)
 		{
-			// Node	*temp;
+			Node	*temp;
 			int		bf;
 
 			// locate the node to be deleted
@@ -299,63 +299,33 @@ class AVL
 			else
 			{
 				//found the node to be deleted
-				// if(root->right == NULL || root->left == NULL)
-				// {
+				if(root->right == NULL || root->left == NULL)
+				{
 					// has one child, replace the parent with the child
-
-				if(root->right == NULL && root->left)
-				{
-					Node *temp = root->left;
-					if (root->parent != NULL) 
+					if(root->right == NULL)
+						temp = root->left;
+					else
+						temp = root->right;
+					if(temp == NULL)
 					{
-						if (root->parent->key->first < root->key->first)
-							root->parent->right = root->left;
-						else
-							root->parent->left = root->left;
+						temp = root;
+						root = NULL;
 					}
-					root->left->parent = root->parent;
-					_alloc_node.construct(root, *temp);
-					free_temp(temp);
-				}
-				else if(root->right && root->left == NULL)
-				{
-					Node *temp = root->right;
-					if (root->parent != NULL) 
+					else
 					{
-						if (root->parent->key->first < root->key->first)
-							root->parent->right = root->right;
-						else
-							root->parent->left = root->right;
-					}
-					root->right->parent = root->parent;
-					_alloc_node.construct(root, *temp);
-					free_temp(temp);
-				}
-				else if(root->right == NULL && root->left == NULL)
-				{
-					if (root->parent->key < root->key)
-						root->parent->right = NULL;
-					else 
-						root->parent->left = NULL;
-					Node *temp = root;
-					root = NULL;
-				}
-					// else
-					// {
-						// *root = *temp;
+						*root = *temp;
 						// _alloc_node.destroy(temp);
 						// _alloc_node.deallocate(temp, sizeof(temp));
 						// free(temp);
-					// }
+					}
 					// !! here we should delete the temp, they used free, we shouldnt
-				// }
+				}
 				else
 				{
 					//the parent has two children, we have to find the inorder successor
 					// it means the nide with minimum value in the right subtree
 
-					Node *temp = inorderSuccessor(root->right);
-
+					Node *temp = MostLeft(root->right);
 					root->key = temp->key;
 					root->right = deleteOneNode(root->right, temp->key->first);
 				}

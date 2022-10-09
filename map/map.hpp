@@ -152,7 +152,7 @@ namespace ft
 
             iterator end()
             {
-                return iterator(nullptr, _avl_tree.root);
+                return iterator(nullptr, _avl_tree.MostRight(_avl_tree.root));
             }
 
             const_iterator end() const
@@ -271,8 +271,8 @@ namespace ft
                 {
                     // we found that the key is there
                     // we start erasing
-                    _size--;
                     _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, k);
+                    _size--;
                     return 1;
                 }
                 return 0;
