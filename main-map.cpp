@@ -39,18 +39,18 @@ int main()
     // myprint(it.second);
 
 
-    m.insert(ft::pair<int, int>(2, 20));
-    m.insert(ft::pair<int, int>(9, 20));
-    m.insert(ft::pair<int, int>(12, 30));
-    m.insert(ft::pair<int, int>(33, 35));
-    m.insert(ft::pair<int, int>(16, 40));
-    m.insert(ft::pair<int, int>(10, 50));
-    m.insert(ft::pair<int, int>(0, 50));
-    m.insert(ft::pair<int, int>(-1, 50));
-    m.insert(ft::pair<int, int>(20, 50));
-    m.insert(ft::pair<int, int>(1, 50));
-    m.insert(ft::pair<int, int>(4, 50));
-    m.tree_print();
+    // m.insert(ft::pair<int, int>(2, 20));
+    // m.insert(ft::pair<int, int>(9, 20));
+    // m.insert(ft::pair<int, int>(12, 30));
+    // m.insert(ft::pair<int, int>(33, 35));
+    // m.insert(ft::pair<int, int>(16, 40));
+    // m.insert(ft::pair<int, int>(10, 50));
+    // m.insert(ft::pair<int, int>(0, 50));
+    // m.insert(ft::pair<int, int>(-1, 50));
+    // m.insert(ft::pair<int, int>(20, 50));
+    // m.insert(ft::pair<int, int>(1, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.tree_print();
     // m.print();
     // m.root();
     // m.insert(ft::pair<int, int>(1, 10));
@@ -65,22 +65,23 @@ int main()
     // ft::map<int, int> m3(m);
 
     // construct using operator=------------------------------------------------------------------------------
-    ft::map<int, int> m4 = m;
+    // ft::map<int, int> m4 = m;
 
     // [] insert using [] operator---------------------------------------------------------------
     // m.insert(ft::pair<int, int>(1, 10));
-    // m[10] = 20;
-    // m[5] = 20;
-    // m[20] = 20;
-    // m[7] = 20;
-    // m[4] = 20;
-    // m[8] = 20;
-    // m[0] = 20;
+    m[10] = 20;
+    m[5] = 20;
+    m[20] = 20;
+    m[7] = 20;
+    m[4] = 20;
+    m[8] = 20;
+    m[0] = 20;
     // m[-1] = 20;
     // m[2] = 30;
     // m[13] = 10;
     // m[30] = 10;
     // m[30] = 10;
+    // m.tree_print();
     // m[-30] = 10;
     // m[4] = 30;
     // m[6] = 60;
@@ -112,13 +113,13 @@ int main()
     // myprint(it->second);
 
     //reverse_iterators-------------------------------------------------------------------------------
-    // ft::map<int, int>::reverse_iterator rit;
-    // for(rit = m.rbegin(); rit !=m.rend(); ++rit)
-    // {
-    //     // puts("hree");
-    //     myprint(rit->first);
-    //     // myprint(it->second);
-    // }
+    ft::map<int, int>::reverse_iterator rit;
+    for(rit = m.rbegin(); rit !=m.rend(); ++rit)
+    {
+        // puts("hree");
+        myprint(rit->first);
+        // myprint(it->second);
+    }
 
     // empty and size and max size------------------------------------------------------------------------------------------
     // ft::map<int, int> m5;
@@ -198,6 +199,5 @@ int main()
     // m1.insert(ft::pair<char, int>('k', 30));
     // m1.insert(ft::pair<char, int>('l', 35));
     // m1.tree_print();
-
     return 0;
 }

@@ -93,8 +93,8 @@ class AVL
 			std::cout << root->key->first << std::endl;
 			printTree(root->left, indent, false);
 			printTree(root->right, indent, true);
+			}
 		}
-}
 
 
 		int height(Node *node)
@@ -108,6 +108,20 @@ class AVL
 		{
 			return (a > b) ? a : b;
 		}
+
+		// void update_height(AVL_Node* root)
+		// {
+		// 	if (root != NULL) 
+		// 	{
+		// 		int val = 1;
+		// 		if (root->left != NULL)
+		// 			val = root->left->height + 1;
+		// 		if (root->right != NULL)
+		// 			val = max(val, root->right->height + 1);
+		// 		root->height = val;
+		// 	}
+		// }
+
 
 		Node    *rotate_left(Node *x)
 		{
@@ -263,9 +277,16 @@ class AVL
 			return temp;
 		}
 
+		void	free_temp(Node *temp)
+		{
+			_alloc_node.destroy(temp);
+			_alloc_node.deallocate(temp, sizeof(temp));
+			// free(temp);
+		}
+
 		Node	*deleteOneNode(Node *root, key_type key)
 		{
-			Node	*temp;
+			// Node	*temp;
 			int		bf;
 
 			// locate the node to be deleted
@@ -278,27 +299,56 @@ class AVL
 			else
 			{
 				//found the node to be deleted
-				if(root->right == NULL || root->left == NULL)
-				{
+				// if(root->right == NULL || root->left == NULL)
+				// {
 					// has one child, replace the parent with the child
-					if(root->right == NULL)
-						temp = root->left;
-					else
-						temp = root->right;
-					if(temp == NULL)
+
+				if(root->right == NULL && root->left)
+				{
+					Node *temp = root->left;
+					if (root->parent != NULL) 
 					{
-						temp = root;
-						root = NULL;
+						if (root->parent->key->first < root->key->first)
+							root->parent->right = root->left;
+						else
+							root->parent->left = root->left;
 					}
-					else
-					{
-						*root = *temp;
-						_alloc_node.destroy(temp);
-						_alloc_node.deallocate(temp, sizeof(temp));
-						// free(temp);
-					}
-					// !! here we should delete the temp, they used free, we shouldnt
+					root->left->parent = root->parent;
+					_alloc_node.construct(root, *temp);
+					free_temp(temp);
 				}
+				else if(root->right && root->left == NULL)
+				{
+					Node *temp = root->right;
+					if (root->parent != NULL) 
+					{
+						if (root->parent->key->first < root->key->first)
+							root->parent->right = root->right;
+						else
+							root->parent->left = root->right;
+					}
+					root->right->parent = root->parent;
+					_alloc_node.construct(root, *temp);
+					free_temp(temp);
+				}
+				else if(root->right == NULL && root->left == NULL)
+				{
+					if (root->parent->key < root->key)
+						root->parent->right = NULL;
+					else 
+						root->parent->left = NULL;
+					Node *temp = root;
+					root = NULL;
+				}
+					// else
+					// {
+						// *root = *temp;
+						// _alloc_node.destroy(temp);
+						// _alloc_node.deallocate(temp, sizeof(temp));
+						// free(temp);
+					// }
+					// !! here we should delete the temp, they used free, we shouldnt
+				// }
 				else
 				{
 					//the parent has two children, we have to find the inorder successor

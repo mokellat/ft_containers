@@ -136,36 +136,44 @@ namespace ft
                 return it;
             }
 
-            mapIterator operator--()
+            mapIterator &operator--()
             {
                 // for later
-                if(_node == NULL)
+                if(_node != NULL)
                 {
-                    node_type *temp;
+                    // puts("0000000000000000000000000");
+                    if(_node == NULL)
+                    {
+                        node_type *temp;
 
-                    temp = MostRight(_check);
-                    _node = temp;
-                    _check = NULL;
-                    return *this;
-                }
+                        temp = MostRight(_check);
+                        _node = temp;
+                        _check = NULL;
+                        return *this;
+                    }
+                    if(_node->left != NULL)
+                    {
+                        _node = _node->left;
+                        while (_node->right != NULL)
+                            _node = _node->right;
+                    }
+                    else
+                    {
+                        node_type   *temp_par = _node->parent;
 
-                if(_node->left != NULL)
-                {
-                    _node = _node->left;
-                    while (_node->right != NULL)
-                        _node = _node->right;
+                        while (temp_par && _node == temp_par->left)
+                        {
+                        _node = temp_par;
+                        temp_par = temp_par->parent;
+                        }
+                        // if(_node->left != temp_par)
+                        _node = temp_par;
+                    }
                 }
                 else
                 {
-                    node_type   *temp_par = _node->parent;
-
-                    while (temp_par && _node == temp_par->left)
-                    {
-                       _node = temp_par;
-                       temp_par = temp_par->parent;
-                    }
-                    // if(_node->left != temp_par)
-                    _node = temp_par;
+                    // puts("1111111111111111111111111111");
+                    _node = MostRight(_check);
                 }
                 return *this;
             }

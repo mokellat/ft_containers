@@ -242,10 +242,10 @@ int main()
   m[4] = 20;
   m[8] = 20;
   m[0] = 20;
-  m[-1] = 20;
-  m[2] = 30;
-  m[13] = 10;
-  m[30] = 10;
+  // m[-1] = 20;
+  // m[2] = 30;
+  // m[13] = 10;
+  // m[30] = 10;
   // std::map<char, int> m1(m);
 
   // std::map<char, int>::iterator it;
@@ -256,16 +256,16 @@ int main()
   // it--;
   // myprint(it->first);
   // for()
-  // std::map<int, int>::reverse_iterator rit;
-  // for(rit = m.rbegin(); rit !=m.rend(); ++rit)
-  // {
-  //     // puts("hree");
-  //     myprint(rit->first);
-  //     // myprint(it->second);
-  // }
+  std::map<int, int>::reverse_iterator rit;
+  for(rit = m.rbegin(); rit !=m.rend(); ++rit)
+  {
+      // puts("hree");
+      myprint(rit->first);
+      // myprint(it->second);
+  }
 
-  std::map<int, int>::iterator it = m.lower_bound(30);
-  std::map<int, int>::iterator ite = m.upper_bound(30);
-  myprint(it->first);
-  myprint(ite->first);
+  // std::map<int, int>::iterator it = m.lower_bound(30);
+  // std::map<int, int>::iterator ite = m.upper_bound(30);
+  // myprint(it->first);
+  // myprint(ite->first);
 }
