@@ -152,7 +152,7 @@ namespace ft
 
             iterator end()
             {
-                return iterator(nullptr, _avl_tree.MostRight(_avl_tree.root));
+                return iterator(NULL, _avl_tree.MostRight(_avl_tree.root));
             }
 
             const_iterator end() const

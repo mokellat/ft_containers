@@ -24,7 +24,6 @@ namespace ft
             node_type   *_node;
             node_type   *_check;
 
-        private:
             node_type    *MostLeft(node_type *node)
             {
                 if(node != NULL)
@@ -108,6 +107,11 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
+                // if (_node == MostRight(_check)) //* Last Node protection
+                // {
+                //     _node = NULL;
+                //     return *this;
+                // }
                 if(_node->right != NULL)
                 {
                     _node = _node->right;
@@ -141,7 +145,6 @@ namespace ft
                 // for later
                 if(_node != NULL)
                 {
-                    // puts("0000000000000000000000000");
                     if(_node == NULL)
                     {
                         node_type *temp;
