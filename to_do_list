@@ -17,6 +17,7 @@
 8. rotate right seems to have a problem : done
 
 9. construction with iterators seems to have some problems
+    (update): infinite loooop
 
 
 

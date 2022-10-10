@@ -123,6 +123,15 @@ class AVL
 		// }
 
 
+		void	update_parent(Node *&node, Node *parent)
+		{
+			if(node == NULL)
+				return;
+			update_parent(node->right, node);
+			node->parent = parent;
+			update_parent(node->left, node);
+		}
+
 		Node    *rotate_left(Node *x)
 		{
 			Node  *y;
@@ -132,21 +141,9 @@ class AVL
 			temp = y->left;
 
 			//rotate here
-			x->right = temp;
-			if (y->left != NULL)
-        		y->left->parent = x;
 			y->left = x;
-
-			y->parent = x->parent;
-			x->parent = y;
-
-			if (y->parent != NULL && _compare(x->key->first, y->parent->key->first))
-				y->parent->left = y;
-			else
-			{
-				if (y->parent != NULL)
-					y->parent->right = y;
-			}
+			x->right = temp;
+			update_parent(y, x->parent);
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left),height(y->right)) + 1;
 			x->height = max(height(x->left),height(x->right)) + 1;
@@ -160,20 +157,10 @@ class AVL
 
 			x = y->left;
 			temp = x->right;
-			if (x->right)
-        		x->right->parent = y;
-			//rotate here
+			
 			x->right = y;
 			y->left = temp;
-
-			x->parent = y->parent;
-    		y->parent = x;
-			if (x->parent != NULL && _compare(y->key->first, x->parent->key->first) == true)
-        		x->parent->left = x;
-			else
-				if (x->parent != NULL)
-					x->parent->right = x;
-			// y = x;
+			update_parent(y, x->parent);
 			// we have to calculate the height of the nodes
 			y->height = max(height(y->left), height(y->right)) + 1;
 			x->height = max(height(x->left), height(x->right)) + 1;
@@ -264,6 +251,10 @@ class AVL
 					return rotate_left(root);
 				}
 			}
+			if(root->left)
+				root->left->parent = root;
+			if(root->right)
+				root->right->parent = root;
 			return root;
 		}
 
@@ -286,6 +277,7 @@ class AVL
 
 		Node	*deleteOneNode(Node *root, key_type key)
 		{
+			// puts("heeeeeeeeeeeere");
 			Node	*temp;
 			int		bf;
 
@@ -358,6 +350,10 @@ class AVL
 					return rotate_left(root);
 				}
 			}
+			if (root->left)
+				root->left->parent = root;
+			if (root->right)
+				root->right->parent = root;
 			return root;
 		}
 

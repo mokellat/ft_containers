@@ -107,11 +107,12 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
-                // if (_node == MostRight(_check)) //* Last Node protection
-                // {
-                //     _node = NULL;
-                //     return *this;
-                // }
+                if (_node == MostRight(_check))
+                {
+                    _node = NULL;
+                    return *this;
+                }
+
                 if(_node->right != NULL)
                 {
                     _node = _node->right;
