@@ -177,7 +177,7 @@ class AVL
 
 		Node    *rotate_right(Node *y)
 		{
-			Node  *x ;
+			Node  *x;
 			Node  *temp;
 
 			x = y->left;
@@ -396,19 +396,19 @@ class AVL
 				return NULL;
 		}
 
-		// Node    *MostRight(Node *node)
-		// {
-		// 	if(node != NULL)
-		// 	{
-		// 		Node *iter = node;
+		Node    *MostRight(Node *node) const
+		{
+			if(node != NULL)
+			{
+				Node *iter = node;
 
-		// 		while (iter->right != NULL)
-		// 			iter = iter->right;
-		// 		return iter;
-		// 	}
-		// 	else
-		// 		return NULL;
-		// }
+				while (iter->right != NULL)
+					iter = iter->right;
+				return iter;
+			}
+			else
+				return NULL;
+		}
 
 		// checks if a node exits
 		Node    *SearchNode(Node *node, key_type key)

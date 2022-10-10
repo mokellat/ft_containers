@@ -39,7 +39,7 @@ namespace ft
 
             //rebind and some typedefs for avl
             typedef Node<value_type>                                             node_type;
-            typedef Node<value_type>                                             const_node_type;
+            typedef Node<const value_type>                                       const_node_type;
 		    typedef typename Alloc::template rebind<node_type>::other            alloc_node;  //it may throw error
             typedef AVL<value_type, alloc_node, key_compare, allocator_type>     avl_type;
 
@@ -112,7 +112,7 @@ namespace ft
             map (const map& x) : _avl_tree()
             {
                 // puts("tab");
-                _size = x._size;
+                _size = 0;
                 _alloc_copy = x._alloc_copy;
                 _comp = x._comp;
                 insert(x.begin(), x.end());
@@ -155,7 +155,10 @@ namespace ft
 
             const_iterator end() const
             {
-                return const_iterator(nullptr, _avl_tree.root);
+                // const_node_type *temp = (const_node_type *)_avl_tree.MostRight(_avl_tree.root);
+                // temp++;
+                return const_iterator(NULL, (const_node_type *)_avl_tree.root);
+                // return const_iterator(nullptr, _avl_tree.root);
             }
 
             reverse_iterator rbegin()
@@ -240,12 +243,18 @@ namespace ft
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last)
             {
-                
-                while(first != last)
-                {
-                    insert(*first);
-                    first++;
-                }
+                (void)last;
+                std::cout << first->first << std::endl;
+                first++;
+                std::cout << first->first << std::endl;
+
+                // while(first != last)
+                // {
+                //     // std::cout << first->first << std::endl;
+                //     std::cout << first->first << std::endl;
+                //     // insert(*first);
+                //     first++;
+                // }
             }
 
             void erase (iterator position)

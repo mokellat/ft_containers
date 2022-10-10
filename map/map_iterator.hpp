@@ -81,13 +81,13 @@ namespace ft
                 
             }
 
-            operator mapIterator<const T>()
-            {
-                const_node_type *node = (const_node_type *)_node;
-                const_node_type *check = (const_node_type *)_check;
-                mapIterator<const T> tmp(node, check);
-                return tmp;
-            }
+            // operator mapIterator<const T>()
+            // {
+            //     const_node_type *node = (const_node_type *)_node;
+            //     const_node_type *check = (const_node_type *)_check;
+            //     mapIterator<const T> tmp(node, check);
+            //     return tmp;
+            // }
             
             ~mapIterator(){}        
 
@@ -125,7 +125,7 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
-                if (_node == _node->MostRight(_check))
+                if (_node && _node == _node->MostRight(_check))
                 {
                     _node = NULL;
                     return *this;

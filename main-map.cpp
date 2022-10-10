@@ -45,21 +45,21 @@ int main()
     m.insert(ft::pair<int, int>(10, 50));
     m.insert(ft::pair<int, int>(0, 50));
     m.insert(ft::pair<int, int>(-1, 50));
-    m.insert(ft::pair<int, int>(20, 50));
-    m.insert(ft::pair<int, int>(1, 50));
-    m.insert(ft::pair<int, int>(100, 50));
-    m.insert(ft::pair<int, int>(101, 50));
-    m.insert(ft::pair<int, int>(102, 50));
-    m.insert(ft::pair<int, int>(90, 50));
-    m.insert(ft::pair<int, int>(80, 50));
-    m.insert(ft::pair<int, int>(84, 50));
-    m.insert(ft::pair<int, int>(94, 50));
-    m.insert(ft::pair<int, int>(3344, 50));
-    m.insert(ft::pair<int, int>(440, 50));
-    m.insert(ft::pair<int, int>(4, 50));        // causes a segv when building with iterators
-    m.insert(ft::pair<int, int>(-888884, 50));
-    m.insert(ft::pair<int, int>(4, 50));
-    m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(20, 50));
+    // m.insert(ft::pair<int, int>(1, 50));
+    // m.insert(ft::pair<int, int>(100, 50));
+    // m.insert(ft::pair<int, int>(101, 50));
+    // m.insert(ft::pair<int, int>(102, 50));
+    // m.insert(ft::pair<int, int>(90, 50));
+    // m.insert(ft::pair<int, int>(80, 50));
+    // m.insert(ft::pair<int, int>(84, 50));
+    // m.insert(ft::pair<int, int>(94, 50));
+    // m.insert(ft::pair<int, int>(3344, 50));
+    // m.insert(ft::pair<int, int>(440, 50));
+    // m.insert(ft::pair<int, int>(4, 50));        // causes a segv when building with iterators
+    // m.insert(ft::pair<int, int>(-888884, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
     // m.insert(ft::pair<int, int>(76464647644, 50));
     // m.insert(ft::pair<int, int>(776344, 50));
     // m.insert(ft::pair<int, int>(-773, 50));
@@ -165,6 +165,10 @@ int main()
 
     //construct using another map--------------------------------------------------------------
     ft::map<int, int> m3(m);
+    // myprint(m.size());
+    myprint(m3.size());
+
+    // m3.tree_print();
 
     // construct using operator=------------------------------------------------------------------------------
     // ft::map<int, int> m4 = m;
@@ -195,6 +199,9 @@ int main()
 
     //iterators-----------------------------------------------------------------------------------------------
     // ft::map<int, int>::iterator it = m.end();
+    // it--;
+
+    // myprint((it->first));
     // for(it--; it != m.begin(); it--)
     // {
     //     // puts("hree");
@@ -203,8 +210,8 @@ int main()
     // }
         // myprint(it->first);
 
-    // ft::map<int, int>::iterator it;
-    // ft::map<int, int>::iterator ite = m.end();
+    // ft::map<int, int>::const_iterator it;
+    // ft::map<int, int>::const_iterator ite = m.end();
 
     // for(it = m.begin(); it != ite; ++it)
     // {
@@ -275,7 +282,13 @@ int main()
 
     // m6.swap(m);
 
-    // //m here
+    // myprint("-----------------------------------");
+    // m6.tree_print();
+    // myprint("-----------------------------------");
+    // m.tree_print();
+    // myprint("-----------------------------------");
+
+    // // //m here
     // ft::map<int, int>::iterator it = m.begin();
     // for(; it != m.end(); it++)
     // {
@@ -284,7 +297,7 @@ int main()
     //     // myprint(it->second);
     // }
 
-    // //m6 here
+    //m6 here
     // myprint("*****************************");
     // ft::map<int, int>::iterator it2 = m6.begin();
     // for(; it2 != m6.end(); it2++)
