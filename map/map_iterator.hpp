@@ -38,24 +38,29 @@ namespace ft
                     return NULL;
             }
 
-            node_type    *MostRight(node_type *node)
-            {
-                if(node != NULL)
-                {
-                    node_type *iter = node;
+            // node_type    *MostRight(node_type *node)
+            // {
+            //     // if(node != NULL)
+            //     // {
+            //     //     node_type *iter = node;
 
-                    while (iter->right != NULL)
-                        iter = iter->right;
-                    return iter;
-                }
-                else
-                    return NULL;
-            }
+            //     //     while (iter->right != NULL)
+            //     //         iter = iter->right;
+            //     //     return iter;
+            //     // }
+            //     // else
+            //     //     return NULL;
+            //     if(node == NULL)
+            //         return node;
+            //     if(node->right == NULL)
+            //         return node;
+            //     return MostRight(node->right);
+            // }
 
         public:
-            mapIterator() : _node(){}
+            mapIterator() : _node(), _check() {}
 
-            mapIterator(node_type *node) : _node(node){}
+            mapIterator(node_type *node) : _node(node), _check(node) {}
 
             mapIterator(const node_type *node)
             {
@@ -65,6 +70,7 @@ namespace ft
             mapIterator(mapIterator const &it)
             {
                 _node = it._node;
+                _check = it._check;
             }
 
             mapIterator(node_type *node, node_type *check) : _node(node), _check(check)
@@ -77,6 +83,7 @@ namespace ft
             mapIterator &operator=(mapIterator const &rhs)
             {
                 _node = rhs._node;
+                _check = rhs._check;
                 return *this;
             }
 
@@ -107,7 +114,7 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
-                if (_node == MostRight(_check))
+                if (_node == _node->MostRight(_check))
                 {
                     _node = NULL;
                     return *this;
@@ -115,6 +122,7 @@ namespace ft
 
                 if(_node->right != NULL)
                 {
+                    // puts("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
                     _node = _node->right;
                     while (_node->left != NULL)
                         _node = _node->left;
@@ -143,16 +151,13 @@ namespace ft
 
             mapIterator &operator--()
             {
+                // puts("wtf");
                 // for later
                 if(_node != NULL)
                 {
-                    if(_node == NULL)
+                    if(_node && _node == _node->MostLeft(_check))
                     {
-                        node_type *temp;
-
-                        temp = MostRight(_check);
-                        _node = temp;
-                        _check = NULL;
+                        _node = NULL;
                         return *this;
                     }
                     if(_node->left != NULL)
@@ -177,7 +182,7 @@ namespace ft
                 else
                 {
                     // puts("1111111111111111111111111111");
-                    _node = MostRight(_check);
+                    _node = _node->MostRight(_check);
                 }
                 return *this;
             }

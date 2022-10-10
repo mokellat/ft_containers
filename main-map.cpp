@@ -21,7 +21,7 @@
 int main()
 {
     //int int
-    ft::map<int, int> m;
+    ft::map<int, int>   m;
     // ft::pair<ft::map<int, int>::iterator, bool> it;
 
     // //insert--------------------------------------------------------------------
@@ -57,16 +57,16 @@ int main()
     m.insert(ft::pair<int, int>(3344, 50));
     m.insert(ft::pair<int, int>(440, 50));
     m.insert(ft::pair<int, int>(4, 50));        // causes a segv when building with iterators
+    m.insert(ft::pair<int, int>(-888884, 50));
+    m.insert(ft::pair<int, int>(4, 50));
+    m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(76464647644, 50));
+    // m.insert(ft::pair<int, int>(776344, 50));
+    // m.insert(ft::pair<int, int>(-773, 50));
+    // m.insert(ft::pair<int, int>(10000000000, 50));
+    // m.insert(ft::pair<int, int>(8844, 50));
     // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
-    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(77635354, 50));
     // m.insert(ft::pair<int, int>(4, 50));
     // m.insert(ft::pair<int, int>(4, 50));
     // m.insert(ft::pair<int, int>(4, 50));
@@ -130,6 +130,7 @@ int main()
     // m.insert(ft::pair<int, int>(4, 50));
 
     m.tree_print();
+    // myprint(m.size());
     // m.print();
     // m.root();
     // m.insert(ft::pair<int, int>(1, 10));
@@ -138,9 +139,9 @@ int main()
     // printTree(m, "", true);
 
     //construct using iterator--------------------------------------------------------
-    myprint("--------------------------------");
-    ft::map<int, int> m2(m.begin(), m.end());
-    m2.tree_print();
+    // myprint("--------------------------------");
+    // ft::map<int, int> m2(m.begin(), m.end());
+    // m2.tree_print();
 
     // myprint("--------------------------------");
 
@@ -182,7 +183,7 @@ int main()
     // m[13] = 10;
     // m[30] = 10;
     // m[30] = 10;
-    // m.tree_print();
+    // // m.tree_print();
     // m[-30] = 10;
     // m[4] = 30;
     // m[6] = 60;
@@ -203,7 +204,9 @@ int main()
         // myprint(it->first);
 
     // ft::map<int, int>::iterator it;
-    // for(it = m.begin(); it!=m.end(); it++)
+    // ft::map<int, int>::iterator ite = m.end();
+
+    // for(it = m.begin(); it != ite; ++it)
     // {
     //     // puts("hree");
     //     myprint(it->first);
@@ -221,6 +224,7 @@ int main()
     //     myprint(rit->first);
     //     // myprint(it->second);
     // }
+    // myprint(rit->first);
 
     // empty and size and max size------------------------------------------------------------------------------------------
     // ft::map<int, int> m5;

@@ -9,6 +9,7 @@ class Node
 	// typedefs
 	public:
 		typedef T 								value_type;
+		typedef Node<T>							node_type;
 		typedef typename value_type::first_type	key_type;
 
 	public:
@@ -22,6 +23,30 @@ class Node
 
 	public:
 		Node() : parent(), left(), right(), height(1) {}
+
+		node_type    *MostRight(node_type *node)
+		{
+			// if(node != NULL)
+			// {
+			//     node_type *iter = node;
+
+			//     while (iter->right != NULL)
+			//         iter = iter->right;
+			//     return iter;
+			// }
+			// else
+			//     return NULL;
+			if(node->right == NULL)
+				return node;
+			return MostRight(node->right);
+		}
+
+		node_type	*MostLeft(node_type *node)
+		{
+			if(node->left == NULL)
+				return node;
+			return MostLeft(node->left);
+		}
 
 		~Node(){}
 };
@@ -145,14 +170,14 @@ class AVL
 			x->right = temp;
 			update_parent(y, x->parent);
 			// we have to calculate the height of the nodes
-			y->height = max(height(y->left),height(y->right)) + 1;
 			x->height = max(height(x->left),height(x->right)) + 1;
+			y->height = max(height(y->left),height(y->right)) + 1;
 			return y;
 		}
 
 		Node    *rotate_right(Node *y)
 		{
-			Node  *x;
+			Node  *x ;
 			Node  *temp;
 
 			x = y->left;
@@ -225,14 +250,14 @@ class AVL
 				if(_compare(key.first, root->left->key->first))
 				{
 					//right rotation
-					return rotate_right(root);
+					root = rotate_right(root);
 					// return root;
 				}
 				else if(_compare(root->left->key->first, key.first))
 				{
 					//left-right rotation
 					root->left = rotate_left(root->left);
-					return rotate_right(root);
+					root = rotate_right(root);
 				}
 			}
 			if(bf < -1)
@@ -241,14 +266,14 @@ class AVL
 				if(_compare(root->right->key->first, key.first))
 				{
 					//left rotation
-					return rotate_left(root);
+					root = rotate_left(root);
 					// return root;
 				}
 				else
 				{
 					//right-left rotation
 					root->right = rotate_right(root->right);
-					return rotate_left(root);
+					root = rotate_left(root);
 				}
 			}
 			if(root->left)
@@ -333,21 +358,21 @@ class AVL
 			if (bf > 1) 
 			{
 				if (BalanceFactor(root->left) >= 0) 
-					return rotate_right(root);
+					root = rotate_right(root);
 				else
 				{
 					root->left = rotate_left(root->left);
-					return rotate_right(root);
+					root = rotate_right(root);
 				}
 			}
 			if (bf < -1) 
 			{
 				if (BalanceFactor(root->right) <= 0) 
-					return rotate_left(root);
+					root = rotate_left(root);
 				else 
 				{
 					root->right = rotate_right(root->right);
-					return rotate_left(root);
+					root = rotate_left(root);
 				}
 			}
 			if (root->left)
@@ -371,19 +396,19 @@ class AVL
 				return NULL;
 		}
 
-		Node    *MostRight(Node *node)
-		{
-			if(node != NULL)
-			{
-				Node *iter = node;
+		// Node    *MostRight(Node *node)
+		// {
+		// 	if(node != NULL)
+		// 	{
+		// 		Node *iter = node;
 
-				while (iter->right != NULL)
-					iter = iter->right;
-				return iter;
-			}
-			else
-				return NULL;
-		}
+		// 		while (iter->right != NULL)
+		// 			iter = iter->right;
+		// 		return iter;
+		// 	}
+		// 	else
+		// 		return NULL;
+		// }
 
 		// checks if a node exits
 		Node    *SearchNode(Node *node, key_type key)
@@ -406,9 +431,10 @@ class AVL
 				deleteAllNodes(node->right);
 				_alloc_type.destroy(node->key);
 				_alloc_type.deallocate(node->key, sizeof(node->key));
-				_alloc_node.destroy(node);
+				// _alloc_node.destroy(node);
 				_alloc_node.deallocate(node, sizeof(node));
+				node = NULL;
 			}
-			node = NULL;
+			// node = NULL;
 		}
 };

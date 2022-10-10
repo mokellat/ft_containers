@@ -137,7 +137,7 @@ namespace ft
             //iterators-------------------------------------
             iterator begin()
             {
-                return iterator(_avl_tree.MostLeft(_avl_tree.root));
+                return iterator(_avl_tree.MostLeft(_avl_tree.root), _avl_tree.root);
             }
 
             const_iterator begin() const
@@ -152,7 +152,7 @@ namespace ft
 
             iterator end()
             {
-                return iterator(NULL, _avl_tree.MostRight(_avl_tree.root));
+                return iterator(NULL, _avl_tree.root);
             }
 
             const_iterator end() const
@@ -216,9 +216,9 @@ namespace ft
                     // we didn't find another node with the same value
                     _size++;
                     _avl_tree.root = _avl_tree.insertNode(_avl_tree.root, val, _avl_tree.root);
-                    it = _avl_tree.SearchNode(_avl_tree.root, val.first);
+                    iterator itr(_avl_tree.SearchNode(_avl_tree.root, val.first), _avl_tree.root);
                     // p[it] = true;
-                    p.first = it;
+                    p.first = itr;
                     p.second = true;
                 }
                 else
