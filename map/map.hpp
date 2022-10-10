@@ -244,7 +244,8 @@ namespace ft
             {
                 while(first != last)
                 {
-                    insert(*first++);
+                    insert(*first);
+                    first++;
                 }
             }
 

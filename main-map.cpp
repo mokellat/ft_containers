@@ -37,20 +37,99 @@ int main()
     // myprint(it.first->first);
     // myprint(it.first->second);
     // myprint(it.second);
-
-
-    // m.insert(ft::pair<int, int>(2, 20));
-    // m.insert(ft::pair<int, int>(9, 20));
-    // m.insert(ft::pair<int, int>(12, 30));
-    // m.insert(ft::pair<int, int>(33, 35));
-    // m.insert(ft::pair<int, int>(16, 40));
-    // m.insert(ft::pair<int, int>(10, 50));
-    // m.insert(ft::pair<int, int>(0, 50));
-    // m.insert(ft::pair<int, int>(-1, 50));
-    // m.insert(ft::pair<int, int>(20, 50));
-    // m.insert(ft::pair<int, int>(1, 50));
+    m.insert(ft::pair<int, int>(2, 20));
+    m.insert(ft::pair<int, int>(9, 20));
+    m.insert(ft::pair<int, int>(12, 30));
+    m.insert(ft::pair<int, int>(33, 35));
+    m.insert(ft::pair<int, int>(16, 40));
+    m.insert(ft::pair<int, int>(10, 50));
+    m.insert(ft::pair<int, int>(0, 50));
+    m.insert(ft::pair<int, int>(-1, 50));
+    m.insert(ft::pair<int, int>(20, 50));
+    m.insert(ft::pair<int, int>(1, 50));
+    m.insert(ft::pair<int, int>(100, 50));
+    m.insert(ft::pair<int, int>(101, 50));
+    m.insert(ft::pair<int, int>(102, 50));
+    m.insert(ft::pair<int, int>(90, 50));
+    m.insert(ft::pair<int, int>(80, 50));
+    m.insert(ft::pair<int, int>(84, 50));
+    m.insert(ft::pair<int, int>(94, 50));
+    m.insert(ft::pair<int, int>(3344, 50));
+    m.insert(ft::pair<int, int>(440, 50));
+    m.insert(ft::pair<int, int>(4, 50));        // causes a segv when building with iterators
     // m.insert(ft::pair<int, int>(4, 50));
-    // m.tree_print();
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+    // m.insert(ft::pair<int, int>(4, 50));
+
+    m.tree_print();
     // m.print();
     // m.root();
     // m.insert(ft::pair<int, int>(1, 10));
@@ -59,7 +138,29 @@ int main()
     // printTree(m, "", true);
 
     //construct using iterator--------------------------------------------------------
-    // ft::map<int, int> m2(m.begin(), m.end());
+    myprint("--------------------------------");
+    ft::map<int, int> m2(m.begin(), m.end());
+    m2.tree_print();
+
+    // myprint("--------------------------------");
+
+    // ft::map<int, int>::iterator it = m.end();
+    // for(it--; it != m.begin(); it--)
+    // {
+    //     // puts("hree");
+    //     myprint(it->first);
+    //     // myprint(it->second);
+    // }
+    
+    // myprint("--------------------------------");
+
+    // ft::map<int, int>::iterator ite = m2.end();
+    // for(ite--; ite != m2.begin(); ite--)
+    // {
+    //     // puts("hree");
+    //     myprint(ite->first);
+    //     // myprint(it->second);
+    // }
 
     //construct using another map--------------------------------------------------------------
     // ft::map<int, int> m3(m);
@@ -69,17 +170,17 @@ int main()
 
     // [] insert using [] operator---------------------------------------------------------------
     // m.insert(ft::pair<int, int>(1, 10));
-    m[10] = 20;
-    m[5] = 20;
-    m[20] = 20;
-    m[7] = 20;
-    m[4] = 20;
-    m[8] = 20;
-    m[0] = 20;
-    m[-1] = 20;
-    m[2] = 30;
-    m[13] = 10;
-    m[30] = 10;
+    // m[10] = 20;
+    // m[5] = 20;
+    // m[20] = 20;
+    // m[7] = 20;
+    // m[4] = 20;
+    // m[8] = 20;
+    // m[0] = 20;
+    // m[-1] = 20;
+    // m[2] = 30;
+    // m[13] = 10;
+    // m[30] = 10;
     // m[30] = 10;
     // m.tree_print();
     // m[-30] = 10;
@@ -145,7 +246,10 @@ int main()
     // m.tree_print();
     // m.erase(30);
     // m.erase(10);
-    // m.erase(7);
+    // m.erase(17);
+    // m.erase(100);
+    // m.erase(94);
+    // m.erase(97);
     // m.tree_print();
     // it = m.begin();
     // ft::map<int, int>::iterator it = m.begin();
@@ -192,6 +296,12 @@ int main()
     // myprint(it->first);
     // myprint(ite->first);
 
+
+    //clear---------------------------------------------------------------------------------------------
+    // m.tree_print();
+    // // m.clear();
+    // myprint("------------------------------------------------------------------");
+    // m.tree_print();
     //char int
     // ft::map<char, int> m1;
     // m1.insert(ft::pair<char, int>('a', 10));
@@ -200,5 +310,5 @@ int main()
     // m1.insert(ft::pair<char, int>('k', 30));
     // m1.insert(ft::pair<char, int>('l', 35));
     // m1.tree_print();
-    return 0;
+    // return 0;
 }

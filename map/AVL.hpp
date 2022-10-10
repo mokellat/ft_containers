@@ -21,7 +21,7 @@ class Node
 		int										height;
 
 	public:
-		Node() : height(1), left(), right(), parent(){}
+		Node() : parent(), left(), right(), height(1) {}
 
 		~Node(){}
 };
@@ -140,7 +140,7 @@ class AVL
 			y->parent = x->parent;
 			x->parent = y;
 
-			if (y->parent != NULL && _compare(x->key->first,y->parent->key->first))
+			if (y->parent != NULL && _compare(x->key->first, y->parent->key->first))
 				y->parent->left = y;
 			else
 			{
@@ -392,8 +392,6 @@ class AVL
 		// checks if a node exits
 		Node    *SearchNode(Node *node, key_type key)
 		{
-			Node*	res;
-
 			if(node == NULL)
 				return NULL;
 
