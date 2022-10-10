@@ -164,7 +164,7 @@ int main()
     // }
 
     //construct using another map--------------------------------------------------------------
-    // ft::map<int, int> m3(m);
+    ft::map<int, int> m3(m);
 
     // construct using operator=------------------------------------------------------------------------------
     // ft::map<int, int> m4 = m;

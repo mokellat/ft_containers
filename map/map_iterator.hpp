@@ -16,27 +16,29 @@ namespace ft
             typedef T                                           value_type;
             typedef ptrdiff_t	                                difference_type;
             typedef Node<T>                                     node_type;
+            typedef Node<const T>                               const_node_type;
             typedef T*                                          pointer;
 		    typedef T&	                                        reference;
+
 
 
         private:
             node_type   *_node;
             node_type   *_check;
 
-            node_type    *MostLeft(node_type *node)
-            {
-                if(node != NULL)
-                {
-                    node_type *iter = node;
+            // node_type    *MostLeft(node_type *node)
+            // {
+            //     if(node != NULL)
+            //     {
+            //         node_type *iter = node;
 
-                    while (iter->left != NULL)
-                        iter = iter->left;
-                    return iter;
-                }
-                else
-                    return NULL;
-            }
+            //         while (iter->left != NULL)
+            //             iter = iter->left;
+            //         return iter;
+            //     }
+            //     else
+            //         return NULL;
+            // }
 
             // node_type    *MostRight(node_type *node)
             // {
@@ -62,10 +64,10 @@ namespace ft
 
             mapIterator(node_type *node) : _node(node), _check(node) {}
 
-            mapIterator(const node_type *node)
-            {
-                (const node_type) _node = node;
-            }
+            // mapIterator(const node_type *node)
+            // {
+            //     (const node_type) _node = node;
+            // }
 
             mapIterator(mapIterator const &it)
             {
@@ -73,11 +75,20 @@ namespace ft
                 _check = it._check;
             }
 
+
             mapIterator(node_type *node, node_type *check) : _node(node), _check(check)
             {
                 
             }
 
+            operator mapIterator<const T>()
+            {
+                const_node_type *node = (const_node_type *)_node;
+                const_node_type *check = (const_node_type *)_check;
+                mapIterator<const T> tmp(node, check);
+                return tmp;
+            }
+            
             ~mapIterator(){}        
 
             mapIterator &operator=(mapIterator const &rhs)

@@ -39,6 +39,7 @@ namespace ft
 
             //rebind and some typedefs for avl
             typedef Node<value_type>                                             node_type;
+            typedef Node<value_type>                                             const_node_type;
 		    typedef typename Alloc::template rebind<node_type>::other            alloc_node;  //it may throw error
             typedef AVL<value_type, alloc_node, key_compare, allocator_type>     avl_type;
 
@@ -142,12 +143,9 @@ namespace ft
 
             const_iterator begin() const
             {
-                const node_type *temp;
-
-                temp = (const node_type *)_avl_tree.MostLeft(_avl_tree.root);
-                const_iterator  it(temp);
-                return it;
-                // return const_iterator(_avl_tree.MostLeft(_avl_tree.root));
+                const_node_type *temp = (const_node_type *)_avl_tree.MostLeft(_avl_tree.root);
+                return const_iterator(temp);
+                // return const_iterator(_avl_tree.MostLeft(_avl_tree.root), _avl_tree.root);
             }
 
             iterator end()
