@@ -96,19 +96,27 @@ int main()
 	// 	std::cout << _ve1[i] << std::endl;
 
 	//erase----------------------------------------------------------------
-	// int a1[7] = {10, 20, 30, 40, 50, 60, 70};
-    // VE_INT _ve(a1, a1+7);
-	// // std::cout << "wtf " << *(_ve.begin(), _ve.begin() + 3) << std::endl;
+	int a1[7] = {10, 20, 30, 40, 50, 60, 70};
+    VE_INT _ve(a1, a1+7);
+	// std::cout << "wtf " << *(_ve.begin(), _ve.begin() + 3) << std::endl;
     // std::cout << *(_ve.erase(_ve.begin() + 3, _ve.end() - 3)) << std::endl;
-    // for (size_t i = 0; i < _ve.size(); i++)
-	// 	std::cout << _ve[i] << std::endl;
-
-	//insert-----------------------------------------------------------------
-	VE_INT _ve(5, 10);
-    VE_INT _v(6, 500);
-    // _ve.insert(_ve.begin()+ 10, _v.begin(), _v.end());
+	_ve.erase(_ve.begin() + 3, _ve.end());
     for (size_t i = 0; i < _ve.size(); i++)
 		std::cout << _ve[i] << std::endl;
+
+	//insert-----------------------------------------------------------------
+	// VE_INT _ve(5, 10);
+	// VE_INT _v1(5, 10);
+    // VE_INT _v(600, 500);
+    // // _ve.insert(_ve.begin()+ 10, _v.begin(), _v.end());
+    // for (size_t i = 0; i < _ve.size(); i++)
+	// 	std::cout << _ve[i] << std::endl;
+	// for (size_t i = 0; i < _v.size(); i++)
+	// 	std::cout << _v[i] << std::endl;
+	// if(_v >= _ve)
+	// 	puts("jjjjj");
+	// else
+	// 	puts("hhhhhhhhh");
     return 0;
 }
 

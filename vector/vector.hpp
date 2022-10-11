@@ -67,7 +67,7 @@ namespace ft
             //(2)
             template <class InputIterator>
             vector (InputIterator first, InputIterator last,
-                    const allocator_type& alloc = allocator_type(), typename enable_if<!(is_integral<InputIterator>::value), int>::type = 0)
+                    const allocator_type& alloc = allocator_type(), typename enable_if<!(ft::is_integral<InputIterator>::value), InputIterator>::type = NULL)
             {
                 this->_alloc_copy = alloc;
                 difference_type diff = std::distance(first, last);
@@ -499,41 +499,42 @@ namespace ft
     template <class T, class Alloc>
     bool operator== (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-        if(rhs._size == lhs._size)
-            return std::equal(rhs.begin(), rhs.end(), lhs.begin());
+        if(rhs.size() == lhs.size())
+            return ft::equal(rhs.begin(), rhs.end(), lhs.begin());
         return false;
     }
 
     template <class T, class Alloc>
     bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-            if(rhs._size != lhs._size)
-            return !std::equal(rhs.begin(), rhs.end(), lhs.begin());
+        // puts("llllllllllllllllllll");
+            if(rhs.size() != lhs.size())
+            return !ft::equal(rhs.begin(), rhs.end(), lhs.begin());
         return false;
     }
 
     template <class T, class Alloc>
     bool operator<  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-        return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+        return ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
     }
 
     template <class T, class Alloc>
     bool operator<= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-        return !std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+        return !ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
     }
 
     template <class T, class Alloc>
     bool operator>  (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-        return std::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
+        return ft::lexicographical_compare(rhs.begin(), rhs.end(), lhs.begin(), lhs.end());
     }
 
     template <class T, class Alloc>
     bool operator>= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-        return !std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
+        return !ft::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(), rhs.end());
     }
 
     template <class T, class Alloc>
