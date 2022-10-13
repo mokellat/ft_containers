@@ -65,13 +65,14 @@ namespace ft
             // first = pr.first;
             // second = pr.second;
         }
-
-        pair& operator= (const pair& pr)
-        {
-            first = pr.first;
-            second = pr.second;
-            return *this;
-        }
+        
+        // implicitle declaration herte
+        // pair& operator= (const pair& pr)
+        // {
+        //     first = pr.first;
+        //     second = pr.second;
+        //     return *this;
+        // }
 
     };
 

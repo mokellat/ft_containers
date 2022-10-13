@@ -25,6 +25,7 @@ namespace ft
         private:
             node_type   *_node;
             node_type   *_check;
+            int         _size;
 
             // node_type    *MostLeft(node_type *node)
             // {
@@ -71,6 +72,7 @@ namespace ft
 
             mapIterator(mapIterator const &it)
             {
+                _size = 0;
                 _node = it._node;
                 _check = it._check;
             }
@@ -125,10 +127,15 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
+                _size++;
                 if (_node == _node->MostRight(_check))
                 {
-                    _node = NULL;
-                    return *this;
+                    if(_size < 1)
+                    {
+                        _node = NULL;
+                        return *this;
+                    }
+    
                 }
 
                 if(_node->right != NULL)

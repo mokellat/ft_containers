@@ -177,7 +177,7 @@ class AVL
 
 		Node    *rotate_right(Node *y)
 		{
-			Node  *x ;
+			Node  *x;
 			Node  *temp;
 
 			x = y->left;
@@ -197,7 +197,7 @@ class AVL
 
 			//allocating the whole node
 			neww = _alloc_node.allocate(sizeof(Node *));
-			_alloc_node.construct(neww);
+			// _alloc_node.construct(neww);
 
 			//allocating the value_type objcect
 			neww->key =  _alloc_type.allocate(sizeof(neww->key));
@@ -396,22 +396,22 @@ class AVL
 				return NULL;
 		}
 
-		// Node    *MostRight(Node *node)
-		// {
-		// 	if(node != NULL)
-		// 	{
-		// 		Node *iter = node;
+		Node    *MostRight(Node *node) const
+		{
+			if(node != NULL)
+			{
+				Node *iter = node;
 
-		// 		while (iter->right != NULL)
-		// 			iter = iter->right;
-		// 		return iter;
-		// 	}
-		// 	else
-		// 		return NULL;
-		// }
+				while (iter->right != NULL)
+					iter = iter->right;
+				return iter;
+			}
+			else
+				return NULL;
+		}
 
 		// checks if a node exits
-		Node    *SearchNode(Node *node, key_type key)
+		Node    *SearchNode(Node *node, key_type key) const
 		{
 			if(node == NULL)
 				return NULL;

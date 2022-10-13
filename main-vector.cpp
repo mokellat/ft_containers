@@ -4,20 +4,26 @@ typedef ft::vector<int> VE_INT;
 
 int main()
 {
-    //default-----------------------------------
+    // default-----------------------------------
     // ft::vector<int> _ve;
 
     //(1)-----------------------------------
     // size_t n = 5;
-    // ft::vector<int> _ve1(n, 10);
+    // ft::vector<int> _ve1(5, 10);
 
     // for (size_t i = 0; i < _ve1.size(); i++)
     //     std::cout << _ve1[i] << std::endl;
 
     // (2)-----------------------------------
-	// int a1[7] = {10, 20, 30, 40, 50, 60, 70};
+	int a1[7] = {10, 20, 30, 40, 50, 60, 70};
 
-	// ft::vector<int> _ve2(a1, a1+7);
+	ft::vector<int> _ve2(a1, a1+2);
+	for (size_t i = 0; i < _ve2.size(); i++)
+        std::cout << _ve2[i] << std::endl;
+
+	ft::vector<int>::iterator it;
+	
+
 
 	//(3)------------------------------------
 	// ft::vector<int> _ve3(_ve2);
@@ -96,13 +102,13 @@ int main()
 	// 	std::cout << _ve1[i] << std::endl;
 
 	//erase----------------------------------------------------------------
-	int a1[7] = {10, 20, 30, 40, 50, 60, 70};
-    VE_INT _ve(a1, a1+7);
-	// std::cout << "wtf " << *(_ve.begin(), _ve.begin() + 3) << std::endl;
-    // std::cout << *(_ve.erase(_ve.begin() + 3, _ve.end() - 3)) << std::endl;
-	_ve.erase(_ve.begin() + 3, _ve.end());
-    for (size_t i = 0; i < _ve.size(); i++)
-		std::cout << _ve[i] << std::endl;
+	// int a1[7] = {10, 20, 30, 40, 50, 60, 70};
+    // VE_INT _ve(a1, a1+7);
+	// // std::cout << "wtf " << *(_ve.begin(), _ve.begin() + 3) << std::endl;
+    // // std::cout << *(_ve.erase(_ve.begin() + 3, _ve.end() - 3)) << std::endl;
+	// _ve.erase(_ve.begin() + 3, _ve.end());
+    // for (size_t i = 0; i < _ve.size(); i++)
+	// 	std::cout << _ve[i] << std::endl;
 
 	//insert-----------------------------------------------------------------
 	// VE_INT _ve(5, 10);
