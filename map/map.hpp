@@ -105,7 +105,7 @@ namespace ft
                             const allocator_type& alloc = allocator_type()) : _avl_tree(), _comp(comp)
             {
                 _alloc_copy = alloc;
-                // _size = std::distance(first, last);
+                _size = 0;
                 insert(first, last);
             }
         	
@@ -207,10 +207,9 @@ namespace ft
 
             pair<iterator,bool> insert (const value_type& val)
             {
-                iterator                it; // what should we initiliaze this iterator
+                iterator                it;
                 pair<iterator, bool>    p;
 
-                // it(_avl_tree.SearchNode(_avl_tree.root, val.first));
                 it = _avl_tree.SearchNode(_avl_tree.root, val.first);
                 if(it == end())
                 {
@@ -243,15 +242,8 @@ namespace ft
             template <class InputIterator>
             void insert (InputIterator first, InputIterator last)
             {
-                // (void)last;
-                // std::cout << first->first << std::endl;
-                // first++;
-                // std::cout << first->first << std::endl;
-
                 while(first != last)
                 {
-                    // std::cout << first->first << std::endl;
-                    // std::cout << first->first << std::endl;
                     insert(*first);
                     first++;
                 }
@@ -298,7 +290,7 @@ namespace ft
 
             void swap (map& x)
             {
-                std::swap(_avl_tree, x._avl_tree);
+                std::swap(_avl_tree, x._avl_tree);  
                 std::swap(_alloc_copy, x._alloc_copy);
                 std::swap(_size, x._size);
             }

@@ -5,15 +5,17 @@ int main()
 {
     //int int
     ft::map<int, int>   m;
+
+    // myprint(it->first);
     // ft::pair<ft::map<int, int>::iterator, bool> it;
 
     // //insert--------------------------------------------------------------------
-    m.insert(ft::pair<int, int>(2, 20));
-    m.insert(ft::pair<int, int>(9, 20));
-    m.insert(ft::pair<int, int>(12, 30));
-    m.insert(ft::pair<int, int>(33, 35));
-    m.insert(ft::pair<int, int>(16, 40));
-    m.insert(ft::pair<int, int>(10, 50));
+    // m.insert(ft::pair<int, int>(2, 20));
+    // m.insert(ft::pair<int, int>(9, 20));
+    // m.insert(ft::pair<int, int>(12, 30));
+    // m.insert(ft::pair<int, int>(33, 35));
+    // m.insert(ft::pair<int, int>(16, 40));
+    // m.insert(ft::pair<int, int>(10, 50));
     // m.insert(ft::pair<int, int>(0, 50));
     // m.insert(ft::pair<int, int>(-1, 50));
     // m.insert(ft::pair<int, int>(20, 50));
@@ -53,7 +55,12 @@ int main()
     // ft::map<int, int> m3;
     // m3.insert(m.begin(), m.end());
     // m2.tree_print();
+    // myprint("--------------------------------");
     // m3.tree_print();
+    // myprint("--------------------------------");
+    // myprint(m.size());
+    // myprint(m2.size());
+    // myprint(m3.size());
 
     // myprint("--------------------------------");
 
@@ -89,6 +96,7 @@ int main()
     // myprint("--------------------------------");
     // ft::map<int, int> m3(m);
     // m3.tree_print();
+    // myprint(m3.size());
     // myprint("--------------------------------");
 
     // ft::map<int, int>::iterator it = m.end();
@@ -369,16 +377,16 @@ int main()
 
 
     // char int --------------------------------------------------------------------------
-    ft::map<int, int>   m;
+    // ft::map<int, int>   m;
     // ft::pair<ft::map<int, int>::iterator, bool> it;
 
     // //insert--------------------------------------------------------------------
-    m.insert(ft::pair<int, int>(2, 20));
-    m.insert(ft::pair<int, int>(9, 20));
-    m.insert(ft::pair<int, int>(12, 30));
-    m.insert(ft::pair<int, int>(33, 35));
-    m.insert(ft::pair<int, int>(16, 40));
-    m.insert(ft::pair<int, int>(10, 50));
+    // m.insert(ft::pair<int, int>(2, 20));
+    // m.insert(ft::pair<int, int>(9, 20));
+    // m.insert(ft::pair<int, int>(12, 30));
+    // m.insert(ft::pair<int, int>(33, 35));
+    // m.insert(ft::pair<int, int>(16, 40));
+    // m.insert(ft::pair<int, int>(10, 50));
     // m.insert(ft::pair<int, int>(0, 50));
     // m.insert(ft::pair<int, int>(-1, 50));
     // m.insert(ft::pair<int, int>(20, 50));

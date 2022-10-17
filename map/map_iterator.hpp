@@ -112,9 +112,6 @@ namespace ft
 
             reference	operator*() const
             {
-                //donno what to do here
-                // if(!_node)
-                //     puts("12");
                 return *_node->key;
             }
 
@@ -135,12 +132,10 @@ namespace ft
                         _node = NULL;
                         return *this;
                     }
-    
                 }
 
                 if(_node->right != NULL)
                 {
-                    // puts("hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh");
                     _node = _node->right;
                     while (_node->left != NULL)
                         _node = _node->left;
@@ -169,12 +164,12 @@ namespace ft
 
             mapIterator &operator--()
             {
-                // puts("wtf");
                 // for later
                 if(_node != NULL)
                 {
                     if(_node && _node == _node->MostLeft(_check))
                     {
+                        puts("wtddd");
                         _node = NULL;
                         return *this;
                     }
@@ -200,7 +195,7 @@ namespace ft
                 else
                 {
                     // puts("1111111111111111111111111111");
-                    _node = _node->MostRight(_check);
+                    _node = _node->MostRight(_check); 
                 }
                 return *this;
             }

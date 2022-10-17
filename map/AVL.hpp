@@ -134,20 +134,7 @@ class AVL
 			return (a > b) ? a : b;
 		}
 
-		// void update_height(AVL_Node* root)
-		// {
-		// 	if (root != NULL) 
-		// 	{
-		// 		int val = 1;
-		// 		if (root->left != NULL)
-		// 			val = root->left->height + 1;
-		// 		if (root->right != NULL)
-		// 			val = max(val, root->right->height + 1);
-		// 		root->height = val;
-		// 	}
-		// }
-
-
+		
 		void	update_parent(Node *&node, Node *parent)
 		{
 			if(node == NULL)
@@ -340,7 +327,7 @@ class AVL
 				else
 				{
 					//the parent has two children, we have to find the inorder successor
-					// it means the nide with minimum value in the right subtree
+					// it means the node with minimum value in the right subtree
 
 					Node *temp = MostLeft(root->right);
 					root->key = temp->key;
@@ -375,10 +362,10 @@ class AVL
 					root = rotate_left(root);
 				}
 			}
-			if (root->left)
-				root->left->parent = root;
-			if (root->right)
-				root->right->parent = root;
+			// if (root->left)
+			// 	root->left->parent = root;
+			// if (root->right)
+			// 	root->right->parent = root;
 			return root;
 		}
 
