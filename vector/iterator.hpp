@@ -59,7 +59,6 @@ namespace ft
                     return false;
             }
 
-           
             bool operator!=(const MyIterator &rhs)
             {
                 return (this->_ptr != rhs._ptr);
@@ -170,4 +169,12 @@ namespace ft
             }
     };
 }
+
+template<typename T>
+ft::MyIterator<T>	operator+(typename ft::MyIterator<T>::difference_type n, 
+            const ft::MyIterator<T> &it)
+{
+	return it + n;
+}
+
 #endif

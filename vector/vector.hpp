@@ -8,6 +8,8 @@
 #include <iterator>
 #include <cmath>
 
+#define myprint(Y) std::cout << Y << std::endl
+
 namespace ft
 {
 
@@ -187,19 +189,27 @@ namespace ft
             void resize (size_type n, value_type val = value_type())
             {
                 pointer temp;
-                // for later i didnt get it right
+                // If n is smaller than the current container size,
+                // the content is reduced to its first n elements.
                 if(n < _size)
                 {
+                    // If n is smaller than the current container size, the content is reduced 
+                    // to its first n elements
                     for(size_type i = n; i < this->_size; i++)
                         _alloc_copy.destroy(&_ptr[i]);
                     _size = n;
                 }
                 else if(n > _size)
                 {
+                    // If n is greater than the current container size, the content is 
+                    // expanded by inserting at the end as many elements as needed to reach a size of n.
                     for(size_type i = _size; i < n; i++)
                         push_back(val);
                     if(n > _capacity)
                     {
+                        // If n is also greater than the current container capacity, an automatic 
+                        // reallocation of the allocated storage space takes place.
+
                         //deallocation
                         temp = _alloc_copy.allocate(_size);
                         for(size_type i = 0; i < this->_size; i++)
@@ -236,6 +246,7 @@ namespace ft
 
             void reserve (size_type n)
             {
+                // Requests that the vector capacity be at least enough to contain n elements.
                 if(n > max_size())
                     throw std::length_error("Lenght Error : Max size execeded");
                 if(n > this->_capacity)
@@ -243,6 +254,8 @@ namespace ft
                     size_type   i;
                     pointer     temp;
 
+                    // If n is greater than the current vector capacity, the function 
+                    // causes the container to reallocate its storage increasing its capacity to n (or greater).
                     this->_capacity = n;
                     temp = _alloc_copy.allocate(n);
                     for(i = 0; i < this->_size; i++)
@@ -250,8 +263,8 @@ namespace ft
                         _alloc_copy.construct(&temp[i], _ptr[i]);
                         _alloc_copy.destroy(&_ptr[i]);
                     }
-                    _alloc_copy.deallocate(_ptr, this->_size);
-
+                    if(_size > 0)
+                        _alloc_copy.deallocate(_ptr, this->_capacity);
                     // reallocate now
                     _ptr = temp;
                 }
@@ -306,7 +319,8 @@ namespace ft
             template <class InputIterator>
             void assign (InputIterator first, InputIterator last, typename enable_if<!(is_integral<InputIterator>::value), int>::type = 0)
             {
-                // std::cout << "first" << std::endl;
+                // In the range version (1), the new contents are elements constructed from 
+                // each of the elements in the range between first and last, in the same order.
                 if(_ptr)
                 {
                     for(size_type i = 0; i < _size; i++)
@@ -326,9 +340,10 @@ namespace ft
 
             void assign (size_type n, const value_type& val)
             {
-                // std::cout << "second" << std::endl;
                 size_type i;
 
+                // In the fill version (2), the new contents are n elements, 
+                // each initialized to a copy of val.
                 if(_ptr)
                 {
                     for(i = 0; i < _size; i++)
@@ -336,7 +351,8 @@ namespace ft
                 }
                 if(n > this->_capacity)
                 {
-                    _alloc_copy.deallocate(_ptr, this->_size);
+                    if(_size != 0)
+                        _alloc_copy.deallocate(_ptr, this->_size);
                     this->_capacity = n;
                     _ptr = _alloc_copy.allocate(this->_capacity);
                 }
@@ -358,22 +374,34 @@ namespace ft
                         _alloc_copy.construct(&temp[i], _ptr[i]);
                         _alloc_copy.destroy(&_ptr[i]);
                     }
-                    _alloc_copy.deallocate(_ptr, this->_capacity);
-                    _ptr = temp;
-                } 
+                    if(_size == 0)
+                    {
+                        _alloc_copy.deallocate(temp, _capacity);
+                        _ptr = _alloc_copy.allocate(this->_capacity + 1);
+                    }
+                    else
+                    {
+                        _alloc_copy.deallocate(_ptr, this->_capacity);
+                        _ptr = temp;
+                    }
+                }
                 _alloc_copy.construct(&_ptr[this->_size], val);
                 this->_size++;
+                if(_capacity == 0)
+                    _capacity = 1;
             }
 
             void pop_back()
             {
-                _alloc_copy.destroy(&_ptr[this->_size - 1]);
-                this->_size--;
+                if(_size > 0)
+                {
+                    _alloc_copy.destroy(&_ptr[this->_size - 1]);
+                    this->_size--;
+                }
             }
 
             iterator insert (iterator position, const value_type& val)
             {
-                
                 difference_type diff;
                 iterator        ret = end();
                 
@@ -383,6 +411,7 @@ namespace ft
                     push_back(val);
                 else
                 {
+                    puts("herrrre");
                     resize(diff);
                     _alloc_copy.construct(&_ptr[_size - 1], val);
                 }
@@ -427,8 +456,6 @@ namespace ft
                     index++;
                 }
                 _alloc_copy.deallocate(_ptr, _capacity);
-
-                _ptr = _alloc_copy.allocate(_capacity);
                 this->_size--;
                 _ptr = temp;
                 return position;
@@ -436,50 +463,25 @@ namespace ft
 
             iterator erase (iterator first, iterator last)
             {
-                for(iterator i = first; i!= last; i++)
-                    erase(i);
-                if(*last != *end())
-                    return last + 1;
-                else    
-                    return first + 1;
+                difference_type diff;
+                difference_type range;
+                size_t          i;
+
+                diff = std::distance(begin(), first);
+                range = std::distance(first, last);
+                for (i = diff; i < this->_size; i++)
+                    std::swap(_ptr[i], _ptr[i + range]);
+                this->_size -= range;
+                iterator it(_ptr + diff);
+                return it;
             }
 
             void swap (vector& x)
             {
-                // !!PS: Exception safety to ask for
-                pointer     p1;
-                pointer     p2;
-
-                if(this->_size == x._size)
-                {
-                    for(size_type i = 0; i < this->_size; i++)
-                       std::swap(_ptr[i], x._ptr[i]);
-                }
-                else
-                {
-                    // std::cout << "tabbbbb" << std::endl;
-                    p1 = _alloc_copy.allocate(_size);
-                    p2 = _alloc_copy.allocate(x._size);
-                    for(size_type i = 0; i < x._size; i++)
-                    {
-                        _alloc_copy.construct(&p1[i], x._ptr[i]);
-                        _alloc_copy.construct(&p2[i], _ptr[i]);
-                        _alloc_copy.destroy(&x._ptr[i]);
-                        _alloc_copy.destroy(&_ptr[i]);
-                    }
-                    for(size_type i = x._size; i < _size; i++)
-                    {
-                        _alloc_copy.construct(&p2[i], _ptr[i]);
-                        _alloc_copy.destroy(&_ptr[i]);
-                    }
-                    _alloc_copy.deallocate(_ptr, this->_capacity);
-                    _alloc_copy.deallocate(x._ptr, x._capacity);
-
-                    //swapping after destroying originals and copying to temps
-                    _ptr = p1;
-                    x._ptr = p2;
-                    std::swap(x._size, _size);
-                }
+                std::swap(this->_ptr, x._ptr);
+                std::swap(this->_alloc_copy, x._alloc_copy);
+                std::swap(this->_size, x._size);
+                std::swap(this->_capacity, x._capacity);
             }
             
             void clear()
@@ -507,7 +509,6 @@ namespace ft
     template <class T, class Alloc>
     bool operator!= (const vector<T,Alloc>& lhs, const vector<T,Alloc>& rhs)
     {
-        // puts("llllllllllllllllllll");
             if(rhs.size() != lhs.size())
             return !ft::equal(rhs.begin(), rhs.end(), lhs.begin());
         return false;

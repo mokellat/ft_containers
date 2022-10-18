@@ -1,3 +1,5 @@
+// map part ---------------------------------------
+
 1. construction with another map isnt doone
 
 2. construction with equal operator have to be doone
@@ -19,9 +21,11 @@
 9. construction with iterators seems to have some problems
     (update): infinite loooop
 
-10. leaaaks in erase
+10. erase not working, infinite loop ans leaks
 
 11. count const conversion
+
+12. clear not working
 
 
 
@@ -40,10 +44,16 @@ done:
 left:
 10.
 11.
+12.
 
 
 compiling with flags error:
 
 1. implicit declaration of copy assignement in pair, have to see what's wrong
 
-2. 
+
+// vector part-----------------------------------------------------------------
+
+1. leaak in empty test
+
+3. leaak in pop_back

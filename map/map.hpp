@@ -10,6 +10,9 @@
 // #include "map_reverse_iterator.hpp"
 #include "node_helper.hpp"
 
+#define myprint(Y) std::cout << Y << std::endl
+
+
 namespace ft
 {
     template < class Key, class T, class Compare = std::less<Key>, class Alloc = std::allocator<ft::pair<const Key,T> > > 
@@ -251,21 +254,20 @@ namespace ft
 
             void erase (iterator position)
             {
-                iterator it;
+                iterator  it(_avl_tree.SearchNode(_avl_tree.root, (position)->first), _avl_tree.root);
 
-                it(searchNode(_avl_tree.root, (*position)->first));
                 if(it != end())
                 {
                     // we found that the key is there
                     // we start erasing
+                    _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, position->first);
                     _size--;
-                    _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, (*position)->first);
                 }
             }	
 
             size_type erase (const key_type& k)
             {
-                iterator it(_avl_tree.SearchNode(_avl_tree.root, k));
+                iterator it(_avl_tree.SearchNode(_avl_tree.root, k), _avl_tree.root);
 
                 // it(_avl_tree.SearchNode(_avl_tree.root, k));
                 if(it != end())
@@ -298,9 +300,11 @@ namespace ft
             void clear()
             {
                 //implement a function to delete all nodes
-
-                _size = 0;
-                _avl_tree.deleteAllNodes(_avl_tree.root);
+                if(_size > 0)
+                {
+                    _avl_tree.deleteAllNodes(_avl_tree.root);
+                    _size = 0;
+                }
             }
 
             //Observers--------------------------------------------------
@@ -335,12 +339,9 @@ namespace ft
 
             size_type count (const key_type& k) const
             {
-                iterator it;
-
-                it = (const_node_type)_avl_tree.SearchNode(_avl_tree.root, k);
-                if(it != end())
-                    return 0;
-                return 1;
+                if(find(k) != end())
+                    return 1;
+                return 0;
             }
 
             iterator lower_bound (const key_type& k)

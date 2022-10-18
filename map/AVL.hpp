@@ -412,16 +412,19 @@ class AVL
 
 		void	deleteAllNodes(Node *node)
 		{
-			if(node != NULL) 
+			if(node != NULL ) 
 			{
 				deleteAllNodes(node->left);
 				deleteAllNodes(node->right);
 				_alloc_type.destroy(node->key);
 				_alloc_type.deallocate(node->key, sizeof(node->key));
-				// _alloc_node.destroy(node);
-				_alloc_node.deallocate(node, sizeof(node));
+				if(node)
+				{
+					_alloc_node.destroy(node);
+					_alloc_node.deallocate(node, sizeof(node));
+				}
 				node = NULL;
 			}
-			// node = NULL;
+			// return NULL;
 		}
 };
