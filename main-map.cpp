@@ -1,4 +1,5 @@
 #include "map/map.hpp"
+#include <sys/time.h>
 // #define myprint(X) std::cout << X << std::endl
 // typedef ft::map<ft::pair<int, int>> MAP_INT;
 
@@ -11,6 +12,16 @@ struct classcomp
         return lhs<rhs;
     }
 };
+
+time_t get_time(void)
+{
+    struct timeval time_now;
+
+    gettimeofday(&time_now, NULL);
+    time_t msecs_time = (time_now.tv_sec * 1e3) + (time_now.tv_usec / 1e3);
+    return (msecs_time);
+}
+
 int main()
 {
     //constructors---------------------------------------------------------------------------------------------------------
@@ -340,6 +351,31 @@ int main()
     // std::cout << "The allocated array has a size of " << psize << " bytes.\n";
 
     // mymap.get_allocator().deallocate(p,5);
+
+
+    //time test-------------------------------------------------------------------------------------------------------------------------
+    // time_t mystart = get_time();
+    // ft::map<int, int> mymap;
+    // int size = 1000000;
+    // for(int i = 1; i < size; i++)
+    // {
+    //     mymap.insert(ft::pair<int, int>(i, i+1));
+    // }
+    // time_t myend = get_time();
+
+    // myprint(myend - mystart);
+
+    // time_t start = get_time();
+    // std::map<int, int> map;
+    // for(int i = 1; i < size; i++)
+    // {
+    //     map.insert(std::pair<int, int>(i, i+1));
+    // }
+    // time_t end = get_time();
+
+    // myprint(end - start);
+
+    //
 
     return 0;
 }

@@ -1,4 +1,6 @@
 #include "./vector/vector.hpp"
+#include <sys/time.h>
+#include <vector>
 
 typedef ft::vector<int> VE_INT;
 #define myprint(Y) std::cout << Y << std::endl 
@@ -45,6 +47,15 @@ void	print_vector_iter_rev_it_dec(VE_INT ve)
 	{
 		myprint(*it);
 	}
+}
+
+time_t get_time(void)
+{
+    struct timeval time_now;
+
+    gettimeofday(&time_now, NULL);
+    time_t msecs_time = (time_now.tv_sec * 1e3) + (time_now.tv_usec / 1e3);
+    return (msecs_time);
 }
 
 int main()
@@ -287,17 +298,17 @@ int main()
 	// print_vector(myvector);
 
 	// pop_back ------------------------------------------------------------------------------
-	VE_INT myvector;
-	int sum (0);
-	myvector.push_back (100);
-	myvector.push_back (200);
-	myvector.push_back (300);
-	// print_vector(myvector);
-	while (!myvector.empty())
-	{
-		sum+=myvector.back();
-		myvector.pop_back();
-	}
+	// VE_INT myvector;
+	// int sum (0);
+	// myvector.push_back (100);
+	// myvector.push_back (200);
+	// myvector.push_back (300);
+	// // print_vector(myvector);
+	// while (!myvector.empty())
+	// {
+	// 	sum+=myvector.back();
+	// 	myvector.pop_back();
+	// }
 	// myprint("------------");
 	// myvector.pop_back();
 	// print_vector(myvector);
@@ -308,7 +319,7 @@ int main()
 	// myvector.pop_back();
 	// print_vector(myvector);
 
-	std::cout << "The elements of myvector add up to " << sum << '\n';
+	// std::cout << "The elements of myvector add up to " << sum << '\n';
 
 	// insert --------------------------------------------------------------------------------
 	// VE_INT myvector (3,100);
@@ -415,6 +426,41 @@ int main()
 	// for (VE_INT::iterator it = bar.begin(); it!=bar.end(); ++it)
 	// 	std::cout << ' ' << *it;
 	// std::cout << '\n';
+
+	// time test -------------------------------------------------------------------------------------------
+	// time_t mystart = get_time();
+    // VE_INT ve;
+    // int size = 100000000;
+    // for(int i = 1; i < size; i++)
+    // {
+    //     ve.push_back(i+1);
+    // }
+    // time_t myend = get_time();
+
+    // myprint(myend - mystart);
+
+    // time_t start = get_time();
+    // std::vector<int> ve1;
+    // for(int i = 1; i < size; i++)
+    // {
+    //     ve1.push_back(i+1);
+    // }
+    // time_t end = get_time();
+
+    // myprint(end - start);
+	// print_vector(ve);
+
+	//comparaison const iterators and iterators---------------------------------------------------------------
+	// VE_INT ve;
+	// for(int i = 0; i < 10; i++)
+	// 	ve.push_back(i);
+	// VE_INT::iterator it = ve.begin();
+	// VE_INT::const_iterator ite = (ve.begin() + 3);
+
+	// if(ite > it)
+	// 	puts("true");
+	// else
+	// 	puts("false");
 
   return 0;
 }

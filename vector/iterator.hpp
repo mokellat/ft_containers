@@ -35,6 +35,12 @@ namespace ft
             {
                 this->_ptr = cp._ptr;
             }
+
+            operator MyIterator<T const>() const
+            {
+                return (MyIterator<T const>(this->_ptr));
+            }
+
             // assignment overload
             MyIterator &operator=(MyIterator const &rhs)
             {

@@ -14,7 +14,7 @@ namespace ft
             typedef size_t      size_type;
 
         
-        private:
+        protected:
             Container _ctnr;
 
         public:
