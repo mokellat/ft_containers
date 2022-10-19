@@ -155,8 +155,9 @@ int main()
 	// VE_INT	myvector;
 	// int sum (0);
 
-	// for (int i=1;i<=10;i++) 
+	// for (int i=2;i<=10;i++) 
 	// 	myvector.push_back(i);
+	// // print_vector(myvector);
 	// while (!myvector.empty())
 	// {
 	// 	sum += myvector.back();
@@ -165,33 +166,33 @@ int main()
 	// std::cout << "total: " << sum << '\n';
 
 	//reserve---------------------------------------------------------------------------------
-	VE_INT::size_type sz;
-	VE_INT foo;
-	sz = foo.capacity();
-	std::cout << "making foo grow:\n";
-	for (int i=0; i<100; ++i) 
-	{
-		foo.push_back(i);
-		if (sz!=foo.capacity()) 
-		{
-			sz = foo.capacity();
-			std::cout << "capacity changed: " << sz << '\n';
-		}
-	}
+	// VE_INT::size_type sz;
+	// VE_INT foo;
+	// sz = foo.capacity();
+	// std::cout << "making foo grow:\n";
+	// for (int i=0; i<100; ++i) 
+	// {
+	// 	foo.push_back(i);
+	// 	if (sz!=foo.capacity()) 
+	// 	{
+	// 		sz = foo.capacity();
+	// 		std::cout << "capacity changed: " << sz << '\n';
+	// 	}
+	// }
 
-	VE_INT bar;
-	sz = bar.capacity();
-	bar.reserve(100);   // this is the only difference with foo above
-	std::cout << "making bar grow:\n";
-	for (int i=0; i<100; ++i)
-	{
-		bar.push_back(i);
-		if (sz != bar.capacity())
-		{
-			sz = bar.capacity();
-			std::cout << "capacity changed: " << sz << '\n';
-		}
-	}
+	// VE_INT bar;
+	// sz = bar.capacity();
+	// bar.reserve(100);   // this is the only difference with foo above
+	// std::cout << "making bar grow:\n";
+	// for (int i=0; i<100; ++i)
+	// {
+	// 	bar.push_back(i);
+	// 	if (sz != bar.capacity())
+	// 	{
+	// 		sz = bar.capacity();
+	// 		std::cout << "capacity changed: " << sz << '\n';
+	// 	}
+	// }
 
 	//operator[]------------------------------------------------------------------------------
 	// VE_INT myvector (10);   // 10 zero-initialized elements
@@ -286,17 +287,17 @@ int main()
 	// print_vector(myvector);
 
 	// pop_back ------------------------------------------------------------------------------
-	// VE_INT myvector;
-	// // int sum (0);
-	// myvector.push_back (100);
-	// myvector.push_back (200);
-	// myvector.push_back (300);
+	VE_INT myvector;
+	int sum (0);
+	myvector.push_back (100);
+	myvector.push_back (200);
+	myvector.push_back (300);
 	// print_vector(myvector);
-	// // while (!myvector.empty())
-	// // {
-	// // 	sum+=myvector.back();
-	// // 	myvector.pop_back();
-	// // }
+	while (!myvector.empty())
+	{
+		sum+=myvector.back();
+		myvector.pop_back();
+	}
 	// myprint("------------");
 	// myvector.pop_back();
 	// print_vector(myvector);
@@ -307,7 +308,7 @@ int main()
 	// myvector.pop_back();
 	// print_vector(myvector);
 
-	// std::cout << "The elements of myvector add up to " << sum << '\n';
+	std::cout << "The elements of myvector add up to " << sum << '\n';
 
 	// insert --------------------------------------------------------------------------------
 	// VE_INT myvector (3,100);

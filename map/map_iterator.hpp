@@ -124,7 +124,11 @@ namespace ft
             mapIterator &operator++()
             {
                 // i ll explain what i did here for later
-                _size++;
+                // if(!_check)
+                //     std::cout << "Check EROOR" << std::endl;
+                // _size++;
+                // std::cout << " jjjj " << _node->key->first << std::endl;
+                // std::cout << " " << _node->MostRight(_check)->key->first << std::endl;
                 if (_node == _node->MostRight(_check))
                 {
                     if(_size < 1)

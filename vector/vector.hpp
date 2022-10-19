@@ -99,15 +99,11 @@ namespace ft
             //Destructor
             ~vector()
             {
-                // std::cout << "size " << this->_size << std::endl;
-                // std::cout << "size " << this->_capacity << std::endl;
-                if(_size > 0)
-                {
-                    // std::cout << "my job done inside" << std::endl;
-                    for(size_type i = 0; i < this->_size; i++)
-                        _alloc_copy.destroy(&_ptr[i]);
+                // std::cout << "my job done inside" << std::endl;
+                for(size_type i = 0; i < this->_size; i++)
+                    _alloc_copy.destroy(&_ptr[i]);
+                if(_capacity > 0)
                     _alloc_copy.deallocate(_ptr, this->_capacity);
-                }
                 // std::cout << "my job done outside" << std::endl;
             }
             

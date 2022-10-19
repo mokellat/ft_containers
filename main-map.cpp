@@ -153,28 +153,28 @@ int main()
 
 
     //erase-------------------------------------------------------------------------------------------------------------------
-    // ft::map<char,int> mymap;
-    // ft::map<char,int>::iterator it;
+//     ft::map<char,int> mymap;
+//     ft::map<char,int>::iterator it;
 
-    // // insert some values:
-    // mymap['a']=10;
-    // mymap['b']=20;
-    // mymap['c']=30;
-    // mymap['d']=40;
-    // mymap['e']=50;
-    // mymap['f']=60;
+//   // insert some values:
+//     mymap['a']=10;
+//     mymap['b']=20;
+//     mymap['c']=30;
+//     mymap['d']=40;
+//     mymap['e']=50;
+//     mymap['f']=60;
 
-    // it=mymap.find('b');
-    // mymap.erase (it);                // erasing by iterator
+//     it=mymap.find('b');
+//     mymap.erase (it);                   // erasing by iterator
 
-    // mymap.erase ('c');                // erasing by key
+//     mymap.erase ('c');                  // erasing by key
 
-    // // it=mymap.find ('e');
-    // // mymap.erase (it, mymap.end());    // erasing by range
+//     it=mymap.find ('e');
+//     mymap.erase ( it, mymap.end() );    // erasing by range
 
-    // // show content:
-    // for (ft::map<char, int>::iterator ite=mymap.begin(); ite!=mymap.end(); ++ite)
-    //     std::cout << ite->first << " => " << ite->second << '\n';
+//     // show content:
+//     for (it=mymap.begin(); it!=mymap.end(); ++it)
+//         std::cout << it->first << " => " << it->second << '\n';
 
     //swap --------------------------------------------------------------------------------------------------------------------
     // ft::map<char,int> foo;
@@ -208,7 +208,7 @@ int main()
     // for (ft::map<char,int>::iterator it=mymap.begin(); it!=mymap.end(); ++it)
     //     std::cout << it->first << " => " << it->second << '\n';
 
-    // // mymap.clear();
+    // mymap.clear();
     // mymap['a']=1101;
     // mymap['b']=2202;
 

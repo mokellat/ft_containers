@@ -254,15 +254,15 @@ namespace ft
 
             void erase (iterator position)
             {
-                iterator  it(_avl_tree.SearchNode(_avl_tree.root, (position)->first), _avl_tree.root);
+                // iterator  it(_avl_tree.SearchNode(_avl_tree.root, (position)->first), _avl_tree.root);
 
-                if(it != end())
-                {
+                // if(it != end())
+                // {
                     // we found that the key is there
                     // we start erasing
                     _avl_tree.root = _avl_tree.deleteOneNode(_avl_tree.root, position->first);
                     _size--;
-                }
+                // }
             }	
 
             size_type erase (const key_type& k)
@@ -283,10 +283,13 @@ namespace ft
 
             void erase (iterator first, iterator last)
             {
-                while(first != last)
+                iterator save;
+                
+                if(first != last)
                 {
-                    erase(first);
-                    first++;
+                    save = first;
+                    erase(++first, last);
+                    erase(save);
                 }
             }
 
@@ -303,6 +306,7 @@ namespace ft
                 if(_size > 0)
                 {
                     _avl_tree.deleteAllNodes(_avl_tree.root);
+                    _avl_tree.root = NULL;
                     _size = 0;
                 }
             }
@@ -330,9 +334,9 @@ namespace ft
 
             const_iterator find (const key_type& k) const
             {
-                const_iterator it;
+                iterator it( _avl_tree.SearchNode(_avl_tree.root, k));
 
-                it = _avl_tree.SearchNode(_avl_tree.root, k);
+                // it = _avl_tree.SearchNode(_avl_tree.root, k);
                     // it(end());
                 return it;
             }

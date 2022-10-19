@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+// #define myprint(X) std::cout << X << std::endl
 // #include "map_iterator.hpp"
 
 template<class T>
@@ -24,6 +25,12 @@ class Node
 	public:
 		Node() : parent(), left(), right(), height(1) {}
 
+		Node(node_type const &node) 
+		{
+			parent = node->parent;
+			
+		}
+
 		node_type    *MostRight(node_type *node)
 		{
 			// if(node != NULL)
@@ -36,6 +43,11 @@ class Node
 			// }
 			// else
 			//     return NULL;
+			if(node == NULL)
+			{
+				puts("ERROR");
+				return NULL;
+			}
 			if(node->right == NULL)
 				return node;
 			return MostRight(node->right);
@@ -289,57 +301,46 @@ class AVL
 
 		Node	*deleteOneNode(Node *root, key_type key)
 		{
-			// puts("heeeeeeeeeeeere");
-			Node	*temp;
 			int		bf;
 
-			// locate the node to be deleted
 			if(root == NULL)
 				return root;
+
 			if(_compare(root->key->first, key))
 				root->right = deleteOneNode(root->right, key);
 			else if(_compare(key, root->key->first))
 				root->left = deleteOneNode(root->left, key);
 			else
 			{
-				//found the node to be deleted
-				if(root->right == NULL || root->left == NULL)
+				// case#1: leaf node
+				if (root->right == NULL && root->left == NULL)
 				{
-					// has one child, replace the parent with the child
-					if(root->right == NULL)
-						temp = root->left;
-					else
-						temp = root->right;
-					if(temp == NULL)
-					{
-						temp = root;
-						root = NULL;
-					}
-					else
-					{
-						*root = *temp;
-						// _alloc_node.destroy(temp);
-						// _alloc_node.deallocate(temp, sizeof(temp));
-						// free(temp);
-					}
-					// !! here we should delete the temp, they used free, we shouldnt
+					_alloc_type.destroy(root->key); _alloc_type.deallocate(root->key, 1);
+					_alloc_node.destroy(root); _alloc_node.deallocate(root, 1);
+					return (NULL);
+				}
+				// case#2: node has one children
+				else if (root->left == NULL)
+				{
+					Node*	rptr = root->right;
+					_alloc_type.destroy(root->key); _alloc_type.deallocate(root->key, 1);
+					_alloc_node.destroy(root); _alloc_node.deallocate(root, 1);
+					root = rptr;
+				}
+				else if (root->right == NULL)
+				{
+					Node*	lptr = root->left;
+					_alloc_type.destroy(root->key); _alloc_type.deallocate(root->key, 1);
+					_alloc_node.destroy(root); _alloc_node.deallocate(root, 1);
+					root = lptr;
 				}
 				else
 				{
-					//the parent has two children, we have to find the inorder successor
-					// it means the node with minimum value in the right subtree
-
-					Node *temp = MostLeft(root->right);
-					root->key = temp->key;
+					Node	*temp = MostLeft(root->right);
+					_alloc_type.destroy(root->key); _alloc_type.construct(root->key, *temp->key);
 					root->right = deleteOneNode(root->right, temp->key->first);
 				}
 			}
-
-			if(root == NULL)
-				return NULL;
-			//update the height and get the tree balanced 
-			//rotations here
-
 			root->height = 1 + max(height(root->left), height(root->right));
 			bf = BalanceFactor(root);
 			if (bf > 1) 
@@ -362,12 +363,144 @@ class AVL
 					root = rotate_left(root);
 				}
 			}
-			// if (root->left)
-			// 	root->left->parent = root;
-			// if (root->right)
-			// 	root->right->parent = root;
-			return root;
+			if (root->left)
+				root->left->parent = root;
+			if (root->right)
+				root->right->parent = root;
+			return (root);
 		}
+
+
+		// Node	*deleteOneNode(Node *root, key_type key)
+		// {
+		// 	// puts("heeeeeeeeeeeere");
+		// 	Node	*temp;
+		// 	int		bf;
+
+		// 	// locate the node to be deleted
+		// 	if(root == NULL)
+		// 		return root;
+		// 	if(_compare(root->key->first, key))
+		// 		root->right = deleteOneNode(root->right, key);
+		// 	else if(_compare(key, root->key->first))
+		// 		root->left = deleteOneNode(root->left, key);
+		// 	else
+		// 	{
+		// 		// case#1: leaf node
+		// 		if (root->right == NULL && root->left == NULL)
+		// 		{
+		// 			_alloc_type.destroy(root->key); _alloc_type.deallocate(root->key, 1);
+		// 			_alloc_node.destroy(root); _alloc_node.deallocate(root, 1);
+		// 			return (NULL);
+		// 		}
+		// 		// case#2: node has one children
+		// 		else if (root->left == NULL)
+		// 		{
+		// 			Node*	rptr = root->right;
+		// 			_alloc_type.destroy(root->key); _alloc_type.deallocate(root->key, 1);
+		// 			_alloc_node.destroy(root); _alloc_node.deallocate(root, 1);
+		// 			root = rptr;
+		// 		}
+		// 		else if (root->right == NULL)
+		// 		{
+		// 			Node*	lptr = root->left;
+		// 			_alloc_type.destroy(root->key); _alloc_type.deallocate(root->key, 1);
+		// 			_alloc_node.destroy(root); _alloc_node.deallocate(root, 1);
+		// 			root = lptr;
+		// 		}
+		// 		else
+		// 		{
+		// 			//the parent has two children, we have to find the inorder successor
+		// 			// it means the node with minimum value in the right subtree
+
+		// 			Node *temp = MostLeft(root->right);
+		// 			std::cout << root->key->first << std::endl;
+		// 			_alloc_type.destroy(root->key);
+		// 			// _alloc_type.deallocate(root->key, 1);
+		// 			// root->key = _alloc_type.allocate(1);
+		// 			// root->key = temp->key;
+		// 			_alloc_type.construct(root->key, *temp->key);
+		// 			std::cout << root->key->first << std::endl;
+		// 			root->right = deleteOneNode(root->right, temp->key->first);
+		// 		}
+
+		// 		//found the node to be deleted
+		// 		// if(root->right == NULL || root->left == NULL)
+		// 		// {
+		// 		// 	// has one child, replace the parent with the child
+		// 		// 	if(root->right == NULL)
+		// 		// 		temp = root->left;
+		// 		// 	else
+		// 		// 		temp = root->right;
+		// 		// 	if(temp == NULL)
+		// 		// 	{
+		// 		// 		_alloc_type.destroy(root->key);
+		// 		// 		_alloc_type.deallocate(root->key, 1);
+		// 		// 		_alloc_node.destroy(root);
+		// 		// 		_alloc_node.deallocate(root, 1);
+		// 		// 		return NULL;
+		// 		// 	}
+		// 		// 	else
+		// 		// 	{
+		// 		// 		_alloc_type.destroy(root->key);
+		// 		// 		_alloc_type.deallocate(root->key, 1);
+		// 		// 		_alloc_node.destroy(root);
+		// 		// 		_alloc_node.deallocate(root, 1);
+		// 		// 		return temp;
+		// 		// 		// free(temp);
+		// 		// 	}
+		// 			// !! here we should delete the temp, they used free, we shouldnt
+		// 		// }
+		// 		// else
+		// 		// {
+		// 		// 	//the parent has two children, we have to find the inorder successor
+		// 		// 	// it means the node with minimum value in the right subtree
+
+		// 		// 	Node *temp = MostLeft(root->right);
+		// 		// 	std::cout << root->key->first << std::endl;
+		// 		// 	_alloc_type.destroy(root->key);
+		// 		// 	// _alloc_type.deallocate(root->key, 1);
+		// 		// 	// root->key = _alloc_type.allocate(1);
+		// 		// 	// root->key = temp->key;
+		// 		// 	_alloc_type.construct(root->key, *temp->key);
+		// 		// 	std::cout << root->key->first << std::endl;
+		// 		// 	root->right = deleteOneNode(root->right, temp->key->first);
+		// 		// }
+		// 	}
+
+		// 	if(root == NULL)
+		// 		return NULL;
+		// 	//update the height and get the tree balanced 
+		// 	//rotations here
+
+		// 	root->height = 1 + max(height(root->left), height(root->right));
+		// 	bf = BalanceFactor(root);
+		// 	if (bf > 1) 
+		// 	{
+		// 		if (BalanceFactor(root->left) >= 0) 
+		// 			root = rotate_right(root);
+		// 		else
+		// 		{
+		// 			root->left = rotate_left(root->left);
+		// 			root = rotate_right(root);
+		// 		}
+		// 	}
+		// 	if (bf < -1) 
+		// 	{
+		// 		if (BalanceFactor(root->right) <= 0) 
+		// 			root = rotate_left(root);
+		// 		else 
+		// 		{
+		// 			root->right = rotate_right(root->right);
+		// 			root = rotate_left(root);
+		// 		}
+		// 	}
+		// 	// if (root->left)
+		// 	// 	root->left->parent = root;
+		// 	// if (root->right)
+		// 	// 	root->right->parent = root;
+		// 	return root;
+		// }
 
 		Node    *MostLeft(Node *node) const
 		{

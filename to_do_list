@@ -39,6 +39,8 @@ done:
 3.
 1.
 2.
+11.
+12.
 
 
 left:
@@ -57,3 +59,6 @@ compiling with flags error:
 1. leaak in empty test
 
 3. leaak in pop_back
+
+
+done
